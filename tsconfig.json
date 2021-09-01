@@ -86,7 +86,7 @@
     "entryPoints": [
       "./src"
     ],
-    "out": "site/tsdoc",
+    "out": "docs",
     "exclude": "node_modules"
   }
 }
