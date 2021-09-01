@@ -1,0 +1,31 @@
+{
+  "rootDir": "./src",
+  "filetypes": ["ts"],
+  "externalModules": [],
+  "outPutDir": "./site",
+  "baseConfig": {
+    "info": {
+      "title": "Kernel Api",
+      "description": "Basic Kernel RESTFull interface"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:9257"
+      }
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
+}

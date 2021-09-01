@@ -1,0 +1,188 @@
+stages:
+  - test
+  - scan
+  - docs
+  - build
+docs:
+  allow_failure: true
+  image: node:latest
+  tags:
+    - docker
+  stage: docs
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  script:
+    - npm install
+    - npm run makeDocs
+  artifacts:
+    paths:
+      - "docs"
+    expire_in: 30 days
+
+# PROD BUIDL
+
+report:test:prod:
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  before_script:
+    - cp $TESTENVFILE .env
+  services:
+    - postgres:12.2-alpine
+  variables:
+    POSTGRES_USER: $POSTGRES_USER
+    POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    POSTGRES_HOST_AUTH_METHOD: trust
+  image: node:latest
+  tags:
+    - docker
+  stage: test
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  script:
+    - npm install
+    - npm run test-converage
+  artifacts:
+    paths:
+      - coverage
+    when: always
+    reports:
+      junit:
+        - junit.xml
+      cobertura: coverage/cobertura-coverage.xml
+  needs: []
+
+
+
+lint:scan:prod:
+  allow_failure: false
+  image: node:latest
+  tags:
+    - docker
+  stage: scan
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  script:
+    - npm install
+    - npm run lint
+  needs: []
+
+
+sec:scan:prod:
+  before_script:
+    - cp $TESTENVFILE .env
+  image: registry.gitlab.com/gitlab-org/security-products/analyzers/eslint
+  tags:
+    - docker
+  stage: scan
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  script:
+    - /analyzer run
+  artifacts:
+    when: always
+    reports:
+      sast: gl-sast-report.json
+  needs:
+    - report:test:prod
+
+
+publish:build:prod:
+  image: node:latest
+  tags:
+    - docker
+  stage: build
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  script:
+    - npm install
+    - npm run buildprep
+  needs:
+    - lint:scan:prod
+    - sec:scan:prod
+
+
+test:test:dev:
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  before_script:
+    - cp $TESTENVFILE .env
+  services:
+    - postgres:12.2-alpine
+  variables:
+    POSTGRES_USER: $POSTGRES_USER
+    POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    POSTGRES_HOST_AUTH_METHOD: trust
+  image: node:latest
+  tags:
+    - docker
+  stage: test
+  only:
+    - merge_requests
+    - dev
+  script:
+    - npm install
+    - npm run test-converage
+  artifacts:
+    paths:
+      - coverage
+    when: always
+    reports:
+      junit:
+        - junit.xml
+      cobertura: coverage/cobertura-coverage.xml
+
+lint:scan:dev:
+  allow_failure: true
+  image: node:latest
+  tags:
+    - docker
+  stage: scan
+  only:
+    - merge_requests
+    - dev
+  script:
+    - npm install
+    - npm run lint
+
+
+sec:scan:dev:
+  before_script:
+    - cp $TESTENVFILE .env
+  image: registry.gitlab.com/gitlab-org/security-products/analyzers/eslint
+  tags:
+    - docker
+  stage: scan
+  only:
+    - merge_requests
+    - dev
+  script:
+    - /analyzer run
+  artifacts:
+    when: always
+    reports:
+      sast: gl-sast-report.json
+
+make:build:dev:
+  image: node:latest
+  tags:
+    - docker
+  stage: build
+  only:
+    - merge_requests
+    - dev
+  script:
+    - npm install
+    - npm run buildprep

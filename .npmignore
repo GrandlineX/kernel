@@ -1,0 +1,15 @@
+.gitlab-ci.yml
+.eslintrc
+node_modules
+docs
+.idea
+.env
+docker-compose.yml
+jest.config.js
+package-lock.json
+data
+src
+tests
+scripts
+glconf.json
+site

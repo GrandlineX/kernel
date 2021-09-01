@@ -1,0 +1,82 @@
+  openapi: 3.0.1
+
+  info: 
+    title: "Kernel Api"
+    description: "Basic Kernel RESTFull interface"
+    version: "0.9.0"
+  servers: 
+    - 
+      url: "http://localhost:9257"
+  security: 
+    - 
+      bearerAuth: []
+  components: 
+    securitySchemes: 
+      bearerAuth: 
+        type: "http"
+        scheme: "bearer"
+        bearerFormat: "JWT"
+
+  paths:
+   /test/auth:
+     get:
+       summary: test call for valid access rights
+       tags:
+         - Kernel
+       responses:
+         200:
+           description: OK
+           content:
+             text/plain:
+               schema:
+                 type: string
+         401:
+           description: invalid token / not authorized
+  
+   /version:
+     get:
+       summary: get api schema version
+       tags:
+         - Kernel
+       responses:
+         200:
+           description: OK
+           content:
+             application/json:
+               schema:
+                 type: object
+                 properties:
+                   api:
+                     type: number
+         401:
+           description: invalid token / not authorized
+  
+   /token:
+     post:
+       summary: Get Bearer for user.
+       tags:
+         - Kernel
+       description: Returns JWT.
+       responses:
+         '200':
+           description: OK
+           content:
+             application/json:
+               schema:
+                 type: object
+                 properties:
+                   token:
+                     type: string
+         '403':
+           description: Not Authorized
+       requestBody:
+         required: true
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 username:
+                   type: string
+                 token:
+                   type: string

@@ -1,0 +1,8 @@
+site_name: GrandLineX Kernel
+site_url: https://grandlinex.github.io/kernel
+nav:
+  - Home: index.md
+theme:
+  name: mkdocs
+  nav_style: dark
+repo_url: https://github.com/GrandlineX/kernel
