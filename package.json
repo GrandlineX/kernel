@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,13 @@
     "openDocs": "npm run makeDocs && http-server docs",
     "makeSpec": "npx @grandlinex/docs-to-openapi"
   },
-  "keywords": ["typescript","framework","express","server","backend"],
+  "keywords": [
+    "typescript",
+    "framework",
+    "express",
+    "server",
+    "backend"
+  ],
   "author": {
     "name": "Elschnagoo"
   },
