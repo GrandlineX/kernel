@@ -1,17 +1,16 @@
-import fetch, { RequestInit } from 'node-fetch';
 import {
   BaseAuthProvider,
   BaseKernelModule,
   BaseLoopService,
   createFolderIfNotExist, IKernel,
-  removeFolderIfNotExist,
-  sleep
+   sleep
 } from '../src';
 import { config } from 'dotenv';
 import * as Path from 'path';
 import Kernel from '../src/Kernel';
  import BaseClient from "../src/classes/BaseClient";
 import {JwtToken} from "../src/classes/BaseAuthProvider";
+import axios from 'axios';
 config();
 
 const appName = 'TestKernel';
@@ -187,95 +186,64 @@ describe('Clean Startup', () => {
   test('get api toke', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
-    const body: string = JSON.stringify({
+
+    const token= await axios.post(`http://localhost:${port}/token`,{
       username: "admin",
       token: process.env.SERVER_PASSWOR,
-    });
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      headers: [['Content-Type', 'application/json']],
-      redirect: 'follow',
-      body,
-    };
-    const token = await fetch(`http://localhost:${port}/token`, requestOptions);
+    })
+
     expect(token.status).toBe(200);
-    const text = await token.text();
-    const json = JSON.parse(text);
-    expect(json.token).not.toBeNull();
-    expect(json.token).not.toBeUndefined();
-    jwtToken=json.token;
-    const res = await cc?.jwtVerifyAccessToken(json.token);
+
+    expect(token.data).not.toBeNull();
+    expect(token.data).not.toBeUndefined();
+    jwtToken=token.data.token;
+    const res = await cc?.jwtVerifyAccessToken(jwtToken);
     expect(await cc?.permissonValidation(jwtToken,"api")).not.toBeTruthy()
     expect(res?.username).toBe("admin");
 
   });
 
   test("get token no body",async ()=>{
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      headers: [['Content-Type', 'application/json']],
-      redirect: 'follow',
-    };
-    const testcall = await fetch(
-        `http://localhost:${port}/token`,
-        requestOptions
-    );
-    expect(testcall.status).toBe(400);
+
+    try {
+      const response = await axios.post(
+        `http://localhost:${port}/token`
+      );
+
+    }catch (error:any) {
+      expect(error.response.status).toBe(400);
+    }
+
   });
 
 
   test("get token no user",async ()=>{
-    const body: string = JSON.stringify({
-      token: process.env.SERVER_PASSWOR,
-    });
-     const requestOptions: RequestInit = {
-      method: 'POST',
-      redirect: 'follow',
-      headers: [['Content-Type', 'application/json']],
-      body:body
-    };
-    const testcall = await fetch(
-        `http://localhost:${port}/token`,
-        requestOptions
-    );
-    expect(testcall.status).toBe(401);
+    try {
+      const response = await axios.post(`http://localhost:${port}/token`, { token: process.env.SERVER_PASSWOR } );
+    }catch (e:any){
+      expect(e.response.status).toBe(401);
+    }
+
   });
 
 
   test("get token wrong user",async ()=>{
-    const body: string = JSON.stringify({
-      token: process.env.SERVER_PASSWOR,
-      user:"noAdmin"
-    });
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      redirect: 'follow',
-      headers: [['Content-Type', 'application/json']],
-      body:body
-    };
-    const testcall = await fetch(
-        `http://localhost:${port}/token`,
-        requestOptions
-    );
-    expect(testcall.status).toBe(401);
+    try {
+      const response = await axios.post( `http://localhost:${port}/token`, { token: process.env.SERVER_PASSWOR, user:"noAdmin" } );
+    }catch (e:any){
+      expect(e.response.status).toBe(401);
+    }
+
+
   });
 
   test("get token wrong token",async ()=>{
-    const body: string = JSON.stringify({
-      token: testText,
-      username: "testUser",
-    });
-     const requestOptions: RequestInit = {
-      method: 'POST',
-      redirect: 'follow',
-      headers: [['Content-Type', 'application/json']],
-      body:body
-    };
-    const testcall = await fetch(
-        `http://localhost:${port}/token`,
-        requestOptions
-    );
-    expect(testcall.status).toBe(403);
+    try {
+      const response = await axios.post( `http://localhost:${port}/token`, { token: testText, username: "testUser", } );
+    }catch (e:any){
+      expect(e.response.status).toBe(403);
+    }
+
   });
 
 
@@ -287,25 +255,11 @@ describe('Clean Startup', () => {
 
      expect(prov).toBeTruthy()
 
-    const body: string = JSON.stringify({
-      token: "admin",
-      username: "admin",
-    });
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      redirect: 'follow',
-      headers: [['Content-Type', 'application/json']],
-      body:body
-    };
-    const testcall = await fetch(
-        `http://localhost:${port}/token`,
-        requestOptions
-    );
-    expect(testcall.status).toBe(200);
-    const text=await testcall.text()
-    const json= JSON.parse(text);
 
-    const adminToken=await cc?.jwtVerifyAccessToken(json.token)
+    const testcall = await axios.post( `http://localhost:${port}/token`, { token: "admin", username: "admin", } );
+    expect(testcall.status).toBe(200);
+
+    const adminToken=await cc?.jwtVerifyAccessToken(testcall.data.token)
     expect(adminToken).not.toBeNull();
 
     if (adminToken){
@@ -318,40 +272,27 @@ describe('Clean Startup', () => {
 
 
   test("test api auth fail",async ()=>{
-    const requestOptions: RequestInit = {
-      method: 'GET',
-      redirect: 'follow',
-    };
 
-    const testcall = await fetch(
-        `http://localhost:${port}/test/auth`,
-        requestOptions
-    );
-    expect(testcall.status).toBe(401);
+    try {
+      const response = await axios.get( `http://localhost:${port}/test/auth` );
+    }catch (e:any){
+      expect(e.response.status).toBe(401);
+    }
+
   });
 
 
 
   test("test auth ",async ()=>{
-    const requestOptions: RequestInit = {
-      method: 'GET',
-      headers: [['Authorization', `bearer ${jwtToken}`]],
-      redirect: 'follow',
-    };
-    const testcall = await fetch(
-        `http://localhost:${port}/test/auth`,
-        requestOptions
-    );
+    const testcall = await axios.get( `http://localhost:${port}/test/auth`,{ headers:{ Authorization:`bearer ${jwtToken}` } } );
     expect(testcall.status).toBe(200);
   });
 
 
   test('test api version', async () => {
-    const version = await fetch(`http://localhost:${port}/version`);
+    const version = await axios.get(`http://localhost:${port}/version`);
     expect(version.status).toBe(200);
-    const res = await version.text();
-    const resObj = JSON.parse(res);
-    expect(resObj?.api).toBe(1);
+    expect(version.data.api).toBe(1);
   });
 
 
