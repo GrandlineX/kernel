@@ -13,3 +13,5 @@ tests
 scripts
 glconf.json
 site
+.eslintignore
+.env.example

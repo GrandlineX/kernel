@@ -131,14 +131,16 @@ export default abstract class BaseKernelModule<
 
   abstract initModule(): Promise<void>;
 
+  abstract beforeServiceStart(): Promise<void>;
+
   async register(): Promise<void> {
     await this.waitForBridgesReady();
     await this.initModule();
-    await this.kernel.trigerFunction('load');
     await this.db?.connect();
     this.actionlist.forEach((el) => {
       el.register();
     });
+    await this.beforeServiceStart();
     this.servicelist.forEach((service) => {
       service.log('Starting');
       service.start();
@@ -184,4 +186,6 @@ export default abstract class BaseKernelModule<
   getBridges(): IBaseBrige[] {
     return this.srcBridges;
   }
+
+  abstract final(): Promise<void>;
 }

@@ -31,9 +31,18 @@ export default class KernelModule extends BaseKernelModule<
       this.getKernel().getAppServerPort()
     );
     this.setEndpoint(endpoint);
+    await this.getKernel().trigerFunction('load');
   }
 
   async startup(): Promise<void> {
-    //
+    return Promise.resolve();
+  }
+
+  async beforeServiceStart(): Promise<void> {
+    return Promise.resolve();
+  }
+
+  async final(): Promise<void> {
+    return Promise.resolve();
   }
 }

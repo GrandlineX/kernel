@@ -122,7 +122,9 @@ export interface IBaseKernelModule<
 
   final?(): Promise<void>;
 
-  startup(): Promise<void>;
+  startup?(): Promise<void>;
+
+  beforeServiceStart?(): Promise<void>;
 
   addAction(action: IBaseAction): void;
 

@@ -72,6 +72,14 @@ class TestModuel extends BaseKernelModule<null,TestClient,null, null>{
     return Promise.resolve( undefined );
   }
 
+  beforeServiceStart(): Promise<void> {
+    return Promise.resolve( undefined );
+  }
+
+  final(): Promise<void> {
+    return Promise.resolve( undefined );
+  }
+
 }
 class BridgeTestModule extends BaseKernelModule<null,TestClient,null, null>{
   constructor(kernel:IKernel) {
@@ -83,6 +91,14 @@ class BridgeTestModule extends BaseKernelModule<null,TestClient,null, null>{
   }
 
   startup(): Promise<void> {
+    return Promise.resolve( undefined );
+  }
+
+  beforeServiceStart(): Promise<void> {
+    return Promise.resolve( undefined );
+  }
+
+  final(): Promise<void> {
     return Promise.resolve( undefined );
   }
 
