@@ -23,7 +23,7 @@ export default class KernelModule extends BaseKernelModule<
   }
 
   async initModule(): Promise<void> {
-    const db = new KernelDB(this, '0');
+    const db = new KernelDB(this);
     this.setDb(db);
     const endpoint = new KernelEndpoint(
       'api',

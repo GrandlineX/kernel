@@ -45,11 +45,13 @@ export interface IDataBase<T> extends IDataBaseConnection {
 export interface IDataBaseConnection extends ILogger {
   setUpdateChain(chain: IBaseDBUpdate): void;
 
+  start(): Promise<void>;
+
   isConected(): boolean;
 
   disconnect(): Promise<boolean>;
 
   setConnected(): void;
 
-  connect(run?: (process: string) => Promise<void>): Promise<boolean>;
+  connect(): Promise<boolean>;
 }

@@ -1,10 +1,15 @@
 import { randomUUID } from 'crypto';
 import newInit from './newInit';
-import { KeyType } from '../lib';
+import { IBaseKernelModule, KeyType } from '../lib';
 import PGConnector from '../modules/DBConnector/connectors/PGConnector';
 import { generateSeed } from '../modules/crypto/utils';
 
+export const KERNEL_DB_VERSION = '1';
 export default class KernelDB extends PGConnector {
+  constructor(module: IBaseKernelModule<any, any, any, any>) {
+    super(module, KERNEL_DB_VERSION);
+  }
+
   async initNewDB(): Promise<void> {
     await this.execScripts(newInit(this.schemaName));
     const seed = generateSeed();

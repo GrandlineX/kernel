@@ -1,9 +1,9 @@
 import {
-  BaseAuthProvider,
+  BaseAuthProvider, BaseDBUpdate,
   BaseKernelModule,
   BaseLoopService,
-  createFolderIfNotExist, IKernel,
-   sleep
+  createFolderIfNotExist, DBConnection, IBaseKernelModule, IKernel,
+  sleep, SQLightConnector
 } from '../src';
 import { config } from 'dotenv';
 import * as Path from 'path';
@@ -58,14 +58,42 @@ class TestClient extends BaseClient{
 
 }
 
-class TestModuel extends BaseKernelModule<null,TestClient,null, null>{
+
+class TestDB extends SQLightConnector{
+  constructor(module:IBaseKernelModule<any, any, any, any>) {
+    super(module,"1");
+  }
+  async initNewDB(): Promise<void> {
+    await this.execScripts([])
+  }
+}
+
+
+class TestDBUpdate extends BaseDBUpdate<any>{
+  constructor(db:DBConnection<any>) {
+    super("0","1",db);
+  }
+  async performe(): Promise<boolean> {
+    const db=this.getDb();
+
+    await db.execScripts([
+      { exec: `UPDATE ${db.schemaName}.config SET c_value=1 WHERE c_key='dbversion'` ,param:[]}
+    ])
+    return true;
+  }
+
+}
+
+class TestModuel extends BaseKernelModule<TestDB,TestClient,null, null>{
   constructor(kernel:IKernel) {
     super("testModule",kernel);
   }
-  initModule(): Promise<void> {
+  async initModule(): Promise<void> {
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
-    return Promise.resolve( undefined );
+    const db=new TestDB(this)
+    this.setDb(db)
+    db.setUpdateChain(new TestDBUpdate(this.getDb() as DBConnection<any>))
   }
 
   startup(): Promise<void> {
@@ -134,7 +162,13 @@ describe('Clean Startup', () => {
     expect(kernel.getState()).toBe('running');
     const db = kernel.getDb();
     const conf = await db?.getConfig('dbversion');
-    expect(conf?.c_value).toBe('0');
+    expect(conf?.c_value).not.toBeNull();
+  });
+
+  test('get testdb version', async () => {
+    const db = kernel.getModuleList()[0].getDb();
+    const conf = await db?.getConfig('dbversion');
+    expect(conf?.c_value).not.toBeNull();
   });
 
 

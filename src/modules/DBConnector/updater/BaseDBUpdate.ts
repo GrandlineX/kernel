@@ -1,16 +1,20 @@
 import DBConnection from '../classes/DBConnection';
 import { IBaseDBUpdate } from '../lib';
 
-export default abstract class BaseDBUpdate implements IBaseDBUpdate {
+export default abstract class BaseDBUpdate<T> implements IBaseDBUpdate {
   srcVersion: string;
 
   tarVersion: string;
 
-  private db: DBConnection;
+  private readonly db: DBConnection<T>;
 
-  private nextUpdate: BaseDBUpdate | null;
+  private nextUpdate: BaseDBUpdate<T> | null;
 
-  constructor(srcVersion: string, tarVersion: string, db: DBConnection) {
+  protected constructor(
+    srcVersion: string,
+    tarVersion: string,
+    db: DBConnection<T>
+  ) {
     this.srcVersion = srcVersion;
     this.tarVersion = tarVersion;
     this.db = db;
@@ -19,15 +23,18 @@ export default abstract class BaseDBUpdate implements IBaseDBUpdate {
 
   async update(): Promise<boolean> {
     const perf = await this.performe();
-    const next = await this.updateNext();
-
-    const result = perf && next;
-    if (result) {
+    if (perf) {
       this.db.log(
         `Update DB from ${this.srcVersion} to ${this.tarVersion} successful`
       );
+    } else {
+      throw new Error(
+        `Updating DB from ${this.srcVersion} to ${this.tarVersion} failed`
+      );
     }
-    return result;
+    const next = await this.updateNext();
+
+    return perf && next;
   }
 
   abstract performe(): Promise<boolean>;
@@ -39,11 +46,11 @@ export default abstract class BaseDBUpdate implements IBaseDBUpdate {
     return true;
   }
 
-  setNext(db: BaseDBUpdate): void {
+  setNext(db: BaseDBUpdate<T>): void {
     this.nextUpdate = db;
   }
 
-  find(version: string): BaseDBUpdate | null {
+  find(version: string): BaseDBUpdate<T> | null {
     if (this.srcVersion === version) {
       return this;
     }
@@ -53,11 +60,11 @@ export default abstract class BaseDBUpdate implements IBaseDBUpdate {
     return null;
   }
 
-  getDb() {
+  getDb(): DBConnection<T> {
     return this.db;
   }
 
-  getSource() {
+  getSource(): string {
     return this.srcVersion;
   }
 }

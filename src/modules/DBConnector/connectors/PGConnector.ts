@@ -5,23 +5,20 @@ import DBConnection from '../classes/DBConnection';
 
 type PGDBType = Client;
 export default abstract class PGConnector
-  extends DBConnection
+  extends DBConnection<QueryResult>
   implements IDataBase<PGDBType>
 {
   db: PGDBType | null;
 
   module: IBaseKernelModule<any, any, any, any>;
 
-  public schemaName: string;
-
   constructor(
     module: IBaseKernelModule<any, any, any, any>,
     dbversion: string
   ) {
-    super(dbversion, module);
+    super(dbversion, module.getName(), module);
     this.module = module;
     this.db = null;
-    this.schemaName = module.getName();
   }
 
   async removeConfig(key: string): Promise<void> {
@@ -123,7 +120,7 @@ export default abstract class PGConnector
     return query?.rows[0];
   }
 
-  async execScripts(list: SQLQuery[]): Promise<QueryResult[] | null> {
+  async execScripts(list: SQLQuery[]): Promise<QueryResult[]> {
     const output: QueryResult[] = [];
     try {
       for (const el of list) {
@@ -135,7 +132,7 @@ export default abstract class PGConnector
       return output;
     } catch (e) {
       this.error(e);
-      return null;
+      return [];
     }
   }
 

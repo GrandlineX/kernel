@@ -105,28 +105,14 @@ export default abstract class BaseKernelModule<
     this.cache = cache;
   }
 
-  async waitForBridgesReady(): Promise<void> {
+  async waitForBridgeState(state: BridgeState): Promise<void> {
     const waitList: Promise<any>[] = [];
-    this.srcBridges.forEach((b) =>
-      waitList.push(b.waitForState(BridgeState.ready))
-    );
+    this.srcBridges.forEach((b) => waitList.push(b.waitForState(state)));
     await Promise.all(waitList);
   }
 
-  async waitForBridgesEnd(): Promise<void> {
-    const waitList: Promise<any>[] = [];
-    this.tarBridges.forEach((b) =>
-      waitList.push(b.waitForState(BridgeState.end))
-    );
-    await Promise.all(waitList);
-  }
-
-  notifyBridgesRead(): void {
-    this.tarBridges.forEach((b) => b.setState(BridgeState.ready));
-  }
-
-  notifyBridgesEnd(): void {
-    this.srcBridges.forEach((b) => b.setState(BridgeState.end));
+  notifyBridges(state: BridgeState): void {
+    this.tarBridges.forEach((b) => b.setState(state));
   }
 
   abstract initModule(): Promise<void>;
@@ -134,9 +120,9 @@ export default abstract class BaseKernelModule<
   abstract beforeServiceStart(): Promise<void>;
 
   async register(): Promise<void> {
-    await this.waitForBridgesReady();
+    await this.waitForBridgeState(BridgeState.ready);
     await this.initModule();
-    await this.db?.connect();
+    await this.db?.start();
     this.actionlist.forEach((el) => {
       el.register();
     });
@@ -145,11 +131,11 @@ export default abstract class BaseKernelModule<
       service.log('Starting');
       service.start();
     });
-    this.notifyBridgesRead();
+    this.notifyBridges(BridgeState.ready);
   }
 
   async shutdown(): Promise<void> {
-    await this.waitForBridgesEnd();
+    await this.waitForBridgeState(BridgeState.end);
     if (this.endpoint) {
       this.endpoint.stop();
     }
@@ -160,7 +146,7 @@ export default abstract class BaseKernelModule<
     await Promise.all(workload);
 
     await this.db?.disconnect();
-    await this.notifyBridgesEnd();
+    await this.notifyBridges(BridgeState.end);
   }
 
   addAction(action: BaseAction): void {
