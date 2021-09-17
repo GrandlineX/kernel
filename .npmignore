@@ -19,3 +19,4 @@ tsconfig.json
 .scannerwork
 sonar-project.properties
 coverage
+*.tgz
