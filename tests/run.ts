@@ -1,9 +1,6 @@
-// @ts-ignore
-import Path from 'path';
+import * as Path from 'path';
 import { config } from 'dotenv';
-import Kernel, {createFolderIfNotExist, KernelEndpoint} from "../src";
-// @ts-ignore
-import cors from "cors";
+import Kernel, { cors, createFolderIfNotExist, KernelEndpoint } from '../src';
 
 config();
 
@@ -21,7 +18,7 @@ const kernel = new Kernel(appName, appCode, testPath, apiPort);
 kernel.setTrigerFunction("load",async (ik)=>{
     const endpoint=ik.getModule().getEndpoint() as KernelEndpoint
     const app=endpoint.getApp();
-    app.use(cors())
+     app.use(cors)
 })
 
 

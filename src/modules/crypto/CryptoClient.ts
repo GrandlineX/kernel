@@ -1,7 +1,6 @@
 import * as crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
-import { randomBytes } from 'crypto';
 import { ICClient, IKernel } from '../../lib';
 import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
 import { KernelDB } from '../../database';
@@ -39,7 +38,7 @@ export default class CryptoClient implements ICClient {
 
   generateSecureToken(length: number): Promise<string> {
     return new Promise<string>((resolve) => {
-      randomBytes(length, (err, buf) => {
+      crypto.randomBytes(length, (err, buf) => {
         if (err) {
           resolve('');
         } else {
@@ -98,7 +97,7 @@ export default class CryptoClient implements ICClient {
   }
 
   jwtGenerateAccessToken(data: { username: string }): string {
-    return jwt.sign(data, this.AesKey, { expiresIn: '14400s' });
+    return jwt.sign(data, this.AesKey, { expiresIn: '1 days' });
   }
 
   async apiTokenValidation(

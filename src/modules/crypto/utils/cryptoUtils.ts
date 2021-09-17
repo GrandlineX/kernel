@@ -40,11 +40,11 @@ export function createCerts(path: string): void {
     },
     {
       name: 'organizationName',
-      value: 'GrandLine',
+      value: 'GrandLineX',
     },
     {
       shortName: 'OU',
-      value: 'GL',
+      value: 'GLX',
     },
   ];
 

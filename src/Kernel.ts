@@ -271,7 +271,7 @@ export default class Kernel extends Logger implements IKernel {
   async stop(): Promise<boolean> {
     const workload: Promise<void>[] = [];
     await this.trigerFunction('stop');
-    this.getModuleList().forEach((el) => workload.push(el.shutdown()));
+    this.moduleList.forEach((el) => workload.push(el.shutdown()));
     await Promise.all(workload);
     await this.getModule().shutdown();
     this.setState('exited');

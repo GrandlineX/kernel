@@ -16,3 +16,6 @@ site
 .eslintignore
 .env.example
 tsconfig.json
+.scannerwork
+sonar-project.properties
+coverage

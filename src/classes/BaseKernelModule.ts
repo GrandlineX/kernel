@@ -146,7 +146,7 @@ export default abstract class BaseKernelModule<
     await Promise.all(workload);
 
     await this.db?.disconnect();
-    await this.notifyBridges(BridgeState.end);
+    this.notifyBridges(BridgeState.end);
   }
 
   addAction(action: BaseAction): void {
@@ -171,6 +171,15 @@ export default abstract class BaseKernelModule<
 
   getBridges(): IBaseBrige[] {
     return this.srcBridges;
+  }
+
+  getBridgeModule(
+    name: string
+  ): IBaseKernelModule<any, any, any, any> | undefined {
+    const br = this.srcBridges.find(
+      (bridge) => bridge.getTarget().getName() === name
+    );
+    return br?.getTarget();
   }
 
   abstract final(): Promise<void>;

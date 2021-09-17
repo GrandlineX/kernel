@@ -19,3 +19,4 @@ junit.xml
 openapi.yaml
 /openapi.yml
 !jest.config.js
+*.tgz

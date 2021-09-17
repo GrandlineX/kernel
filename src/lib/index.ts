@@ -149,6 +149,10 @@ export interface IBaseKernelModule<
   setCache(cache: C): void;
 
   getName(): string;
+
+  getBridgeModule(
+    name: string
+  ): IBaseKernelModule<any, any, any, any> | undefined;
 }
 
 export interface IBaseEndpoint extends IBaseElement {
@@ -202,6 +206,6 @@ export interface IBaseBrige {
   connect(): void;
   setState(state: BridgeState): void;
   waitForState(state: BridgeState): Promise<boolean>;
-  getTarget(): Promise<IBaseKernelModule<any, any, any, any>>;
+  getTarget(): IBaseKernelModule<any, any, any, any>;
 }
 export type WorkLoad = Promise<any>[];

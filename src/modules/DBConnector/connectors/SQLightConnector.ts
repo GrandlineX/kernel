@@ -58,7 +58,7 @@ export default abstract class SQLightConnector
       const version = result.find((el) => {
         return el.c_key === 'dbversion';
       });
-      return true;
+      return !!version;
     } catch (e) {
       this.warn(e);
       this.log('Create new Database');

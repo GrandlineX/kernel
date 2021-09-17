@@ -1,8 +1,8 @@
 import {
   BaseAuthProvider, BaseDBUpdate,
   BaseKernelModule,
-  BaseLoopService,
-  createFolderIfNotExist, DBConnection, IBaseKernelModule, IKernel,
+  BaseLoopService, cors,
+  createFolderIfNotExist, DBConnection, IBaseKernelModule, IKernel, KernelEndpoint,
   sleep, SQLightConnector
 } from '../src';
 import { config } from 'dotenv';
@@ -150,6 +150,10 @@ describe('Clean Startup', () => {
       ik.addModule(new TestModuel(ik))
       ik.addModule(new BridgeTestModule(ik))
     })
+    kernel.setTrigerFunction("load",async (ik)=>{
+      const ep=ik.getModule().getEndpoint() as KernelEndpoint;
+      ep.getApp().use(cors)
+    })
   });
   test('start kernel', async () => {
     const result = await kernel.start();
@@ -169,6 +173,12 @@ describe('Clean Startup', () => {
     const db = kernel.getModuleList()[0].getDb();
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
+  });
+
+  test('test bridge', async () => {
+    const mod = kernel.getModuleList()[1];
+
+    expect(mod.getBridgeModule("testModule")).not.toBeUndefined();
   });
 
 

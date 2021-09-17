@@ -39,7 +39,7 @@ export default class BaseBridge extends Logger implements IBaseBrige {
     return true;
   }
 
-  async getTarget(): Promise<IBaseKernelModule<any, any, any, any>> {
+  getTarget(): IBaseKernelModule<any, any, any, any> {
     return this.target;
   }
 }
