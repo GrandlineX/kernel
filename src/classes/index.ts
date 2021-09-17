@@ -7,6 +7,8 @@ import BaseLoopService from './BaseLoopService';
 import BaseApiAction from './BaseApiAction';
 import BaseService from './BaseService';
 import BaseAuthProvider from './BaseAuthProvider';
+import BaseClient from './BaseClient';
+import BaseBridge from './BaseBridge';
 
 export {
   BaseLoopService,
@@ -18,4 +20,6 @@ export {
   BaseElement,
   BaseCache,
   BaseAction,
+  BaseClient,
+  BaseBridge,
 };

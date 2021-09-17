@@ -14,5 +14,5 @@ export * from './modules';
 export * from './services';
 export * from './utils';
 
-export { KernelModule };
+export { KernelModule, Kernel };
 export default Kernel;
