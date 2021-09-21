@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 import { RedisClientType } from 'redis/dist/lib/client';
-import { BaseCache } from '../../classes';
+import BaseCache from '../../classes/BaseCache';
 import { IBaseKernelModule } from '../../lib';
 
 type RedisClient = RedisClientType<any, any> | null;
