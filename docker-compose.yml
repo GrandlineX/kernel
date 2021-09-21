@@ -1,3 +1,4 @@
+version: '3'
 services:
   dev-db:
     image: postgres
@@ -7,3 +8,10 @@ services:
       - .env
     ports:
       - 5432:5432
+  dev-redis:
+    image: redis:alpine
+    command: redis-server --requirepass password
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master

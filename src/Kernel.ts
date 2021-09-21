@@ -1,10 +1,4 @@
-import {
-  IBaseKernelModule,
-  ICClient,
-  IKernel,
-  KernelTrigger,
-  PGConfig,
-} from './lib';
+import { IBaseKernelModule, ICClient, IKernel, KernelTrigger } from './lib';
 import BaseKernelModule from './classes/BaseKernelModule';
 import KernelModule from './KernelModule';
 import {
@@ -47,8 +41,6 @@ export default class Kernel extends Logger implements IKernel {
 
   private offline: boolean;
 
-  private pgConf: PGConfig | null;
-
   private updateSkip: boolean;
 
   private globalConfig: CoreConfig;
@@ -85,7 +77,6 @@ export default class Kernel extends Logger implements IKernel {
     this.offline = false;
     this.updateSkip = false;
     this.appVersion = 'noVersion';
-    this.pgConf = null;
     this.master = true;
     this.trigerFunction = this.trigerFunction.bind(this);
     if (pathOverride) {
@@ -134,10 +125,6 @@ export default class Kernel extends Logger implements IKernel {
 
   getAppCode(): string {
     return this.appCode;
-  }
-
-  getPGConf(): PGConfig | null {
-    return this.pgConf;
   }
 
   public async start(): Promise<boolean> {
@@ -314,12 +301,26 @@ export default class Kernel extends Logger implements IKernel {
       env?.POSTGRES_PASSWORD &&
       env?.POSTGRES_USER
     ) {
-      this.pgConf = {
-        host: env.DBPATH,
-        port: Number(env.DBPORT),
-        password: env.POSTGRES_PASSWORD,
-        user: env.POSTGRES_USER,
+      this.globalConfig.db = {
+        postgres: {
+          host: env.DBPATH,
+          port: Number(env.DBPORT),
+          password: env.POSTGRES_PASSWORD,
+          user: env.POSTGRES_USER,
+        },
       };
+    }
+    if (env?.REDIS_URL && env?.REDIS_PORT) {
+      const conf = {
+        url: env.REDIS_URL,
+        port: parseInt(env.REDIS_PORT, 10),
+        password: env?.REDIS_PASSWORD,
+      };
+      if (this.globalConfig.db) {
+        this.globalConfig.db.redis = conf;
+      } else {
+        this.globalConfig.db = { redis: conf };
+      }
     }
     if (env?.SERVER_PASSWOR) {
       this.debug('enable crypto client');

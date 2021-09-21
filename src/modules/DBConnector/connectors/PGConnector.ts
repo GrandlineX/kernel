@@ -35,8 +35,8 @@ export default abstract class PGConnector
   abstract initNewDB(): Promise<void>;
 
   async connect(run?: (process: string) => Promise<void>): Promise<boolean> {
-    const conf = this.module.getKernel().getPGConf();
-    if (conf === null) {
+    const conf = this.module.getKernel().getGlobalConfig().db?.postgres;
+    if (conf === undefined) {
       this.error('NO PG CONFIG FOUND');
       return false;
     }
@@ -137,7 +137,9 @@ export default abstract class PGConnector
   }
 
   async disconnect(): Promise<boolean> {
-    this.db?.end();
+    if (this.db) {
+      await this.db?.end();
+    }
     return true;
   }
 }

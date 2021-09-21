@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { CoreConfig } from '../utils/config';
-import BaseCache from '../classes/BaseCache';
 import { ILogger } from '../modules/logger/Logger';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
 import { IDataBase } from '../modules/DBConnector/lib';
@@ -15,6 +14,22 @@ export enum BridgeState {
 
 export type ActionTypes = 'POST' | 'GET' | 'USE';
 export type ServiceStates = 'INIT' | 'RUNNING' | 'SLEEPING';
+
+export interface IBaseCache {
+  start(): Promise<void>;
+
+  set(key: string, val: string): Promise<void>;
+
+  get(key: string): Promise<string | undefined>;
+
+  delete(key: string): Promise<void>;
+
+  clearAll(key: string): Promise<void>;
+
+  exist(key: string): Promise<boolean>;
+
+  stop(): Promise<void>;
+}
 
 export interface ICClient {
   setAuthProvider(provider: IAuthProvider): boolean;
@@ -98,14 +113,12 @@ export interface IKernel extends ILogger {
   getGlobalConfig(): CoreConfig;
 
   getAppServerPort(): number;
-
-  getPGConf(): PGConfig | null;
 }
 
 export interface IBaseKernelModule<
   T extends IDataBase<any> | null,
   P extends IBaseElement | null,
-  C extends BaseCache | null,
+  C extends IBaseCache | null,
   E extends IBaseEndpoint | null
 > extends ILogger {
   addSrcBridge(bridge: IBaseBrige): void;
@@ -193,13 +206,6 @@ export interface KeyType {
   iv: Buffer;
   secret: string;
   auth: Buffer;
-}
-
-export interface PGConfig {
-  host: string;
-  port: number;
-  user: string;
-  password: string;
 }
 
 export interface IBaseBrige {

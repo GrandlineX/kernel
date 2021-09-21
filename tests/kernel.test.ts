@@ -11,6 +11,7 @@ import Kernel from '../src/Kernel';
  import BaseClient from "../src/classes/BaseClient";
 import {JwtToken} from "../src/classes/BaseAuthProvider";
 import axios from 'axios';
+import BaseRedisCache from '../src/modules/cache/BaseRedisCache';
 config();
 
 const appName = 'TestKernel';
@@ -83,13 +84,14 @@ class TestDBUpdate extends BaseDBUpdate<any>{
   }
 
 }
-
-class TestModuel extends BaseKernelModule<TestDB,TestClient,null, null>{
+class TestRedisCache extends BaseRedisCache{}
+class TestModuel extends BaseKernelModule<TestDB,TestClient,TestRedisCache, null>{
   constructor(kernel:IKernel) {
     super("testModule",kernel);
   }
   async initModule(): Promise<void> {
     this.setClient(new TestClient("testc",this))
+    this.setCache(new TestRedisCache("testcache",this))
     this.log("FirstTHIS")
     const db=new TestDB(this)
     this.setDb(db)
@@ -175,6 +177,29 @@ describe('Clean Startup', () => {
     expect(conf?.c_value).not.toBeNull();
   });
 
+  test('redis test', async () => {
+    const cache = kernel.getModuleList()[0].getCache() as BaseRedisCache;
+    const obj={
+      test:"object",
+    }
+    const kk='dbversion'
+    const kk2='test'
+    await cache.clearAll();
+    expect(await cache.exist(kk)).toBeFalsy()
+    await cache.set(kk,"001");
+    expect( await cache.get(kk)).toBe("001")
+    expect(await cache.exist(kk)).toBeTruthy()
+    await cache.set(kk2,JSON.stringify(obj));
+    await cache.expire(kk,30);
+    const a=await cache.get(kk2);
+    expect(a).not.toBeUndefined()
+    expect(a).not.toBeNull()
+    if (!a){
+      return
+    }
+    expect(JSON.parse(a)?.test).toBe("object")
+    await cache.expire(kk2,30);
+  });
   test('test bridge', async () => {
     const mod = kernel.getModuleList()[1];
 

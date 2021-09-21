@@ -123,6 +123,7 @@ export default abstract class BaseKernelModule<
     await this.waitForBridgeState(BridgeState.ready);
     await this.initModule();
     await this.db?.start();
+    await this.cache?.start();
     this.actionlist.forEach((el) => {
       el.register();
     });
@@ -146,6 +147,7 @@ export default abstract class BaseKernelModule<
     await Promise.all(workload);
 
     await this.db?.disconnect();
+    await this.cache?.stop();
     this.notifyBridges(BridgeState.end);
   }
 

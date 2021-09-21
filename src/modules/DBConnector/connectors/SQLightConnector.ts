@@ -33,7 +33,10 @@ export default abstract class SQLightConnector
                        FROM ${this.schemaName}.config
                        WHERE c_key = $1;`;
       const query = await this.db?.prepare(q);
-      query?.run([key]);
+
+      if (query) {
+        query.run([key]);
+      }
     } catch (e) {
       this.error(e);
     }

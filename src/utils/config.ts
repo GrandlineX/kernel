@@ -1,6 +1,13 @@
 import os from 'os';
 import path from 'path';
 
+export interface PGConfig {
+  host: string;
+  port: number;
+  user: string;
+  password: string;
+}
+
 export enum OsRelease {
   'FREEBSD',
   'OPENBSD',
@@ -28,6 +35,14 @@ export interface CoreConfig extends BaseCoreConfig {
   net: {
     port: number;
     domain: string;
+  };
+  db?: {
+    redis?: {
+      url: string;
+      port: number;
+      password?: string;
+    };
+    postgres?: PGConfig;
   };
 }
 export function getConfig(

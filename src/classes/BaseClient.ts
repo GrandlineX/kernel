@@ -1,22 +1,11 @@
-import { IBaseElement, IBaseKernelModule, IKernel } from '../lib';
-import Logger from '../modules/logger/Logger';
+import { IBaseElement, IBaseKernelModule } from '../lib';
+import BaseElement from './BaseElement';
 
 export default abstract class BaseClient
-  extends Logger
+  extends BaseElement
   implements IBaseElement
 {
-  module: IBaseKernelModule<any, any, any, any>;
-
   constructor(chanel: string, module: IBaseKernelModule<any, any, any, any>) {
-    super(`client-${chanel}`, module.getKernel().getGlobalConfig().dir.temp);
-    this.module = module;
-  }
-
-  getKernel(): IKernel {
-    return this.module.getKernel();
-  }
-
-  getModule(): IBaseKernelModule<any, any, any, any> {
-    return this.module;
+    super(`client-${chanel}`, module);
   }
 }
