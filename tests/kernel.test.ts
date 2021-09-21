@@ -2,7 +2,7 @@ import {
   BaseAuthProvider, BaseDBUpdate,
   BaseKernelModule,
   BaseLoopService, cors,
-  createFolderIfNotExist, DBConnection, IBaseKernelModule, IKernel, KernelEndpoint,
+  createFolderIfNotExist, DBConnection, IBaseKernelModule, ICClient, IKernel, KernelEndpoint,
   sleep, SQLightConnector
 } from '../src';
 import { config } from 'dotenv';
@@ -12,6 +12,7 @@ import Kernel from '../src/Kernel';
 import {JwtToken} from "../src/classes/BaseAuthProvider";
 import axios from 'axios';
 import BaseRedisCache from '../src/modules/cache/BaseRedisCache';
+import { Request } from 'express';
 config();
 
 const appName = 'TestKernel';
@@ -45,12 +46,31 @@ class TestServie extends BaseLoopService{
 }
 
 class TestAuthProvider extends  BaseAuthProvider{
+
+  cc:ICClient
+  constructor(cc:ICClient) {
+    super();
+    this.cc=cc;
+  }
   async authorizeToken(username: string, token: any, requestType: string): Promise<boolean> {
     return username ==='admin' && token ==='admin' && requestType ==='api';
   }
 
   async validateAcces(token: JwtToken, requestType: string): Promise<boolean> {
     return token.username==="admin" && requestType === "api";
+  }
+
+  async bearerTokenValidation(req: Request): Promise<JwtToken | null> {
+      const authHeader = req.headers.authorization;
+      const token = authHeader && authHeader.split(' ')[1];
+      if (token == null) {
+      return null;
+    }
+    const tokenData = await this.cc.jwtVerifyAccessToken(token);
+    if (tokenData) {
+      return tokenData;
+    }
+    return null;
   }
 
 }
@@ -336,7 +356,7 @@ describe('Clean Startup', () => {
     const cc=kernel.getCryptoClient();
     expect(cc).not.toBeNull();
 
-    const prov=cc?.setAuthProvider(new TestAuthProvider())
+    const prov=cc?.setAuthProvider(new TestAuthProvider(cc))
 
      expect(prov).toBeTruthy()
 

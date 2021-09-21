@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface JwtToken {
   exp: number;
   iat: number;
@@ -12,6 +14,8 @@ export interface IAuthProvider {
   ): Promise<boolean>;
 
   validateAcces(token: JwtToken, requestType: string): Promise<boolean>;
+
+  bearerTokenValidation(req: Request): Promise<JwtToken | null>;
 }
 
 export default abstract class BaseAuthProvider implements IAuthProvider {
@@ -25,4 +29,6 @@ export default abstract class BaseAuthProvider implements IAuthProvider {
     token: JwtToken,
     requestType: string
   ): Promise<boolean>;
+
+  abstract bearerTokenValidation(req: Request): Promise<JwtToken | null>;
 }

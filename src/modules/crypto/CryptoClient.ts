@@ -122,6 +122,9 @@ export default class CryptoClient implements ICClient {
   }
 
   async bearerTokenValidation(req: Request): Promise<JwtToken | null> {
+    if (this.authProvider) {
+      return this.authProvider.bearerTokenValidation(req);
+    }
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) {
