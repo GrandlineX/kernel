@@ -1,6 +1,8 @@
 import * as Path from 'path';
 import { config } from 'dotenv';
-import Kernel, { cors, createFolderIfNotExist, KernelEndpoint } from '../src';
+import Kernel, {  KernelEndpoint } from '../src';
+import { createFolderIfNotExist } from '@grandlinex/core';
+import { cors } from '../src/modules/crypto/utils/cors';
 
 config();
 

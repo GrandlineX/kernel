@@ -1,15 +1,13 @@
 import express from 'express';
 import http from 'http';
 import { json } from 'body-parser';
-import { IBaseEndpoint, IBaseKernelModule, IKernel } from '../lib';
-import Logger from '../modules/logger/Logger';
+import { CoreEndpoint } from '@grandlinex/core';
+import { IBaseEndpoint, IBaseKernelModule } from '../lib';
 
 export default abstract class BaseEndpoint
-  extends Logger
+  extends CoreEndpoint<express.Express>
   implements IBaseEndpoint
 {
-  private module: IBaseKernelModule<any, any, any, any>;
-
   private appServer: express.Express;
 
   private httpServer: http.Server | null;
@@ -21,8 +19,7 @@ export default abstract class BaseEndpoint
     module: IBaseKernelModule<any, any, any, any>,
     port: number
   ) {
-    super(`endpoint-${chanel}`, module.getKernel().getGlobalConfig().dir.temp);
-    this.module = module;
+    super(`endpoint-${chanel}`, module);
     this.port = port;
     this.appServer = express();
     this.appServer.use(json());
@@ -49,14 +46,6 @@ export default abstract class BaseEndpoint
         this.httpServer.close((err) => (err ? resolve(false) : resolve(true)));
       }
     });
-  }
-
-  getKernel(): IKernel {
-    return this.module.getKernel();
-  }
-
-  getModule(): IBaseKernelModule<any, any, any, any> {
-    return this.module;
   }
 
   getApp(): express.Express {

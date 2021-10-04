@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { IBaseKernelModule } from '../lib';
 import { BaseApiAction } from '../classes';
-import { CryptoClient } from '../modules';
+import CryptoClient from '../modules/crypto/CryptoClient';
 
 /**
  * @openapi

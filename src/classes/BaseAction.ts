@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import BaseElement from './BaseElement';
+import { CoreAction } from '@grandlinex/core';
 import { IBaseAction, IBaseKernelModule } from '../lib';
 import { JwtToken } from './BaseAuthProvider';
 
 export default abstract class BaseAction
-  extends BaseElement
+  extends CoreAction
   implements IBaseAction
 {
   dmz = false;

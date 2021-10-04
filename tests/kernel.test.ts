@@ -1,18 +1,25 @@
 import {
-  BaseAuthProvider, BaseDBUpdate,
+  BaseAuthProvider, BaseClient,
   BaseKernelModule,
-  BaseLoopService, cors,
-  createFolderIfNotExist, DBConnection, IBaseKernelModule, ICClient, IKernel, KernelEndpoint,
-  sleep, SQLightConnector
+  BaseLoopService,
+  IBaseKernelModule, ICClient, IKernel, KernelEndpoint
+
 } from '../src';
 import { config } from 'dotenv';
 import * as Path from 'path';
 import Kernel from '../src/Kernel';
- import BaseClient from "../src/classes/BaseClient";
 import {JwtToken} from "../src/classes/BaseAuthProvider";
 import axios from 'axios';
-import BaseRedisCache from '../src/modules/cache/BaseRedisCache';
 import { Request } from 'express';
+import {
+  BaseDBUpdate,
+  BaseRedisCache,
+  createFolderIfNotExist,
+  DBConnection,
+  sleep,
+  SQLightConnector
+} from '@grandlinex/core';
+import { cors } from '../src/modules/crypto/utils/cors';
 config();
 
 const appName = 'TestKernel';
@@ -182,6 +189,12 @@ describe('Clean Startup', () => {
     expect(result).toBe(true);
     expect(kernel.getModuleList()).toHaveLength(2);
     expect(kernel.getState()).toBe('running');
+  });
+
+  test('net config', async () => {
+    const conf = kernel.getGlobalConfig()
+    expect(conf.net).not.toBeNull();
+    expect(conf.net).not.toBeUndefined();
   });
 
   test('get db version', async () => {

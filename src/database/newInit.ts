@@ -1,4 +1,4 @@
-import { SQLQuery } from '../modules/DBConnector/lib';
+import { SQLQuery } from '@grandlinex/core';
 
 function newInit(schema: string): SQLQuery[] {
   return [

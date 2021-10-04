@@ -1,14 +1,16 @@
+import {
+  CoreLoopService as BaseLoopService,
+  CoreService as BaseService,
+  CoreElement as BaseElement,
+  CoreCache as BaseCache,
+  CoreClient as BaseClient,
+  CoreBridge as BaseBridge,
+} from '@grandlinex/core';
 import BaseAction from './BaseAction';
-import BaseCache from './BaseCache';
-import BaseElement from './BaseElement';
 import BaseEndpoint from './BaseEndpoint';
 import BaseKernelModule from './BaseKernelModule';
-import BaseLoopService from './BaseLoopService';
 import BaseApiAction from './BaseApiAction';
-import BaseService from './BaseService';
 import BaseAuthProvider from './BaseAuthProvider';
-import BaseClient from './BaseClient';
-import BaseBridge from './BaseBridge';
 
 export {
   BaseLoopService,

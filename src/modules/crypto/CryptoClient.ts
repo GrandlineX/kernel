@@ -1,29 +1,18 @@
 import * as crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
+import { CoreCryptoClient } from '@grandlinex/core';
 import { ICClient, IKernel } from '../../lib';
 import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
 import { KernelDB } from '../../database';
 
-const encryptionType = 'aes-256-gcm';
-const encryptionEncoding = 'base64';
-const bufferEncryption = 'utf8';
+export default class CryptoClient extends CoreCryptoClient implements ICClient {
+  protected authProvider: IAuthProvider | null;
 
-export default class CryptoClient implements ICClient {
-  private AesKey: string;
-
-  private AesIV: string;
-
-  private authProvider: IAuthProvider | null;
-
-  private kernel: IKernel;
+  protected kernel: IKernel;
 
   constructor(key: string, kernel: IKernel) {
-    if (key.length !== 32) {
-      throw new Error('INVALID KEY LENGTH');
-    }
-    this.AesKey = key;
-    this.AesIV = key.substring(0, 16);
+    super(key);
     this.kernel = kernel;
     this.authProvider = null;
   }
@@ -34,54 +23,6 @@ export default class CryptoClient implements ICClient {
     }
     this.authProvider = provider;
     return true;
-  }
-
-  generateSecureToken(length: number): Promise<string> {
-    return new Promise<string>((resolve) => {
-      crypto.randomBytes(length, (err, buf) => {
-        if (err) {
-          resolve('');
-        } else {
-          resolve(buf.toString('hex'));
-        }
-      });
-    });
-  }
-
-  encrypt(message: string): {
-    auth: Buffer;
-    iv: Buffer;
-    enc: string;
-  } {
-    const iv = crypto.randomBytes(12);
-    const cipher = crypto.createCipheriv(encryptionType, this.AesKey, iv);
-
-    let enc = cipher.update(message, bufferEncryption, encryptionEncoding);
-    enc += cipher.final(encryptionEncoding);
-    return {
-      auth: cipher.getAuthTag(),
-      iv,
-      enc,
-    };
-  }
-
-  decrypt(enc: string, iv: Buffer, authTag: Buffer): string {
-    const decipher = crypto.createDecipheriv(encryptionType, this.AesKey, iv);
-    decipher.setAuthTag(Buffer.from(authTag));
-    let str = decipher.update(enc, encryptionEncoding, bufferEncryption);
-    str += decipher.final(bufferEncryption);
-    return str;
-  }
-
-  isValid(): boolean {
-    return this.AesKey.length === 32;
-  }
-
-  getHash(seed: string, val: string): string {
-    return crypto
-      .createHash('sha512')
-      .update(seed + val)
-      .digest('hex');
   }
 
   jwtVerifyAccessToken(token: string): Promise<JwtToken | null> {
@@ -147,10 +88,5 @@ export default class CryptoClient implements ICClient {
     const db = this.kernel.getDb() as KernelDB;
     const key = await db.getKey(id);
     return this.decrypt(key.secret, key.iv, key.auth);
-  }
-
-  static fromPW(pw: string, kernel: IKernel): ICClient {
-    const shasum = crypto.createHash('sha512').update(pw).digest('hex');
-    return new CryptoClient(shasum.substring(0, 32), kernel);
   }
 }
