@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/core": "^0.11.0",
+    "@grandlinex/core": "^0.11.1",
     "axios": "^0.21.4",
     "better-sqlite3": "^7.4.3",
     "body-parser": "^1.19.0",
