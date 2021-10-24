@@ -182,7 +182,7 @@ test:test:dev:
   only:
     - merge_requests
     - dev
-    - master
+    - main
   script:
     - npm install
     - npm run test-converage
@@ -204,7 +204,7 @@ lint:scan:dev:
   only:
     - merge_requests
     - dev
-    - master
+    - main
   script:
     - npm install
     - npm run lint
@@ -220,7 +220,7 @@ sec:scan:dev:
   only:
     - merge_requests
     - dev
-    - master
+    - main
   script:
     - /analyzer run
   artifacts:
@@ -236,7 +236,7 @@ make:build:dev:
   only:
     - merge_requests
     - dev
-    - master
+    - main
   script:
     - npm install
     - npm run buildprep
