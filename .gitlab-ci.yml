@@ -11,7 +11,7 @@ cache:
 
 docs:
   allow_failure: true
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: docs
@@ -35,13 +35,15 @@ report:test:prod:
   before_script:
     - cp $TESTENVFILE .env
   services:
-    - postgres:12.2-alpine
-    - redis:alpine
+     - name: ${DOCKER_IMG_PRE}postgres:latest
+       alias: postgres
+     - name: ${DOCKER_IMG_PRE}redis:alpine
+       alias: redis
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     POSTGRES_HOST_AUTH_METHOD: trust
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: test
@@ -67,7 +69,7 @@ report:test:prod:
 
 lint:scan:prod:
   allow_failure: false
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: scan
@@ -83,7 +85,7 @@ lint:scan:prod:
 
 'sonar:scan:prod':
   allow_failure: true
-  image: sonarsource/sonar-scanner-cli
+  image: ${DOCKER_IMG_PRE}sonarsource/sonar-scanner-cli
   stage: scan
   tags:
     - docker
@@ -119,7 +121,7 @@ sec:scan:prod:
 
 
 make:build:prod:
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: build
@@ -142,7 +144,7 @@ make:build:prod:
 
 
 package:peploy:prod:
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: publish
@@ -169,13 +171,15 @@ test:test:dev:
   before_script:
     - cp $TESTENVFILE .env
   services:
-    - postgres:12.2-alpine
-    - redis:alpine
+     - name: ${DOCKER_IMG_PRE}postgres:latest
+       alias: postgres
+     - name: ${DOCKER_IMG_PRE}redis:alpine
+       alias: redis
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     POSTGRES_HOST_AUTH_METHOD: trust
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: test
@@ -197,7 +201,7 @@ test:test:dev:
 
 lint:scan:dev:
   allow_failure: true
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: scan
@@ -229,7 +233,7 @@ sec:scan:dev:
       sast: gl-sast-report.json
 
 make:build:dev:
-  image: node:latest
+  image:  ${DOCKER_IMG_PRE}node:latest
   tags:
     - docker
   stage: build
