@@ -3,6 +3,12 @@ stages:
   - scan
   - docs
   - build
+  - publish
+
+cache:
+  paths:
+    - node_modules/
+
 docs:
   allow_failure: true
   image: node:latest
@@ -30,6 +36,7 @@ report:test:prod:
     - cp $TESTENVFILE .env
   services:
     - postgres:12.2-alpine
+    - redis:alpine
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -74,6 +81,20 @@ lint:scan:prod:
     - npm run lint
   needs: []
 
+'sonar:scan:prod':
+  allow_failure: true
+  image: sonarsource/sonar-scanner-cli
+  stage: scan
+  tags:
+    - docker
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  script:
+    - sonar-scanner -Dsonar.login=$sonar_key -Dsonar.host.url=$sonar_url
+  needs:
+    - report:test:prod
+
 
 sec:scan:prod:
   before_script:
@@ -97,7 +118,7 @@ sec:scan:prod:
     - report:test:prod
 
 
-publish:build:prod:
+make:build:prod:
   image: node:latest
   tags:
     - docker
@@ -113,7 +134,35 @@ publish:build:prod:
   needs:
     - lint:scan:prod
     - sec:scan:prod
+    - sonar:scan:prod
+  artifacts:
+    paths:
+      - dist
+    expire_in: 7 days
 
+
+package:peploy:prod:
+  image: node:latest
+  tags:
+    - docker
+  stage: publish
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  before_script:
+    - cp $NPM_DEPLOY ./.npmrc
+  after_script:
+    - rm ./.npmrc
+  script:
+    - npm publish
+    - npm pack
+  needs:
+    - make:build:prod
+  artifacts:
+    paths:
+      - ./*.tgz
 
 test:test:dev:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
@@ -121,6 +170,7 @@ test:test:dev:
     - cp $TESTENVFILE .env
   services:
     - postgres:12.2-alpine
+    - redis:alpine
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -132,6 +182,7 @@ test:test:dev:
   only:
     - merge_requests
     - dev
+    - master
   script:
     - npm install
     - npm run test-converage
@@ -153,6 +204,7 @@ lint:scan:dev:
   only:
     - merge_requests
     - dev
+    - master
   script:
     - npm install
     - npm run lint
@@ -168,6 +220,7 @@ sec:scan:dev:
   only:
     - merge_requests
     - dev
+    - master
   script:
     - /analyzer run
   artifacts:
@@ -183,6 +236,12 @@ make:build:dev:
   only:
     - merge_requests
     - dev
+    - master
   script:
     - npm install
     - npm run buildprep
+    - npm pack
+  artifacts:
+    paths:
+      - ./*.tgz
+    expire_in: 14 days
