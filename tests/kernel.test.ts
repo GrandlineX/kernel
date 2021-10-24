@@ -305,7 +305,7 @@ describe('Clean Startup', () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
 
-    const token= await axios.post(`http://localhost:${port}/token`,{
+    const token= await axios.post<{token:string}>(`http://localhost:${port}/token`,{
       username: "admin",
       token: process.env.SERVER_PASSWOR,
     })
@@ -374,7 +374,7 @@ describe('Clean Startup', () => {
      expect(prov).toBeTruthy()
 
 
-    const testcall = await axios.post( `http://localhost:${port}/token`, { token: "admin", username: "admin", } );
+    const testcall = await axios.post<{token:string}>( `http://localhost:${port}/token`, { token: "admin", username: "admin", } );
     expect(testcall.status).toBe(200);
 
     const adminToken=await cc?.jwtVerifyAccessToken(testcall.data.token)
@@ -408,7 +408,7 @@ describe('Clean Startup', () => {
 
 
   test('test api version', async () => {
-    const version = await axios.get(`http://localhost:${port}/version`);
+    const version = await axios.get<{api:number}>(`http://localhost:${port}/version`);
     expect(version.status).toBe(200);
     expect(version.data.api).toBe(1);
   });
