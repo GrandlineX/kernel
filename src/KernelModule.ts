@@ -1,19 +1,22 @@
 import { OfflineService } from '@grandlinex/core';
 import BaseKernelModule from './classes/BaseKernelModule';
 import KernelDB from './database/KernelDB';
-import { IKernel } from './lib';
+import { IKernel, IKernelDb } from './lib';
 
 import KernelEndpoint from './api/KernelEndpoint';
 import ApiVersionAction from './actions/ApiVersionAction';
 import GetTokenAction from './actions/GetTokenAction';
 import ApiAuthTestAction from './actions/ApiAuthTestAction';
+import KernelDBLight from './database/KernelDBLight';
 
 export default class KernelModule extends BaseKernelModule<
-  KernelDB,
+  KernelDB | KernelDBLight,
   null,
   null,
   KernelEndpoint
 > {
+  useLightDB = false;
+
   constructor(kernel: IKernel) {
     super('kernel', kernel);
 
@@ -31,7 +34,12 @@ export default class KernelModule extends BaseKernelModule<
   }
 
   async initModule(): Promise<void> {
-    const db = new KernelDB(this);
+    let db;
+    if (this.useLightDB) {
+      db = new KernelDBLight(this);
+    } else {
+      db = new KernelDB(this);
+    }
     this.setDb(db);
     const endpoint = new KernelEndpoint(
       'api',

@@ -2,10 +2,10 @@ import { randomUUID } from 'crypto';
 
 import { generateSeed, PGConnector } from '@grandlinex/core';
 import newInit from './newInit';
-import { IBaseKernelModule, KeyType } from '../lib';
+import { IBaseKernelModule, IKernelDb, KeyType } from '../lib';
 
 export const KERNEL_DB_VERSION = '1';
-export default class KernelDB extends PGConnector {
+export default class KernelDB extends PGConnector implements IKernelDb {
   constructor(module: IBaseKernelModule<any, any, any, any>) {
     super(module, KERNEL_DB_VERSION);
   }

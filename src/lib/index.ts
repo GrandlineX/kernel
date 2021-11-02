@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import {
+  generateSeed,
   ICoreAction,
   ICoreBridge,
   ICoreCache,
@@ -12,7 +13,9 @@ import {
   IDataBase,
 } from '@grandlinex/core';
 import { BaseClient } from 'classes';
+import { randomUUID } from 'crypto';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
+import newInit from '../database/newInit';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE';
 
@@ -37,6 +40,16 @@ export interface ICClient extends ICoreCClient {
 export interface IKernel extends ICoreKernel<ICClient> {
   getAppServerPort(): number;
   setAppServerPort(port: number): void;
+}
+
+export interface IKernelDb {
+  initNewDB(): Promise<void>;
+
+  setKey(secret: string, iv: Buffer, auth: Buffer): Promise<number>;
+
+  getKey(id: number): Promise<KeyType>;
+
+  deleteKey(id: number): Promise<void>;
 }
 
 export type IBaseKernelModule<
