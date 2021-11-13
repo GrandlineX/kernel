@@ -10,16 +10,16 @@ GrandLineX is an out-of-the-box server framework on top of ExpressJs.
 ![TS](https://img.shields.io/static/v1?label=Language&message=TypeScript&color=blue&logo=TypeScript)
 
 ### Status
-![Quality Gate Status](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=alert_status)
-![Security Rating](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=security_rating)
-![Maintainability Rating](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=sqale_rating)
-![Reliability Rating](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=reliability_rating)
-![Coverage](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=coverage)
+![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=alert_status)
+![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=security_rating)
+![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=sqale_rating)
+![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=reliability_rating)
+![Coverage](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=coverage)
 
 ### Issues
-![Bugs](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=bugs)
-![Vulnerabilities](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=vulnerabilities)
-![Code Smells](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=code_smells)
+![Bugs](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=bugs)
+![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=vulnerabilities)
+![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_kernel&metric=code_smells)
 
 
 ## Documentation
