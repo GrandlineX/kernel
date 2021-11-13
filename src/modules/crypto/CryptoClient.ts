@@ -1,4 +1,3 @@
-import * as crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
 import { CoreCryptoClient } from '@grandlinex/core';
@@ -49,7 +48,11 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     if (this.authProvider) {
       return this.authProvider.authorizeToken(username, token, requestType);
     }
-    return token === process.env.SERVER_PASSWOR && username === 'admin';
+    const store = this.kernel.getConfigStore();
+    if (!store.has('SERVER_PASSWORD')) {
+      return false;
+    }
+    return token === store.get('SERVER_PASSWORD') && username === 'admin';
   }
 
   async permissonValidation(

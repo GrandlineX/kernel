@@ -1,7 +1,7 @@
 import {
   ActionTypes,
   IBaseAction,
-  IBaseEndpoint,
+  IBasePresenter,
   IBaseKernelModule,
 } from '../lib';
 import BaseAction from './BaseAction';
@@ -26,7 +26,7 @@ export default abstract class BaseApiAction
   }
 
   register(): void {
-    let endpoint: IBaseEndpoint | null;
+    let endpoint: IBasePresenter | null;
     if (this.exmod) {
       endpoint = this.exmod.getEndpoint();
     } else {

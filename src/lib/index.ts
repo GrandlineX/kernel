@@ -1,21 +1,18 @@
 import express, { Request, Response } from 'express';
 import {
-  generateSeed,
   ICoreAction,
   ICoreBridge,
   ICoreCache,
   ICoreCClient,
   ICoreElement,
-  ICoreEndpoint,
   ICoreKernel,
   ICoreKernelModule,
+  ICorePresenter,
   ICoreService,
   IDataBase,
 } from '@grandlinex/core';
 import { BaseClient } from 'classes';
-import { randomUUID } from 'crypto';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
-import newInit from '../database/newInit';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE';
 
@@ -53,13 +50,13 @@ export interface IKernelDb {
 }
 
 export type IBaseKernelModule<
-  T extends IDataBase<any> | null,
+  T extends IDataBase<any, any> | null,
   P extends BaseClient | null,
   C extends IBaseCache | null,
-  E extends IBaseEndpoint | null
+  E extends IBasePresenter | null
 > = ICoreKernelModule<IKernel, T, P, C, E>;
 
-export type IBaseEndpoint = ICoreEndpoint<express.Express>;
+export type IBasePresenter = ICorePresenter<express.Express>;
 
 export interface IBaseAction extends ICoreAction {
   handler(

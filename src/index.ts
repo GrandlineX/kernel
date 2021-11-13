@@ -12,5 +12,9 @@ export * from './modules/crypto';
 export * from './database';
 export * from './lib';
 export * from '@grandlinex/core';
+export * from '@grandlinex/bundle-postgresql';
+export * from '@grandlinex/bundle-sqlight';
+export * from '@grandlinex/bundle-elogger';
+
 export { KernelModule, Kernel };
 export default Kernel;

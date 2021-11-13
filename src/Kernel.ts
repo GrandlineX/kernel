@@ -1,5 +1,6 @@
 import CoreKernel from '@grandlinex/core';
 import { unwatchFile } from 'fs';
+import ELogger from '@grandlinex/bundle-elogger';
 import { ICClient, IKernel } from './lib';
 import KernelModule from './KernelModule';
 import CryptoClient from './modules/crypto/CryptoClient';
@@ -13,39 +14,33 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
 
   /**
    * Default Constructor
-   * @param appName App Name
-   * @param appCode App Code (Only lower case)
-   * @param domain set the external endpoint
-   * @param pathOverride set base path for config folder
-   * @param portOverride overwrites the default port
+   * @param options App Name
    */
-  constructor(
-    appName: string,
-    appCode: string,
-    pathOverride?: string,
-    portOverride?: number
-  ) {
-    super(appName, appCode, pathOverride);
+  constructor(options: {
+    appName: string;
+    appCode: string;
+    pathOverride?: string;
+    portOverride?: number;
+    envFilePath?: string;
+  }) {
+    super(options);
+    this.globalLogger = new ELogger(this);
+    this.setLogger(this.globalLogger);
     this.setBaseModule(new KernelModule(this));
-    if (portOverride) {
-      this.debug(`use custiom api port @ ${portOverride}`);
-      this.expressPort = portOverride;
+    if (options.portOverride) {
+      this.debug(`use custiom api port @ ${options.portOverride}`);
+      this.expressPort = options.portOverride;
     } else {
       this.expressPort = 9257;
     }
-    if (process.env.SERVER_PASSWOR !== undefined) {
+    const store = this.getConfigStore();
+    if (store.has('SERVER_PASSWORD')) {
       this.setCryptoClient(
         new CryptoClient(
-          CryptoClient.fromPW(process.env.SERVER_PASSWOR as string),
+          CryptoClient.fromPW(store.get('SERVER_PASSWORD') as string),
           this
         )
       );
-    }
-    if (process.env.PUBLICDOMAIN) {
-      this.globalConfig.net = {
-        port: this.expressPort,
-        domain: process.env.PUBLICDOMAIN,
-      };
     }
   }
 

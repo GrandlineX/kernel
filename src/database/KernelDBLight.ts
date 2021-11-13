@@ -1,10 +1,7 @@
-import { SQLightConnector } from '@grandlinex/core';
+import { SQLCon } from '@grandlinex/bundle-sqlight';
 import { IBaseKernelModule, IKernelDb, KeyType } from '../lib';
 
-export default class KernelDBLight
-  extends SQLightConnector
-  implements IKernelDb
-{
+export default class KernelDBLight extends SQLCon implements IKernelDb {
   constructor(module: IBaseKernelModule<any, any, any, any>) {
     super(module, '1');
   }
@@ -20,7 +17,7 @@ export default class KernelDBLight
 
   async setKey(secret: string, iv: Buffer, auth: Buffer): Promise<number> {
     const query = this.db?.prepare(
-      `REPLACE INTO main.keys (secret,iv ,auth) VALUES (?,?,?);`
+      `INSERT INTO main.keys (secret,iv ,auth) VALUES (?,?,?);`
     );
     if (query === undefined) {
       return -1;

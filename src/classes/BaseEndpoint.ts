@@ -1,12 +1,12 @@
 import express from 'express';
 import http from 'http';
 import { json } from 'body-parser';
-import { CoreEndpoint } from '@grandlinex/core';
-import { IBaseEndpoint, IBaseKernelModule } from '../lib';
+import { CorePresenter } from '@grandlinex/core';
+import { IBasePresenter, IBaseKernelModule } from '../lib';
 
 export default abstract class BaseEndpoint
-  extends CoreEndpoint<express.Express>
-  implements IBaseEndpoint
+  extends CorePresenter<express.Express>
+  implements IBasePresenter
 {
   private appServer: express.Express;
 

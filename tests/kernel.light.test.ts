@@ -1,185 +1,41 @@
 import {
-  BaseAuthProvider, BaseClient,
-  BaseKernelModule,
-  BaseLoopService,
-  IBaseKernelModule, ICClient, IKernel, KernelEndpoint, KernelModule
-
+  KernelEndpoint, KernelModule
 } from '../src';
-import { config } from 'dotenv';
 import * as Path from 'path';
-import Kernel from '../src/Kernel';
-import {JwtToken} from "../src/classes/BaseAuthProvider";
 import axios from 'axios';
-import { Request } from 'express';
 import {
-  BaseDBUpdate,
-  BaseRedisCache,
-  createFolderIfNotExist,
-  DBConnection,
-  sleep,
-  SQLightConnector
-} from '@grandlinex/core';
-import { cors } from '../src/modules/crypto/utils/cors';
-config();
+   createFolderIfNotExist,
+   sleep,
+ } from '@grandlinex/core';
+import { cors } from '../src';
+import { TestAuthProvider, testKernelUtil } from './DebugClasses';
 
-const appName = 'TestKernelLight';
-const appCode = 'tkernellight';
+
+
 const msiPath = Path.join(__dirname, '..', 'data');
 const testPath = Path.join(__dirname, '..', 'data', 'config');
  process.env.DLOG_LEVEL = 'debug';
 
-function testKernelUtil(port: number) {
-   return  new Kernel(appName, appCode, testPath, port);
-}
-
-function randomString(length:number) {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(Math.random() *
-        charactersLength));
-  }
-  return result;
-}
-
-
-class TestServie extends BaseLoopService{
-  async loop(): Promise<void> {
-
-    await sleep(2000)
-    await this.next()
-  }
-}
-
-class TestAuthProvider extends  BaseAuthProvider{
-
-  cc:ICClient
-  constructor(cc:ICClient) {
-    super();
-    this.cc=cc;
-  }
-  async authorizeToken(username: string, token: any, requestType: string): Promise<boolean> {
-    return username ==='admin' && token ==='admin' && requestType ==='api';
-  }
-
-  async validateAcces(token: JwtToken, requestType: string): Promise<boolean> {
-    return token.username==="admin" && requestType === "api";
-  }
-
-  async bearerTokenValidation(req: Request): Promise<JwtToken | null> {
-      const authHeader = req.headers.authorization;
-      const token = authHeader && authHeader.split(' ')[1];
-      if (token == null) {
-      return null;
-    }
-    const tokenData = await this.cc.jwtVerifyAccessToken(token);
-    if (tokenData) {
-      return tokenData;
-    }
-    return null;
-  }
-
-}
-
-class TestClient extends BaseClient{
-
-}
-
-
-class TestDB extends SQLightConnector{
-  constructor(module:IBaseKernelModule<any, any, any, any>) {
-    super(module,"1");
-  }
-  async initNewDB(): Promise<void> {
-    await this.execScripts([])
-  }
-}
-
-
-class TestDBUpdate extends BaseDBUpdate<any>{
-  constructor(db:DBConnection<any>) {
-    super("0","1",db);
-  }
-  async performe(): Promise<boolean> {
-    const db=this.getDb();
-
-    await db.execScripts([
-      { exec: `UPDATE ${db.schemaName}.config SET c_value=1 WHERE c_key='dbversion'` ,param:[]}
-    ])
-    return true;
-  }
-
-}
- class TestModuel extends BaseKernelModule<TestDB,TestClient,null, null>{
-  constructor(kernel:IKernel) {
-    super("testModule",kernel);
-  }
-  async initModule(): Promise<void> {
-    this.setClient(new TestClient("testc",this))
-    this.log("FirstTHIS")
-    const db=new TestDB(this)
-    this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as DBConnection<any>))
-  }
-
-  startup(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  beforeServiceStart(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  final(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-}
-class BridgeTestModule extends BaseKernelModule<null,TestClient,null, null>{
-  constructor(kernel:IKernel) {
-    super("bridgeModule",kernel,"testModule");
-  }
-  initModule(): Promise<void> {
-    this.log("LaterTHIS")
-    return Promise.resolve( undefined );
-  }
-
-  startup(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  beforeServiceStart(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  final(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-}
 
  createFolderIfNotExist(msiPath);
  createFolderIfNotExist(testPath);
 
 
 let port = 9901;
-let kernel = testKernelUtil(port);
+let kernel = testKernelUtil("KLight",port);
 
 const testText = 'hello_world';
 
-describe('Clean Startup', () => {
+describe('Clean Startup Light', () => {
   let jwtToken:any;
   test('definePreload', async () => {
     expect(kernel.getState()).toBe('init');
-    expect(kernel.getModuleList()).toHaveLength(0);
-    kernel.setTrigerFunction("pre",async (ik)=>{
-      ik.addModule(new TestModuel(ik))
-      ik.addModule(new BridgeTestModule(ik))
+    expect(kernel.getModCount()).toBe(0);
+    kernel.setTriggerFunction("pre",async (ik)=>{
       const mod=ik.getModule() as KernelModule
       mod.useLightDB=true;
     })
-    kernel.setTrigerFunction("load",async (ik)=>{
+    kernel.setTriggerFunction("load",async (ik)=>{
       const ep=ik.getModule().getEndpoint() as KernelEndpoint;
       ep.getApp().use(cors)
     })
@@ -187,14 +43,8 @@ describe('Clean Startup', () => {
   test('start kernel', async () => {
     const result = await kernel.start();
     expect(result).toBe(true);
-    expect(kernel.getModuleList()).toHaveLength(2);
+    expect(kernel.getModCount()).toBe(0);
     expect(kernel.getState()).toBe('running');
-  });
-
-  test('net config', async () => {
-    const conf = kernel.getGlobalConfig()
-    expect(conf.net).not.toBeNull();
-    expect(conf.net).not.toBeUndefined();
   });
 
   test('get db version', async () => {
@@ -202,17 +52,6 @@ describe('Clean Startup', () => {
     const db = kernel.getDb();
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
-  });
-
-  test('get testdb version', async () => {
-    const db = kernel.getModuleList()[0].getDb();
-    const conf = await db?.getConfig('dbversion');
-    expect(conf?.c_value).not.toBeNull();
-  });
-
-  test('test bridge', async () => {
-    const mod = kernel.getModuleList()[1];
-    expect(mod.getBridgeModule("testModule")).not.toBeUndefined();
   });
 
 
@@ -280,11 +119,12 @@ describe('Clean Startup', () => {
   test('get api toke', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
-
-    const token= await axios.post<{token:string}>(`http://localhost:${port}/token`,{
+    const store=kernel.getConfigStore();
+    const dat={
       username: "admin",
-      token: process.env.SERVER_PASSWOR,
-    })
+      token: store.get("SERVER_PASSWORD"),
+    }
+    const token= await axios.post<{token:string}>(`http://localhost:${port}/token`,dat)
 
     expect(token.status).toBe(200);
 
@@ -312,8 +152,9 @@ describe('Clean Startup', () => {
 
 
   test("get token no user",async ()=>{
+    const store=kernel.getConfigStore();
     try {
-      const response = await axios.post(`http://localhost:${port}/token`, { token: process.env.SERVER_PASSWOR } );
+      const response = await axios.post(`http://localhost:${port}/token`, { token: store.get("SERVER_PASSWORD") } );
     }catch (e:any){
       expect(e.response.status).toBe(401);
     }
@@ -322,8 +163,10 @@ describe('Clean Startup', () => {
 
 
   test("get token wrong user",async ()=>{
+    const store=kernel.getConfigStore();
+
     try {
-      const response = await axios.post( `http://localhost:${port}/token`, { token: process.env.SERVER_PASSWOR, user:"noAdmin" } );
+      const response = await axios.post( `http://localhost:${port}/token`, { token: store.get("SERVER_PASSWORD"), user:"noAdmin" } );
     }catch (e:any){
       expect(e.response.status).toBe(401);
     }
@@ -363,8 +206,6 @@ describe('Clean Startup', () => {
   });
 
 
-
-
   test("test api auth fail",async ()=>{
 
     try {
@@ -374,7 +215,6 @@ describe('Clean Startup', () => {
     }
 
   });
-
 
 
   test("test auth ",async ()=>{
@@ -388,37 +228,6 @@ describe('Clean Startup', () => {
     expect(version.status).toBe(200);
     expect(version.data.api).toBe(1);
   });
-
-
-  test('loop service test', async () => {
-    const mod=kernel.getModule()
-    const service=new TestServie("hello",30000,mod);
-    expect(service.state).toBe("INIT")
-    service.setRunning()
-    expect(service.state).toBe("RUNNING")
-    service.setSleeping()
-    expect(service.state).toBe("SLEEPING")
-    service.forceStop=true;
-    service.setRunning()
-    expect(service.state).toBe("SLEEPING")
-  });
-
-  test('loop service test', async () => {
-    const mod=kernel.getModule()
-    const service=new TestServie("hello",30000,mod);
-      mod.addService(service)
-    await service.start()
-
-    await sleep( 1 )
-
-    expect(service.state).toBe("RUNNING")
-
-    await service.stop()
-
-    expect(service.state).toBe("SLEEPING")
-
-  });
-
 
 
   test('exit kernel', async () => {

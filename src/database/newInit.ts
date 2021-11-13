@@ -1,6 +1,6 @@
-import { SQLQuery } from '@grandlinex/core';
+import { RawQuery } from '@grandlinex/core';
 
-function newInit(schema: string): SQLQuery[] {
+function newInit(schema: string): RawQuery[] {
   return [
     {
       exec: `CREATE TABLE ${schema}.keys
