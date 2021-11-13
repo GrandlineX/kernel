@@ -22,5 +22,6 @@ GrandLineX is an out-of-the-box server framework on top of ExpressJs.
 ![Code Smells](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Kernel&metric=code_smells)
 
 
-## Documentation 
-- [Docs](https://grandlinex.github.io/docs/)
+## Documentation
+- [Documentation](https://grandlinex.github.io/kernel/)
+- [GrandLineX Docs](https://grandlinex.github.io/docs/)

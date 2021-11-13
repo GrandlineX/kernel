@@ -23,3 +23,4 @@ coverage
 .ncurc.json
 .npmrc
 junit.xml
+.github
