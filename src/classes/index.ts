@@ -1,10 +1,10 @@
 import {
-  CoreLoopService as BaseLoopService,
-  CoreService as BaseService,
-  CoreElement as BaseElement,
+  CoreBridge as BaseBridge,
   CoreCache as BaseCache,
   CoreClient as BaseClient,
-  CoreBridge as BaseBridge,
+  CoreElement as BaseElement,
+  CoreLoopService as BaseLoopService,
+  CoreService as BaseService,
 } from '@grandlinex/core';
 import BaseAction from './BaseAction';
 import BaseEndpoint from './BaseEndpoint';

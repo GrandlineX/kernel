@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 import { generateSeed } from '@grandlinex/core';
 import { PGCon } from '@grandlinex/bundle-postgresql';
 import newInit from './newInit';
-import { IBaseKernelModule, IKernel, IKernelDb, KeyType } from '../lib';
+import { IBaseKernelModule, IKernelDb, KeyType } from '../lib';
 
 export const KERNEL_DB_VERSION = '1';
 export default class KernelDB extends PGCon implements IKernelDb {

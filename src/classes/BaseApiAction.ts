@@ -1,8 +1,8 @@
 import {
   ActionTypes,
   IBaseAction,
-  IBasePresenter,
   IBaseKernelModule,
+  IBasePresenter,
 } from '../lib';
 import BaseAction from './BaseAction';
 

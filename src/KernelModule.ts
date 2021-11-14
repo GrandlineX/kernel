@@ -1,7 +1,7 @@
 import { OfflineService } from '@grandlinex/core';
 import BaseKernelModule from './classes/BaseKernelModule';
 import KernelDB from './database/KernelDB';
-import { IKernel, IKernelDb } from './lib';
+import { IKernel } from './lib';
 
 import KernelEndpoint from './api/KernelEndpoint';
 import ApiVersionAction from './actions/ApiVersionAction';

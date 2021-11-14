@@ -18,8 +18,11 @@ export type ActionTypes = 'POST' | 'GET' | 'USE';
 
 export interface ICClient extends ICoreCClient {
   setAuthProvider(provider: IAuthProvider): boolean;
+
   jwtVerifyAccessToken(token: string): Promise<JwtToken | null>;
+
   jwtGenerateAccessToken(data: { username: string }): string;
+
   apiTokenValidation(
     username: string,
     token: string,
@@ -29,6 +32,7 @@ export interface ICClient extends ICoreCClient {
   permissonValidation(token: JwtToken, requestType: string): Promise<boolean>;
 
   bearerTokenValidation(req: Request): Promise<JwtToken | null>;
+
   keyStoreSave(data: string): Promise<number>;
 
   keyStoreLoad(id: number): Promise<string | null>;
@@ -36,6 +40,7 @@ export interface ICClient extends ICoreCClient {
 
 export interface IKernel extends ICoreKernel<ICClient> {
   getAppServerPort(): number;
+
   setAppServerPort(port: number): void;
 }
 
@@ -73,6 +78,7 @@ export interface KeyType {
   secret: string;
   auth: Buffer;
 }
+
 export type IBaseService = ICoreService;
 export type IBaseBrige = ICoreBridge;
 export type IBaseCache = ICoreCache;

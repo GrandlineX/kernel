@@ -1,5 +1,4 @@
 import CoreKernel from '@grandlinex/core';
-import { unwatchFile } from 'fs';
 import ELogger from '@grandlinex/bundle-elogger';
 import { ICClient, IKernel } from './lib';
 import KernelModule from './KernelModule';
