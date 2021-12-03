@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.15.1] - 2021-12-03
+
+### Fixed
+- Linting error
+- DB Duplication
+
 ## [0.15.0] - 2021-12-02
 ### Added
 - Add Changelog
