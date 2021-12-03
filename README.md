@@ -25,3 +25,4 @@ GrandLineX is an out-of-the-box server framework on top of ExpressJs.
 ## Documentation
 - [Documentation](https://grandlinex.github.io/kernel/)
 - [GrandLineX Docs](https://grandlinex.github.io/docs/)
+- [GrandLineX Project](https://grandlinex.github.io/)

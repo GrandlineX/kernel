@@ -13,6 +13,7 @@ import {
 } from '@grandlinex/core';
 import { BaseClient } from 'classes';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
+import GKey from '../database/entity/GKey';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE';
 
@@ -49,7 +50,7 @@ export interface IKernelDb {
 
   setKey(secret: string, iv: Buffer, auth: Buffer): Promise<number>;
 
-  getKey(id: number): Promise<KeyType>;
+  getKey(id: number): Promise<GKey | null>;
 
   deleteKey(id: number): Promise<void>;
 }
@@ -70,13 +71,6 @@ export interface IBaseAction extends ICoreAction {
     next: () => void,
     data: JwtToken | null
   ): Promise<void>;
-}
-
-export interface KeyType {
-  id: number;
-  iv: Buffer;
-  secret: string;
-  auth: Buffer;
 }
 
 export type IBaseService = ICoreService;

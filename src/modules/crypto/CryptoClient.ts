@@ -90,6 +90,9 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
   async keyStoreLoad(id: number): Promise<string | null> {
     const db = this.kernel.getDb() as KernelDB;
     const key = await db.getKey(id);
+    if (!key){
+      return null
+    }
     return this.decrypt(key.secret, key.iv, key.auth);
   }
 }

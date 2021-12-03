@@ -1,4 +1,4 @@
 import KernelDB from './KernelDB';
-import newInit from './newInit';
+import KernelDBLight from './KernelDBLight';
 
-export { KernelDB, newInit };
+export { KernelDB, KernelDBLight };
