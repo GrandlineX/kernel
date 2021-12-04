@@ -15,6 +15,7 @@ export * from '@grandlinex/core';
 export * as bundlePostgreSQL from '@grandlinex/bundle-postgresql';
 export * as bundleSQLight from '@grandlinex/bundle-sqlight';
 export * as bundleELogger from '@grandlinex/bundle-elogger';
-
+export { SQLCon } from '@grandlinex/bundle-sqlight';
+export { PGCon } from '@grandlinex/bundle-postgresql';
 export { KernelModule, Kernel };
 export default Kernel;

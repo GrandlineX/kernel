@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.15.2] - 2021-12-04
+
+### Fixed
+- Update to fixed database bundles
+- Export DB Classes in root file
+
 ## [0.15.1] - 2021-12-03
 
 ### Fixed
