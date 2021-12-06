@@ -1,4 +1,4 @@
-import { OfflineService } from '@grandlinex/core';
+import { InMemCache, OfflineService } from '@grandlinex/core';
 import BaseKernelModule from './classes/BaseKernelModule';
 import KernelDB from './database/KernelDB';
 import { IKernel } from './lib';
@@ -12,7 +12,7 @@ import KernelDBLight from './database/KernelDBLight';
 export default class KernelModule extends BaseKernelModule<
   KernelDB | KernelDBLight,
   null,
-  null,
+  InMemCache,
   KernelEndpoint
 > {
   useLightDB = false;
@@ -34,12 +34,14 @@ export default class KernelModule extends BaseKernelModule<
   }
 
   async initModule(): Promise<void> {
-    let db;
+    this.setCache(new InMemCache(this, 120000));
+    let db: KernelDB | KernelDBLight;
     if (this.useLightDB) {
       db = new KernelDBLight(this);
     } else {
       db = new KernelDB(this);
     }
+    db.setEntityCache(true);
     this.setDb(db);
     const endpoint = new KernelEndpoint(
       'api',

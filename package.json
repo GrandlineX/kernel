@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.15.3",
+  "version": "0.16.0",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,10 +27,10 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/bundle-elogger": "^0.15.1",
-    "@grandlinex/bundle-postgresql": "^0.15.2",
-    "@grandlinex/bundle-sqlight": "^0.15.2",
-    "@grandlinex/core": "^0.15.1",
+    "@grandlinex/bundle-elogger": "^0.16.0",
+    "@grandlinex/bundle-postgresql": "^0.16.0",
+    "@grandlinex/bundle-sqlight": "^0.16.0",
+    "@grandlinex/core": "^0.16.1",
     "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
