@@ -19,7 +19,6 @@ export async function setKey(
   if (keyStore) {
     const res = await keyStore.createObject(
       new GKey({
-        e_id: null,
         secret,
         iv,
         auth,
