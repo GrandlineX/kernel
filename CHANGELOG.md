@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.16.1] - 2021-12-07
+
+### Changed
+- Update to core 0.16.2
+
 ## [0.15.3] - 2021-12-06
 ### Changed
 - Update to core 0.15.1 
