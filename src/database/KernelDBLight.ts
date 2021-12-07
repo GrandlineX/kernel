@@ -6,7 +6,6 @@ import * as DBF from './DBFunctions';
 export default class KernelDBLight extends SQLCon implements IKernelDb {
   constructor(module: IBaseKernelModule<any, any, any, any>) {
     super(module, DBF.KERNEL_DB_VERSION);
-    this.registerEntity(new GKey());
   }
 
   deleteKey(id: number): Promise<void> {

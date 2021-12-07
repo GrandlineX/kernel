@@ -8,6 +8,7 @@ import ApiVersionAction from './actions/ApiVersionAction';
 import GetTokenAction from './actions/GetTokenAction';
 import ApiAuthTestAction from './actions/ApiAuthTestAction';
 import KernelDBLight from './database/KernelDBLight';
+import GKey from './database/entity/GKey';
 
 export default class KernelModule extends BaseKernelModule<
   KernelDB | KernelDBLight,
@@ -34,7 +35,7 @@ export default class KernelModule extends BaseKernelModule<
   }
 
   async initModule(): Promise<void> {
-    this.setCache(new InMemCache(this, 120000));
+    this.setCache(new InMemCache(this, 480000));
     let db: KernelDB | KernelDBLight;
     if (this.useLightDB) {
       db = new KernelDBLight(this);
@@ -42,6 +43,8 @@ export default class KernelModule extends BaseKernelModule<
       db = new KernelDB(this);
     }
     db.setEntityCache(true);
+    db.registerEntity(new GKey());
+
     this.setDb(db);
     const endpoint = new KernelEndpoint(
       'api',
