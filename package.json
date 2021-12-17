@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,12 +28,12 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "@grandlinex/bundle-elogger": "^0.16.0",
-    "@grandlinex/bundle-postgresql": "^0.16.0",
-    "@grandlinex/bundle-sqlight": "^0.16.1",
+    "@grandlinex/bundle-postgresql": "^0.16.1",
+    "@grandlinex/bundle-sqlight": "^0.16.2",
     "@grandlinex/core": "0.16.2",
     "axios": "^0.24.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
@@ -56,14 +56,14 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
-    "jest": "^27.4.3",
+    "jest": "^27.4.5",
     "jest-junit": "^13.0.0",
     "prettier": "^2.5.1",
-    "ts-jest": "^27.1.0",
+    "ts-jest": "^27.1.2",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "typedoc": "^0.22.10",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.4"
   },
   "repository": {
     "type": "git",

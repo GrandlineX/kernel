@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
+## [v0.16.2] - 2021-12-17
+
+### Changed
+- Update Db Bundles with search bug
+
+
 ## [v0.16.1] - 2021-12-07
 
 ### Changed
