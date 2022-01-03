@@ -1,10 +1,11 @@
-import { KernelDB, KernelDBLight, KernelEndpoint, KernelModule } from '../src';
+import { KernelEndpoint, KernelModule } from '../src';
 import * as Path from 'path';
 import axios from 'axios';
 import { createFolderIfNotExist,   sleep } from '@grandlinex/core';
 import { cors } from '../src';
 import { TestAuthProvider, testKernelUtil } from './DebugClasses';
 import GKey from '../src/database/entity/GKey';
+import KernelDB from '../src/database/KernelDB';
 
 
 const msiPath = Path.join(__dirname, '..', 'data');
@@ -60,7 +61,7 @@ describe.each([
     test('keystore', async () => {
       const text=testText;
       const cc = kernel.getCryptoClient();
-      const kdb=kernel.getDb() as KernelDB|KernelDBLight;
+      const kdb=kernel.getDb() as KernelDB;
       expect(cc).not.toBeNull();
       if (cc) {
         const keyID = await cc.keyStoreSave(text);

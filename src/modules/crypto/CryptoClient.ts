@@ -3,7 +3,7 @@ import { Request } from 'express';
 import { CoreCryptoClient } from '@grandlinex/core';
 import { ICClient, IKernel } from '../../lib';
 import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
-import { KernelDB } from '../../database';
+import KernelDB from '../../database/KernelDB';
 
 export default class CryptoClient extends CoreCryptoClient implements ICClient {
   protected authProvider: IAuthProvider | null;

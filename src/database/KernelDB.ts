@@ -1,26 +1,34 @@
-import { PGCon } from '@grandlinex/bundle-postgresql';
-import { IBaseKernelModule, IKernelDb } from '../lib';
+import { CoreDBCon, CoreEntityWrapper, generateSeed } from '@grandlinex/core';
+import CoreDBPrefab from '@grandlinex/core/dist/classes/CoreDBPrefab';
+import { randomUUID } from 'crypto';
+import { IKernelDb } from '../lib';
 import GKey from './entity/GKey';
-import * as DBF from './DBFunctions';
 
-export default class KernelDB extends PGCon implements IKernelDb {
-  constructor(module: IBaseKernelModule<any, any, any, any>) {
-    super(module, DBF.KERNEL_DB_VERSION);
+export const KERNEL_DB_VERSION = '1';
+
+export default class KernelDB extends CoreDBPrefab<any> implements IKernelDb {
+  private gKey: CoreEntityWrapper<GKey>;
+
+  constructor(db: CoreDBCon<any, any>) {
+    super(db);
+    this.gKey = this.registerEntity<GKey>(new GKey());
   }
 
-  deleteKey(id: number): Promise<void> {
-    return DBF.deleteKey(this, id);
+  async initPrefabDB(): Promise<void> {
+    const seed = generateSeed();
+    await this.setConfig('seed', seed);
+    await this.setConfig('uid', randomUUID());
+  }
+
+  async deleteKey(id: number): Promise<void> {
+    await this.gKey.delete(id);
   }
 
   getKey(id: number): Promise<GKey | null> {
-    return DBF.getKey(this, id);
+    return this.gKey.getObjById(id);
   }
 
-  initNewDB(): Promise<void> {
-    return DBF.initNewDB(this);
-  }
-
-  setKey(secret: string, iv: Buffer, auth: Buffer): Promise<number> {
-    return DBF.setKey(this, secret, iv, auth);
+  async setKey(secret: string, iv: Buffer, auth: Buffer): Promise<number> {
+    return (await this.gKey.createObject({ secret, iv, auth })).e_id;
   }
 }

@@ -1,17 +1,19 @@
+// eslint-disable-next-line max-classes-per-file
 import { InMemCache, OfflineService } from '@grandlinex/core';
+import SQLCon from '@grandlinex/bundle-sqlight';
+import PGCon from '@grandlinex/bundle-postgresql';
 import BaseKernelModule from './classes/BaseKernelModule';
-import KernelDB from './database/KernelDB';
+import KernelDB, { KERNEL_DB_VERSION } from './database/KernelDB';
 import { IKernel } from './lib';
 
 import KernelEndpoint from './api/KernelEndpoint';
 import ApiVersionAction from './actions/ApiVersionAction';
 import GetTokenAction from './actions/GetTokenAction';
 import ApiAuthTestAction from './actions/ApiAuthTestAction';
-import KernelDBLight from './database/KernelDBLight';
 import GKey from './database/entity/GKey';
 
 export default class KernelModule extends BaseKernelModule<
-  KernelDB | KernelDBLight,
+  KernelDB,
   null,
   InMemCache,
   KernelEndpoint
@@ -36,11 +38,29 @@ export default class KernelModule extends BaseKernelModule<
 
   async initModule(): Promise<void> {
     this.setCache(new InMemCache(this, 480000));
-    let db: KernelDB | KernelDBLight;
+    let db: KernelDB;
     if (this.useLightDB) {
-      db = new KernelDBLight(this);
+      class Db extends SQLCon {
+        constructor(mod: KernelModule) {
+          super(mod, KERNEL_DB_VERSION);
+        }
+
+        initNewDB(): Promise<void> {
+          return Promise.resolve(undefined);
+        }
+      }
+      db = new KernelDB(new Db(this));
     } else {
-      db = new KernelDB(this);
+      class Db extends PGCon {
+        constructor(mod: KernelModule) {
+          super(mod, KERNEL_DB_VERSION);
+        }
+
+        initNewDB(): Promise<void> {
+          return Promise.resolve(undefined);
+        }
+      }
+      db = new KernelDB(new Db(this));
     }
     db.setEntityCache(true);
     db.registerEntity(new GKey());
