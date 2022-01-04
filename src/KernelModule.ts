@@ -23,17 +23,13 @@ export default class KernelModule extends BaseKernelModule<
   constructor(kernel: IKernel) {
     super('kernel', kernel);
 
-    [
+    this.addAction(
       new ApiVersionAction(this),
       new ApiAuthTestAction(this),
-      new GetTokenAction(this),
-    ].forEach((action) => {
-      this.addAction(action);
-    });
+      new GetTokenAction(this)
+    );
 
-    [new OfflineService(this)].forEach((service) => {
-      this.addService(service);
-    });
+    this.addService(new OfflineService(this));
   }
 
   async initModule(): Promise<void> {
