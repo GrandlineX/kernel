@@ -30,7 +30,7 @@
     "@grandlinex/bundle-elogger": "^0.17.3",
     "@grandlinex/bundle-postgresql": "^0.17.3",
     "@grandlinex/bundle-sqlight": "^0.17.3",
-    "@grandlinex/core": "^0.17.4",
+    "@grandlinex/core": "^0.18.0",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
