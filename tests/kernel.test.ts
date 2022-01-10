@@ -36,7 +36,7 @@ describe.each([
         })
       }
       kernel.setTriggerFunction("load",async (ik)=>{
-        const ep=ik.getModule().getEndpoint() as KernelEndpoint;
+        const ep=ik.getModule().getPresenter() as KernelEndpoint;
         ep.getApp().use(cors)
       })
     });
