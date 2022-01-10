@@ -28,27 +28,27 @@ export default abstract class BaseApiAction
   register(): void {
     let endpoint: IBasePresenter | null;
     if (this.exmod) {
-      endpoint = this.exmod.getEndpoint();
+      endpoint = this.exmod.getPresenter();
     } else {
-      endpoint = this.getModule().getEndpoint();
+      endpoint = this.getModule().getPresenter();
     }
     if (endpoint) {
-      this.log(`register ${this.chanel}`);
+      this.log(`register ${this.getName()}`);
       const app = endpoint.getApp();
       switch (this.type) {
         case 'POST':
-          app.post(this.chanel, this.secureHandler);
+          app.post(this.getName(), this.secureHandler);
           break;
         case 'USE':
-          app.use(this.chanel, this.secureHandler);
+          app.use(this.getName(), this.secureHandler);
           break;
         case 'GET':
         default:
-          app.get(this.chanel, this.secureHandler);
+          app.get(this.getName(), this.secureHandler);
           break;
       }
     } else {
-      this.error(`on register -> ${this.chanel}`);
+      this.error(`on register -> ${this.getName()}`);
       this.error(`No Endpoint found`);
     }
   }

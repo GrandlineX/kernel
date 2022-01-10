@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## [v0.18.0] - 2022-01-10
+### Changed
+- Update to core 0.18.0 
+
 ## [v0.17.0] - 2022-01-03
 ### Changed
 - Update to core 0.17.1
