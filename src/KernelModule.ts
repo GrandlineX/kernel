@@ -36,27 +36,9 @@ export default class KernelModule extends BaseKernelModule<
     this.setCache(new InMemCache(this, 480000));
     let db: KernelDB;
     if (this.useLightDB) {
-      class Db extends SQLCon {
-        constructor(mod: KernelModule) {
-          super(mod, KERNEL_DB_VERSION);
-        }
-
-        initNewDB(): Promise<void> {
-          return Promise.resolve(undefined);
-        }
-      }
-      db = new KernelDB(new Db(this));
+      db = new KernelDB(new SQLCon(this, '0'));
     } else {
-      class Db extends PGCon {
-        constructor(mod: KernelModule) {
-          super(mod, KERNEL_DB_VERSION);
-        }
-
-        initNewDB(): Promise<void> {
-          return Promise.resolve(undefined);
-        }
-      }
-      db = new KernelDB(new Db(this));
+      db = new KernelDB(new PGCon(this, '0'));
     }
     db.setEntityCache(true);
     db.registerEntity(new GKey());

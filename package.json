@@ -27,9 +27,9 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/bundle-elogger": "^0.18.0",
-    "@grandlinex/bundle-postgresql": "^0.18.0",
-    "@grandlinex/bundle-sqlight": "^0.18.0",
+    "@grandlinex/bundle-elogger": "^0.19.0",
+    "@grandlinex/bundle-postgresql": "^0.19.1",
+    "@grandlinex/bundle-sqlight": "^0.19.1",
     "@grandlinex/core": "^0.19.0",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
