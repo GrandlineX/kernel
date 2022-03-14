@@ -13,9 +13,8 @@ import {
 } from '@grandlinex/core';
 import { BaseClient } from 'classes';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
-import GKey from '../database/entity/GKey';
 
-export type ActionTypes = 'POST' | 'GET' | 'USE';
+export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
 export interface ICClient extends ICoreCClient {
   setAuthProvider(provider: IAuthProvider): boolean;
@@ -30,29 +29,15 @@ export interface ICClient extends ICoreCClient {
     requestType: string
   ): Promise<boolean>;
 
-  permissonValidation(token: JwtToken, requestType: string): Promise<boolean>;
+  permissionValidation(token: JwtToken, requestType: string): Promise<boolean>;
 
   bearerTokenValidation(req: Request): Promise<JwtToken | null>;
-
-  keyStoreSave(data: string): Promise<number>;
-
-  keyStoreLoad(id: number): Promise<string | null>;
 }
 
 export interface IKernel extends ICoreKernel<ICClient> {
   getAppServerPort(): number;
 
   setAppServerPort(port: number): void;
-}
-
-export interface IKernelDb {
-  initNewDB(): Promise<void>;
-
-  setKey(secret: string, iv: Buffer, auth: Buffer): Promise<number>;
-
-  getKey(id: number): Promise<GKey | null>;
-
-  deleteKey(id: number): Promise<void>;
 }
 
 export type IBaseKernelModule<

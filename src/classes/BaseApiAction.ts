@@ -33,7 +33,7 @@ export default abstract class BaseApiAction
       endpoint = this.getModule().getPresenter();
     }
     if (endpoint) {
-      this.log(`register ${this.getName()}`);
+      this.log(`register ${this.type} ${this.getName()}`);
       const app = endpoint.getApp();
       switch (this.type) {
         case 'POST':
@@ -41,6 +41,12 @@ export default abstract class BaseApiAction
           break;
         case 'USE':
           app.use(this.getName(), this.secureHandler);
+          break;
+        case 'PATCH':
+          app.patch(this.getName(), this.secureHandler);
+          break;
+        case 'DELETE':
+          app.delete(this.getName(), this.secureHandler);
           break;
         case 'GET':
         default:

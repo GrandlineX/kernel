@@ -13,7 +13,7 @@ export interface IAuthProvider {
     requestType: string
   ): Promise<boolean>;
 
-  validateAcces(token: JwtToken, requestType: string): Promise<boolean>;
+  validateAccess(token: JwtToken, requestType: string): Promise<boolean>;
 
   bearerTokenValidation(req: Request): Promise<JwtToken | null>;
 }
@@ -25,7 +25,7 @@ export default abstract class BaseAuthProvider implements IAuthProvider {
     requestType: string
   ): Promise<boolean>;
 
-  abstract validateAcces(
+  abstract validateAccess(
     token: JwtToken,
     requestType: string
   ): Promise<boolean>;

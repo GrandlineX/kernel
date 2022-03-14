@@ -3,7 +3,6 @@ import { Request } from 'express';
 import { CoreCryptoClient } from '@grandlinex/core';
 import { ICClient, IKernel } from '../../lib';
 import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
-import KernelDB from '../../database/KernelDB';
 
 export default class CryptoClient extends CoreCryptoClient implements ICClient {
   protected authProvider: IAuthProvider | null;
@@ -11,7 +10,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
   protected kernel: IKernel;
 
   constructor(key: string, kernel: IKernel) {
-    super(key);
+    super(kernel, key);
     this.kernel = kernel;
     this.authProvider = null;
   }
@@ -55,12 +54,12 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     return token === store.get('SERVER_PASSWORD') && username === 'admin';
   }
 
-  async permissonValidation(
+  async permissionValidation(
     token: JwtToken,
     requestType: string
   ): Promise<boolean> {
     if (this.authProvider) {
-      return this.authProvider.validateAcces(token, requestType);
+      return this.authProvider.validateAccess(token, requestType);
     }
     return false;
   }
@@ -79,20 +78,5 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
       return tokenData;
     }
     return null;
-  }
-
-  async keyStoreSave(data: string): Promise<number> {
-    const db = this.kernel.getDb() as KernelDB;
-    const keyCrypt = this.encrypt(data);
-    return db.setKey(keyCrypt.enc, keyCrypt.iv, keyCrypt.auth);
-  }
-
-  async keyStoreLoad(id: number): Promise<string | null> {
-    const db = this.kernel.getDb() as KernelDB;
-    const key = await db.getKey(id);
-    if (!key) {
-      return null;
-    }
-    return this.decrypt(key.secret, key.iv, key.auth);
   }
 }

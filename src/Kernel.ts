@@ -1,8 +1,7 @@
-import CoreKernel from '@grandlinex/core';
-import ELogger from '@grandlinex/bundle-elogger';
+import CoreKernel, { DefaultLogger } from '@grandlinex/core';
 import { ICClient, IKernel } from './lib';
-import KernelModule from './KernelModule';
 import CryptoClient from './modules/crypto/CryptoClient';
+import KernelModule from './KernelModule';
 
 /**
  *  @class Kernel
@@ -22,9 +21,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     portOverride?: number;
     envFilePath?: string;
   }) {
-    super(options);
-    this.globalLogger = new ELogger(this);
-    this.setLogger(this.globalLogger);
+    super({ ...options, logger: (k) => new DefaultLogger() });
     this.setBaseModule(new KernelModule(this));
     if (options.portOverride) {
       this.debug(`use custiom api port @ ${options.portOverride}`);
