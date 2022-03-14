@@ -11,6 +11,5 @@ export * from './classes';
 export * from './modules/crypto';
 export * from './lib';
 export * from '@grandlinex/core';
-export * as bundleELogger from '@grandlinex/bundle-elogger';
 export { KernelModule, Kernel };
 export default Kernel;
