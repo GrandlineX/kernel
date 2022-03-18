@@ -1,4 +1,4 @@
-import CoreKernel, { CoreLogger } from '@grandlinex/core';
+import CoreKernel, { CoreLogger, StoreGlobal } from '@grandlinex/core';
 import { ICClient, IKernel } from './lib';
 import CryptoClient from './modules/crypto/CryptoClient';
 import KernelModule from './KernelModule';

@@ -2,17 +2,24 @@ import jwt from 'jsonwebtoken';
 import { Request } from 'express';
 import { CoreCryptoClient } from '@grandlinex/core';
 import { ICClient, IKernel } from '../../lib';
-import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
+import {
+  IAuthProvider,
+  JwtToken,
+  JwtTokenData,
+} from '../../classes/BaseAuthProvider';
 
 export default class CryptoClient extends CoreCryptoClient implements ICClient {
   protected authProvider: IAuthProvider | null;
 
   protected kernel: IKernel;
 
+  protected expiresIn: string;
+
   constructor(key: string, kernel: IKernel) {
     super(kernel, key);
     this.kernel = kernel;
     this.authProvider = null;
+    this.expiresIn = kernel.getConfigStore().get('JWT_EXPIRE') || '1 days';
   }
 
   setAuthProvider(provider: IAuthProvider): boolean {
@@ -35,23 +42,32 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     });
   }
 
-  jwtGenerateAccessToken(data: { username: string }): string {
-    return jwt.sign(data, this.AesKey, { expiresIn: '1 days' });
+  jwtGenerateAccessToken(data: JwtTokenData): string {
+    return jwt.sign(data, this.AesKey, { expiresIn: this.expiresIn });
   }
 
   async apiTokenValidation(
     username: string,
     token: string,
     requestType: string
-  ): Promise<boolean> {
+  ): Promise<{ valid: boolean; userId: string | null }> {
     if (this.authProvider) {
       return this.authProvider.authorizeToken(username, token, requestType);
     }
     const store = this.kernel.getConfigStore();
     if (!store.has('SERVER_PASSWORD')) {
-      return false;
+      return { valid: false, userId: null };
     }
-    return token === store.get('SERVER_PASSWORD') && username === 'admin';
+    if (token === store.get('SERVER_PASSWORD') && username === 'admin') {
+      return {
+        valid: true,
+        userId: 'admin',
+      };
+    }
+    return {
+      valid: false,
+      userId: null,
+    };
   }
 
   async permissionValidation(

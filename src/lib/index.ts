@@ -27,7 +27,7 @@ export interface ICClient extends ICoreCClient {
     username: string,
     token: string,
     requestType: string
-  ): Promise<boolean>;
+  ): Promise<{ valid: boolean; userId: string | null }>;
 
   permissionValidation(token: JwtToken, requestType: string): Promise<boolean>;
 

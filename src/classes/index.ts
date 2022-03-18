@@ -12,6 +12,8 @@ import BaseKernelModule from './BaseKernelModule';
 import BaseApiAction from './BaseApiAction';
 import BaseAuthProvider from './BaseAuthProvider';
 
+export * from './BaseAuthProvider';
+
 export {
   BaseLoopService,
   BaseAuthProvider,

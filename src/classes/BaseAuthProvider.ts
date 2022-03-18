@@ -1,17 +1,25 @@
 import { Request } from 'express';
 
-export interface JwtToken {
+export interface JwtTokenData {
+  username: string;
+  userid: string;
+}
+export interface JwtToken extends JwtTokenData {
   exp: number;
   iat: number;
-  username: string;
 }
+
+export type AuthResult = {
+  valid: boolean;
+  userId: string | null;
+};
 
 export interface IAuthProvider {
   authorizeToken(
-    username: string,
-    token: any,
+    userid: string,
+    token: string,
     requestType: string
-  ): Promise<boolean>;
+  ): Promise<AuthResult>;
 
   validateAccess(token: JwtToken, requestType: string): Promise<boolean>;
 
@@ -21,9 +29,9 @@ export interface IAuthProvider {
 export default abstract class BaseAuthProvider implements IAuthProvider {
   abstract authorizeToken(
     username: string,
-    token: any,
+    token: string,
     requestType: string
-  ): Promise<boolean>;
+  ): Promise<AuthResult>;
 
   abstract validateAccess(
     token: JwtToken,
