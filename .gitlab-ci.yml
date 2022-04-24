@@ -12,4 +12,8 @@ include:
   - project: 'grandlinex/templates'
     file: '/update/update-glx.yml'
   - project: 'grandlinex/templates'
+    file: '/deploy/npm-gitlab-deploy.yml'
+  - project: 'grandlinex/templates'
+    file: '/test/sast.yml'
+  - project: 'grandlinex/templates'
     file: '/trigger/express-skeleton.yml'
