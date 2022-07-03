@@ -1,15 +1,28 @@
 import { Request, Response } from 'express';
-import { CoreAction } from '@grandlinex/core';
-import { IBaseAction, IBaseKernelModule } from '../lib';
+import { CoreAction, IDataBase } from '@grandlinex/core';
+import {
+  IBaseAction,
+  IBaseCache,
+  IBaseClient,
+  IBaseKernelModule,
+  IBasePresenter,
+  IKernel,
+} from '../lib';
 import { JwtToken } from './BaseAuthProvider';
 
-export default abstract class BaseAction
-  extends CoreAction
-  implements IBaseAction
+export default abstract class BaseAction<
+    K extends IKernel = IKernel,
+    T extends IDataBase<any, any> | null = any,
+    P extends IBaseClient | null = any,
+    C extends IBaseCache | null = any,
+    E extends IBasePresenter | null = any
+  >
+  extends CoreAction<K, T, P, C, E>
+  implements IBaseAction<K, T, P, C, E>
 {
   dmz = false;
 
-  constructor(chanel: string, module: IBaseKernelModule<any, any, any, any>) {
+  constructor(chanel: string, module: IBaseKernelModule<K, T, P, C, E>) {
     super(chanel, module);
     this.secureHandler = this.secureHandler.bind(this);
   }
@@ -26,6 +39,12 @@ export default abstract class BaseAction
     res: Response,
     next: () => void
   ): Promise<void> {
+    res.on('finish', () => {
+      (this.getKernel() as IKernel).responseCodeFunction({
+        code: res.statusCode,
+        req,
+      });
+    });
     const cc = this.getKernel().getCryptoClient();
     if (!cc) {
       res.status(504).send('internal server error');

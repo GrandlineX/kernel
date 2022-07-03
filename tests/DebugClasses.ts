@@ -1,8 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
 import { Request, Response } from 'express';
 import { ICoreAnyModule } from '@grandlinex/core';
-import { ActionTypes, AuthResult, BaseApiAction, BaseAuthProvider, ICClient } from '../src';
-import { JwtToken } from '../src/classes/BaseAuthProvider';
+import Kernel, { ActionTypes, AuthResult, BaseApiAction, BaseAuthProvider, ICClient } from '../src';
+import { JwtToken } from '../src';
 
 export class TestAllAction extends BaseApiAction  {
   constructor(mod: ICoreAnyModule, type: ActionTypes) {

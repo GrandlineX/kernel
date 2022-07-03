@@ -4,6 +4,7 @@ import {
   ICoreBridge,
   ICoreCache,
   ICoreCClient,
+  ICoreClient,
   ICoreElement,
   ICoreKernel,
   ICoreKernelModule,
@@ -36,20 +37,57 @@ export interface ICClient extends ICoreCClient {
 
 export interface IKernel extends ICoreKernel<ICClient> {
   getAppServerPort(): number;
-
   setAppServerPort(port: number): void;
+  responseCodeFunction(data: { code: number; req: Request }): void;
 }
 
 export type IBaseKernelModule<
-  T extends IDataBase<any, any> | null,
-  P extends BaseClient | null,
-  C extends IBaseCache | null,
-  E extends IBasePresenter | null
-> = ICoreKernelModule<IKernel, T, P, C, E>;
+  K extends IKernel = IKernel,
+  T extends IDataBase<any, any> | null = any,
+  P extends IBaseClient | null = any,
+  C extends IBaseCache | null = any,
+  E extends IBasePresenter | null = any
+> = ICoreKernelModule<K, T, P, C, E>;
 
 export type IBasePresenter = ICorePresenter<express.Express>;
 
-export interface IBaseAction extends ICoreAction {
+export type IBaseService<
+  K extends IKernel = IKernel,
+  T extends IDataBase<any, any> | null = any,
+  P extends IBaseClient | null = any,
+  C extends IBaseCache | null = any,
+  E extends IBasePresenter | null = any
+> = ICoreService<K, T, P, C, E>;
+export type IBaseClient<
+  K extends IKernel = IKernel,
+  T extends IDataBase<any, any> | null = any,
+  P extends IBaseClient | null = any,
+  C extends IBaseCache | null = any,
+  E extends IBasePresenter | null = any
+> = ICoreClient;
+export type IBaseBrige = ICoreBridge;
+export type IBaseCache<
+  K extends IKernel = IKernel,
+  T extends IDataBase<any, any> | null = any,
+  P extends IBaseClient | null = any,
+  C extends IBaseCache | null = any,
+  E extends IBasePresenter | null = any
+> = ICoreCache<K, T, P, C, E>;
+export type IBaseElement<
+  K extends IKernel = IKernel,
+  T extends IDataBase<any, any> | null = any,
+  P extends IBaseClient | null = any,
+  C extends IBaseCache | null = any,
+  E extends IBasePresenter | null = any
+> = ICoreElement<K, T, P, C, E>;
+
+export interface IBaseAction<
+  K extends IKernel = IKernel,
+  T extends IDataBase<any, any> | null = any,
+  P extends IBaseClient | null = any,
+  C extends IBaseCache | null = any,
+  E extends IBasePresenter | null = any
+> extends ICoreAction<K, T, P, C, E> {
   handler(
     req: Request,
     res: Response,
@@ -57,8 +95,3 @@ export interface IBaseAction extends ICoreAction {
     data: JwtToken | null
   ): Promise<void>;
 }
-
-export type IBaseService = ICoreService;
-export type IBaseBrige = ICoreBridge;
-export type IBaseCache = ICoreCache;
-export type IBaseElement = ICoreElement;
