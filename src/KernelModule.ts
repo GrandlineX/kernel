@@ -8,6 +8,7 @@ import GetTokenAction from './actions/GetTokenAction';
 import ApiAuthTestAction from './actions/ApiAuthTestAction';
 
 export default class KernelModule extends BaseKernelModule<
+  IKernel,
   null,
   null,
   InMemCache,

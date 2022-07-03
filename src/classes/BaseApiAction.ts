@@ -1,24 +1,34 @@
+import { IDataBase } from '@grandlinex/core';
 import {
   ActionTypes,
   IBaseAction,
+  IBaseCache,
+  IBaseClient,
   IBaseKernelModule,
   IBasePresenter,
+  IKernel,
 } from '../lib';
 import BaseAction from './BaseAction';
 
-export default abstract class BaseApiAction
-  extends BaseAction
-  implements IBaseAction
+export default abstract class BaseApiAction<
+    K extends IKernel = IKernel,
+    T extends IDataBase<any, any> | null = any,
+    P extends IBaseClient | null = any,
+    C extends IBaseCache | null = any,
+    E extends IBasePresenter | null = any
+  >
+  extends BaseAction<K, T, P, C, E>
+  implements IBaseAction<K, T, P, C, E>
 {
-  exmod: undefined | IBaseKernelModule<any, any, any, any>;
+  exmod: undefined | IBaseKernelModule<K>;
 
   type: ActionTypes;
 
   constructor(
     type: ActionTypes,
     chanel: string,
-    module: IBaseKernelModule<any, any, any, any>,
-    extMod?: IBaseKernelModule<any, any, any, any>
+    module: IBaseKernelModule<K, T, P, C, E>,
+    extMod?: IBaseKernelModule<K>
   ) {
     super(chanel, module);
     this.exmod = extMod;

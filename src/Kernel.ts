@@ -1,4 +1,5 @@
-import CoreKernel, { CoreLogger, StoreGlobal } from '@grandlinex/core';
+import CoreKernel, { CoreLogger } from '@grandlinex/core';
+import { Request } from 'express';
 import { ICClient, IKernel } from './lib';
 import CryptoClient from './modules/crypto/CryptoClient';
 import KernelModule from './KernelModule';
@@ -47,5 +48,12 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
 
   setAppServerPort(port: number): void {
     this.expressPort = port;
+  }
+
+  responseCodeFunction(data: { code: number; req: Request }) {
+    const { code } = data;
+    if (code < 200 || code >= 300) {
+      this.debug(data.req.path, data.req.ip, data.code);
+    }
   }
 }
