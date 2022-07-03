@@ -12,7 +12,6 @@ import {
   ICoreService,
   IDataBase,
 } from '@grandlinex/core';
-import { BaseClient } from 'classes';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
