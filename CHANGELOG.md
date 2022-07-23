@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.25.0] - 2022-07-23
+### Changed
+- Update to core 0.25.0
+
 
 ## [v0.18.0] - 2022-01-10
 ### Changed

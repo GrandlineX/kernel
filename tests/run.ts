@@ -1,14 +1,9 @@
-import * as Path from 'path';
-import { createFolderIfNotExist } from '@grandlinex/core';
+import { XUtil } from '@grandlinex/core';
 import { Kernel } from '../src';
-
-const testPathData = Path.join(__dirname, '..', 'data');
-const testPath = Path.join(__dirname, '..', 'data', 'config');
 
 const apiPort = 9257;
 
-createFolderIfNotExist(testPathData);
-createFolderIfNotExist(testPath);
+const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
 
 const appName = 'TestKernel';
 const kernel = new Kernel({
