@@ -1,9 +1,8 @@
-import * as Path from 'path';
 import axios from 'axios';
 import {
-  createFolderIfNotExist,
+
   setupDevKernel,
-  TestContext,
+  TestContext, XUtil
 } from '@grandlinex/core';
 import {
   KernelEndpoint,
@@ -16,12 +15,10 @@ import {
 import { TestAuthProvider, TestAllAction } from './DebugClasses';
 import CryptoClient from '../src/modules/crypto/CryptoClient';
 
-const msiPath = Path.join(__dirname, '..', 'data');
-const testPath = Path.join(__dirname, '..', 'data', 'config');
+const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
+
 process.env.DLOG_LEVEL = 'debug';
 
-createFolderIfNotExist(msiPath);
-createFolderIfNotExist(testPath);
 
 const port = 9900;
 const appName = 'TestKernel';
