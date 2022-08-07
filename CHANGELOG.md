@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.25.2] - 2022-08-07
+### Added
+- Add express timing api in dev mode
+
 ## [v0.25.0] - 2022-07-23
 ### Changed
 - Update to core 0.25.0

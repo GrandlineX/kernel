@@ -13,6 +13,7 @@ import {
   IDataBase,
 } from '@grandlinex/core';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
+import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
@@ -91,6 +92,7 @@ export interface IBaseAction<
     req: Request,
     res: Response,
     next: () => void,
-    data: JwtToken | null
+    data: JwtToken | null,
+    extension: IExtensionInterface
   ): Promise<void>;
 }

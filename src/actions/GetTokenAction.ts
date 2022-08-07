@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { IBaseKernelModule } from '../lib';
 import { BaseApiAction } from '../classes';
 import CryptoClient from '../modules/crypto/CryptoClient';
+import { ActionMode } from '../classes/BaseAction';
+import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
 
 /**
  * @openapi
@@ -44,10 +46,16 @@ export default class GetTokenAction extends BaseApiAction {
   constructor(module: IBaseKernelModule<any, any, any, any>) {
     super('POST', '/token', module);
     this.handler = this.handler.bind(this);
-    this.setDmz(true);
+    this.setMode(ActionMode.DMZ);
   }
 
-  async handler(req: Request, res: Response, next: () => void): Promise<void> {
+  async handler(
+    req: Request,
+    res: Response,
+    next: () => void,
+    data: any,
+    ex: IExtensionInterface
+  ): Promise<void> {
     const cc = this.getKernel().getCryptoClient() as CryptoClient;
 
     if (!req.body.token) {
@@ -60,12 +68,16 @@ export default class GetTokenAction extends BaseApiAction {
     }
 
     const { username, token } = req.body;
-    const valid = await cc.apiTokenValidation(username, token, 'api');
+
+    const valid = await ex.timing.startFunc('validation', () =>
+      cc.apiTokenValidation(username, token, 'api')
+    );
     if (valid.valid && valid.userId) {
       const jwt = cc.jwtGenerateAccessToken({
         userid: valid.userId,
         username,
       });
+      ex.done();
       res.status(200).send({ token: jwt });
     } else {
       res.status(403).send('no no no ...');

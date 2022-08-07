@@ -68,6 +68,9 @@ require('@grandlinex/core/dist/dev/lib/store');
 describe('Express-Kernel', () => {
   let jwtToken: any;
 
+  test('dev mode', async () => {
+    kernel.setDevMode(true);
+  });
   test('crypto jwt', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
