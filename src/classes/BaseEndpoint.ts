@@ -22,7 +22,7 @@ export default abstract class BaseEndpoint<
 {
   private appServer: express.Express;
 
-  private httpServer: http.Server | null;
+  private httpServer: http.Server;
 
   private port: number;
 
@@ -35,12 +35,12 @@ export default abstract class BaseEndpoint<
     this.port = port;
     this.appServer = express();
     this.appServer.use(json());
-    this.httpServer = null;
+    this.httpServer = http.createServer(this.appServer);
   }
 
   start(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      this.httpServer = this.appServer
+      this.httpServer
         .listen(this.port, () => {
           this.debug(`Endpoint listen on ${this.port}`);
           resolve(true);
@@ -62,5 +62,9 @@ export default abstract class BaseEndpoint<
 
   getApp(): express.Express {
     return this.appServer;
+  }
+
+  getServer(): http.Server {
+    return this.httpServer;
   }
 }
