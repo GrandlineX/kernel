@@ -43,7 +43,7 @@ export default abstract class BaseApiAction<
       endpoint = this.getModule().getPresenter();
     }
     if (endpoint) {
-      this.log(`register ${this.type} ${this.getName()}`);
+      this.debug(`register ${this.type} ${this.getName()}`);
       const app = endpoint.getApp();
       switch (this.type) {
         case 'POST':

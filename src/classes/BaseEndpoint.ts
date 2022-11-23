@@ -42,7 +42,7 @@ export default abstract class BaseEndpoint<
     return new Promise<boolean>((resolve) => {
       this.httpServer
         .listen(this.port, () => {
-          this.debug(`Endpoint listen on ${this.port}`);
+          this.info(`Endpoint listen on ${this.port}`);
           resolve(true);
         })
         .on('error', (err) => {
