@@ -21,6 +21,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     pathOverride?: string;
     portOverride?: number;
     envFilePath?: string;
+    loadFromLocalEnv?: boolean;
     logger?: (k: CoreKernel<any>) => CoreLogger;
   }) {
     super({ ...options });
