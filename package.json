@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/core": "^0.26.0",
+    "@grandlinex/core": "^0.27.0",
     "axios": "^0.27.2",
     "body-parser": "^1.20.1",
     "express": "^4.18.2",
