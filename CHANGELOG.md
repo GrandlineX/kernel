@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.27.1] - 2023-01-26
+### Added
+- Add raw body field for express calls 
+- change BaseEndpoint variables from private to protected
+
 ## [v0.25.2] - 2022-08-07
 ### Added
 - Add express timing api in dev mode

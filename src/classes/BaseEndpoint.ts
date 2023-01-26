@@ -9,6 +9,22 @@ import {
   IBasePresenter,
   IKernel,
 } from '../lib';
+import { XRequest, XResponse } from '../lib/express';
+
+export function keepRawBody(
+  req: XRequest,
+  res: XResponse,
+  buf: Buffer,
+  encoding: string
+) {
+  if (buf && buf.length) {
+    try {
+      req.rawBody = buf.toString((encoding as BufferEncoding) || 'utf8');
+    } catch (e) {
+      req.rawBody = null;
+    }
+  }
+}
 
 export default abstract class BaseEndpoint<
     K extends IKernel = IKernel,
@@ -20,11 +36,11 @@ export default abstract class BaseEndpoint<
   extends CorePresenter<express.Express, K, T, P, C, E>
   implements IBasePresenter
 {
-  private appServer: express.Express;
+  protected appServer: express.Express;
 
-  private httpServer: http.Server;
+  protected httpServer: http.Server;
 
-  private port: number;
+  protected port: number;
 
   constructor(
     chanel: string,
@@ -34,7 +50,7 @@ export default abstract class BaseEndpoint<
     super(`endpoint-${chanel}`, module);
     this.port = port;
     this.appServer = express();
-    this.appServer.use(json());
+    this.appServer.use(json({ verify: keepRawBody }));
     this.httpServer = http.createServer(this.appServer);
   }
 

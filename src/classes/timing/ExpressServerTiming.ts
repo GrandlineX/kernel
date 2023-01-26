@@ -1,6 +1,6 @@
-import { Response } from 'express';
 import { CoreElement } from '@grandlinex/core';
 import ServerTiming from './ServerTiming';
+import { XResponse } from '../../lib/express';
 
 export type IExtensionInterface = {
   done: () => void;
@@ -40,7 +40,7 @@ export default class ExpressServerTiming {
     return out.join(', ');
   }
 
-  addHeader(res: Response) {
+  addHeader(res: XResponse) {
     if (
       this.timing.map.size > 0 &&
       this.baseApiAction.getKernel().getDevMode()
@@ -53,7 +53,7 @@ export default class ExpressServerTiming {
 
   static init(
     baseApiAction: CoreElement<any>,
-    res: Response
+    res: XResponse
   ): [ExpressServerTiming, () => void] {
     const el = new ExpressServerTiming(baseApiAction);
     const total = el.start('total');

@@ -1,8 +1,8 @@
 import CoreKernel, { CoreLogger } from '@grandlinex/core';
-import { Request } from 'express';
 import { ICClient, IKernel } from './lib';
 import CryptoClient from './modules/crypto/CryptoClient';
 import KernelModule from './KernelModule';
+import { XRequest } from './lib/express';
 
 /**
  *  @class Kernel
@@ -51,7 +51,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     this.expressPort = port;
   }
 
-  responseCodeFunction(data: { code: number; req: Request }) {
+  responseCodeFunction(data: { code: number; req: XRequest }) {
     const { code } = data;
     if (code < 200 || code >= 300) {
       this.debug(data.req.path, data.req.ip, data.code);

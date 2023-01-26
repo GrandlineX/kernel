@@ -1,8 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
-import { Request, Response } from 'express';
 import { ICoreAnyModule } from '@grandlinex/core';
-import Kernel, { ActionTypes, AuthResult, BaseApiAction, BaseAuthProvider, ICClient } from '../src';
+import { ActionTypes, AuthResult, BaseApiAction, BaseAuthProvider, ICClient } from '../src';
 import { JwtToken } from '../src';
+import { XNextFc, XRequest, XResponse } from '../src/lib/express';
 
 export class TestAllAction extends BaseApiAction  {
   constructor(mod: ICoreAnyModule, type: ActionTypes) {
@@ -11,11 +11,14 @@ export class TestAllAction extends BaseApiAction  {
   }
 
   async handler(
-    req: Request,
-    res: Response,
-    next: () => void,
+    req: XRequest,
+    res: XResponse,
+    next: XNextFc,
     data: JwtToken | null
   ): Promise<void> {
+    if (req.rawBody){
+      console.log(req.rawBody)
+    }
     res.sendStatus(200);
   }
 }
@@ -45,7 +48,7 @@ export class TestAuthProvider extends BaseAuthProvider {
     return token.username === 'admin' && requestType === 'api';
   }
 
-  async bearerTokenValidation(req: Request): Promise<JwtToken | null> {
+  async bearerTokenValidation(req: XRequest): Promise<JwtToken | null> {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) {

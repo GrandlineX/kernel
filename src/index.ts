@@ -10,6 +10,7 @@ export * from './api';
 export * from './classes';
 export * from './modules/crypto';
 export * from './lib';
+export * from './lib/express';
 export * from '@grandlinex/core';
 export { KernelModule, Kernel };
 export default Kernel;

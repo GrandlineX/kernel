@@ -1,8 +1,8 @@
-import e from 'express';
-import { IBaseKernelModule, IKernel } from '../lib';
+import { IBaseKernelModule } from '../lib';
 import { BaseApiAction } from '../classes';
 import { ActionMode } from '../classes/BaseAction';
 import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
+import { XRequest, XResponse } from '../lib/express';
 
 /**
  * @name ApiVersionAction
@@ -36,8 +36,8 @@ export default class ApiVersionAction extends BaseApiAction {
   }
 
   async handler(
-    req: e.Request,
-    res: e.Response,
+    req: XRequest,
+    res: XResponse,
     next: () => void,
     data: any,
     ex: IExtensionInterface

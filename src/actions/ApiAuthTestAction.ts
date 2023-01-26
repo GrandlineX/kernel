@@ -1,6 +1,6 @@
-import e from 'express';
 import { IBaseKernelModule } from '../lib';
 import { BaseApiAction, JwtToken } from '../classes';
+import { XRequest, XResponse } from '../lib/express';
 
 /**
  * @name ApiAuthTestAction
@@ -30,8 +30,8 @@ export default class ApiAuthTestAction extends BaseApiAction {
   }
 
   async handler(
-    req: e.Request,
-    res: e.Response,
+    req: XRequest,
+    res: XResponse,
     next: () => void,
     data: JwtToken
   ): Promise<void> {

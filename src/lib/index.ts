@@ -1,4 +1,3 @@
-import express, { Request, Response } from 'express';
 import {
   ICoreAction,
   ICoreBridge,
@@ -12,8 +11,10 @@ import {
   ICoreService,
   IDataBase,
 } from '@grandlinex/core';
+import express from 'express';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
 import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
+import { XNextFc, XRequest, XResponse } from './express';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
@@ -32,13 +33,13 @@ export interface ICClient extends ICoreCClient {
 
   permissionValidation(token: JwtToken, requestType: string): Promise<boolean>;
 
-  bearerTokenValidation(req: Request): Promise<JwtToken | null>;
+  bearerTokenValidation(req: XRequest): Promise<JwtToken | null>;
 }
 
 export interface IKernel extends ICoreKernel<ICClient> {
   getAppServerPort(): number;
   setAppServerPort(port: number): void;
-  responseCodeFunction(data: { code: number; req: Request }): void;
+  responseCodeFunction(data: { code: number; req: XRequest }): void;
 }
 
 export type IBaseKernelModule<
@@ -89,9 +90,9 @@ export interface IBaseAction<
   E extends IBasePresenter | null = any
 > extends ICoreAction<K, T, P, C, E> {
   handler(
-    req: Request,
-    res: Response,
-    next: () => void,
+    req: XRequest,
+    res: XResponse,
+    next: XNextFc,
     data: JwtToken | null,
     extension: IExtensionInterface
   ): Promise<void>;

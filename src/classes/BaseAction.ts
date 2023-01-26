@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { CoreAction, IDataBase } from '@grandlinex/core';
 import {
   IBaseAction,
@@ -11,6 +10,7 @@ import {
 import { JwtToken } from './BaseAuthProvider';
 import { ExpressServerTiming } from './timing';
 import { IExtensionInterface } from './timing/ExpressServerTiming';
+import { XNextFc, XRequest, XResponse } from '../lib/express';
 
 export enum ActionMode {
   'DEFAULT',
@@ -36,16 +36,16 @@ export default abstract class BaseAction<
   }
 
   abstract handler(
-    req: Request,
-    res: Response,
-    next: () => void,
+    req: XRequest,
+    res: XResponse,
+    next: XNextFc,
     data: JwtToken | null,
     extension: IExtensionInterface
   ): Promise<void>;
 
   async secureHandler(
-    req: Request,
-    res: Response,
+    req: XRequest,
+    res: XResponse,
     next: () => void
   ): Promise<void> {
     const extension = this.initExtension(res);
@@ -83,7 +83,7 @@ export default abstract class BaseAction<
   }
   abstract register(): void;
 
-  private initExtension(res: Response): IExtensionInterface {
+  private initExtension(res: XResponse): IExtensionInterface {
     const [el, fx] = ExpressServerTiming.init(this, res);
     return {
       done: () => {

@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
 import { IBaseKernelModule } from '../lib';
 import { BaseApiAction } from '../classes';
 import CryptoClient from '../modules/crypto/CryptoClient';
 import { ActionMode } from '../classes/BaseAction';
 import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
+import { XRequest, XResponse } from '../lib/express';
 
 /**
  * @openapi
@@ -50,8 +50,8 @@ export default class GetTokenAction extends BaseApiAction {
   }
 
   async handler(
-    req: Request,
-    res: Response,
+    req: XRequest,
+    res: XResponse,
     next: () => void,
     data: any,
     ex: IExtensionInterface

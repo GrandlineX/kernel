@@ -7,7 +7,7 @@ import {
   CoreService as BaseService,
 } from '@grandlinex/core';
 import BaseAction from './BaseAction';
-import BaseEndpoint from './BaseEndpoint';
+import BaseEndpoint, { keepRawBody } from './BaseEndpoint';
 import BaseKernelModule from './BaseKernelModule';
 import BaseApiAction from './BaseApiAction';
 import BaseAuthProvider from './BaseAuthProvider';
@@ -27,4 +27,5 @@ export {
   BaseAction,
   BaseClient,
   BaseBridge,
+  keepRawBody,
 };

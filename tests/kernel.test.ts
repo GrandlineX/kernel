@@ -195,7 +195,7 @@ describe('Express-Kernel', () => {
     if (type === 'GET' || type === 'DELETE') {
       testcall = await fc(qPath, conf);
     } else {
-      testcall = await fc(qPath, undefined, conf);
+      testcall = await fc(qPath, { test: "value" }, conf);
     }
     expect(testcall.status).toBe(200);
   });

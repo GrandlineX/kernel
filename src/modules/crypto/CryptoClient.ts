@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { Request } from 'express';
 import { CoreCryptoClient } from '@grandlinex/core';
 import { ICClient, IKernel } from '../../lib';
 import {
@@ -7,6 +6,7 @@ import {
   JwtToken,
   JwtTokenData,
 } from '../../classes/BaseAuthProvider';
+import { XRequest } from '../../lib/express';
 
 export default class CryptoClient extends CoreCryptoClient implements ICClient {
   protected authProvider: IAuthProvider | null;
@@ -80,7 +80,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     return false;
   }
 
-  async bearerTokenValidation(req: Request): Promise<JwtToken | null> {
+  async bearerTokenValidation(req: XRequest): Promise<JwtToken | null> {
     if (this.authProvider) {
       return this.authProvider.bearerTokenValidation(req);
     }

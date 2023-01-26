@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
+import { XNextFc, XRequest, XResponse } from '../../../lib/express';
 
 export type CorsMiddleWare = (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: XRequest,
+  res: XResponse,
+  next: XNextFc
 ) => void;
 
 export const cors: CorsMiddleWare = (req, res, next) => {
