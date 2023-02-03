@@ -1,11 +1,7 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload, TokenExpiredError } from 'jsonwebtoken';
 import { CoreCryptoClient } from '@grandlinex/core';
 import { ICClient, IKernel } from '../../lib';
-import {
-  IAuthProvider,
-  JwtToken,
-  JwtTokenData,
-} from '../../classes/BaseAuthProvider';
+import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
 import { XRequest } from '../../lib/express';
 
 export default class CryptoClient extends CoreCryptoClient implements ICClient {
@@ -30,11 +26,13 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     return true;
   }
 
-  jwtVerifyAccessToken(token: string): Promise<JwtToken | null> {
+  jwtVerifyAccessToken(token: string): Promise<JwtToken | number> {
     return new Promise((resolve) => {
-      jwt.verify(token, this.AesKey, (err: any, user: any) => {
-        if (err || user === null) {
-          resolve(null);
+      jwt.verify(token, this.AesKey, (err, user: any) => {
+        if (err instanceof TokenExpiredError) {
+          resolve(498);
+        } else if (err || user === null) {
+          resolve(403);
         } else {
           resolve(user);
         }
@@ -42,8 +40,12 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     });
   }
 
-  jwtGenerateAccessToken(data: JwtTokenData): string {
-    return jwt.sign(data, this.AesKey, { expiresIn: this.expiresIn });
+  jwtDecodeAccessToken(token: string): JwtPayload | null {
+    return jwt.decode(token, { json: true });
+  }
+
+  jwtGenerateAccessToken(data: JwtToken, expire?: string | number): string {
+    return jwt.sign(data, this.AesKey, { expiresIn: expire ?? this.expiresIn });
   }
 
   async apiTokenValidation(
@@ -55,10 +57,14 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
       return this.authProvider.authorizeToken(username, token, requestType);
     }
     const store = this.kernel.getConfigStore();
+    const cc = this.kernel.getCryptoClient();
     if (!store.has('SERVER_PASSWORD')) {
       return { valid: false, userId: null };
     }
-    if (token === store.get('SERVER_PASSWORD') && username === 'admin') {
+    if (
+      cc?.timeSavePWValidation(token, store.get('SERVER_PASSWORD') || '') ||
+      (token === store.get('SERVER_PASSWORD') && username === 'admin')
+    ) {
       return {
         valid: true,
         userId: 'admin',
@@ -80,19 +86,19 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     return false;
   }
 
-  async bearerTokenValidation(req: XRequest): Promise<JwtToken | null> {
+  async bearerTokenValidation(req: XRequest): Promise<JwtToken | number> {
     if (this.authProvider) {
       return this.authProvider.bearerTokenValidation(req);
     }
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
-    if (token == null) {
-      return null;
+    if (!token) {
+      return 401;
     }
     const tokenData = await this.jwtVerifyAccessToken(token);
     if (tokenData) {
       return tokenData;
     }
-    return null;
+    return 403;
   }
 }

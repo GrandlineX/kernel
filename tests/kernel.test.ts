@@ -75,12 +75,16 @@ describe('Express-Kernel', () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
 
-    const token = cc?.jwtGenerateAccessToken({ username: testText });
+    const token = cc!.jwtGenerateAccessToken({ username: testText, userid:testText });
 
     expect(token).not.toBeUndefined();
     if (token) {
-      const res = await cc?.jwtVerifyAccessToken(token);
-      expect(res?.username).toBe(testText);
+      const res = await cc!.jwtVerifyAccessToken(token);
+      expect(typeof res ==="number").toBeFalsy();
+      if (typeof res !=="number"){
+        expect(res?.username).toBe(testText);
+      }
+
     }
   });
 
@@ -101,9 +105,12 @@ describe('Express-Kernel', () => {
     expect(token.data).not.toBeNull();
     expect(token.data).not.toBeUndefined();
     jwtToken = token.data.token;
-    const res = await cc?.jwtVerifyAccessToken(jwtToken);
+    const res = await cc!.jwtVerifyAccessToken(jwtToken);
     expect(await cc?.permissionValidation(jwtToken, 'api')).not.toBeTruthy();
-    expect(res?.username).toBe('admin');
+    expect(typeof res ==="number").toBeFalsy();
+    if (typeof res!=="number"){
+      expect(res.username).toBe('admin');
+    }
   });
 
   test('get token no body', async () => {
@@ -162,10 +169,10 @@ describe('Express-Kernel', () => {
     );
     expect(testcall.status).toBe(200);
 
-    const adminToken = await cc?.jwtVerifyAccessToken(testcall.data.token);
+    const adminToken = await cc!.jwtVerifyAccessToken(testcall.data.token);
     expect(adminToken).not.toBeNull();
 
-    if (adminToken) {
+    if (typeof  adminToken !=="number") {
       expect(await cc?.permissionValidation(adminToken, 'api')).toBeTruthy();
     }
   });
@@ -184,6 +191,18 @@ describe('Express-Kernel', () => {
     });
     expect(testcall.status).toBe(200);
   });
+
+  test('test auth expire', async () => {
+    const token = kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },0);
+    const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
+    expect(valid?.username).toBe(testText);
+    await XUtil.sleep(2000);
+    const testcall = await axios.get(`http://localhost:${port}/test/auth`, {
+      headers: { Authorization: `Bearer ${token}` },
+      validateStatus:()=>true
+    });
+    expect(testcall.status).toBe(498);
+  },30000);
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   test.each(types)('Type (%s):', async (type, fc: Function) => {

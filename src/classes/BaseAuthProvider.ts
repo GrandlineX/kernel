@@ -1,12 +1,9 @@
+import { JwtPayload } from 'jsonwebtoken';
 import { XRequest } from '../lib/express';
 
-export interface JwtTokenData {
+export interface JwtToken extends JwtPayload {
   username: string;
   userid: string;
-}
-export interface JwtToken extends JwtTokenData {
-  exp: number;
-  iat: number;
 }
 
 export type AuthResult = {
@@ -23,7 +20,7 @@ export interface IAuthProvider {
 
   validateAccess(token: JwtToken, requestType: string): Promise<boolean>;
 
-  bearerTokenValidation(req: XRequest): Promise<JwtToken | null>;
+  bearerTokenValidation(req: XRequest): Promise<JwtToken | number>;
 }
 
 export default abstract class BaseAuthProvider implements IAuthProvider {
@@ -38,5 +35,5 @@ export default abstract class BaseAuthProvider implements IAuthProvider {
     requestType: string
   ): Promise<boolean>;
 
-  abstract bearerTokenValidation(req: XRequest): Promise<JwtToken | null>;
+  abstract bearerTokenValidation(req: XRequest): Promise<JwtToken | number>;
 }

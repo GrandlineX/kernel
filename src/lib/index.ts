@@ -12,6 +12,7 @@ import {
   IDataBase,
 } from '@grandlinex/core';
 import express from 'express';
+import { JwtPayload } from 'jsonwebtoken';
 import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
 import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
 import { XNextFc, XRequest, XResponse } from './express';
@@ -21,9 +22,11 @@ export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 export interface ICClient extends ICoreCClient {
   setAuthProvider(provider: IAuthProvider): boolean;
 
-  jwtVerifyAccessToken(token: string): Promise<JwtToken | null>;
+  jwtVerifyAccessToken(token: string): Promise<JwtToken | number>;
 
-  jwtGenerateAccessToken(data: { username: string }): string;
+  jwtDecodeAccessToken(token: string): JwtPayload | null;
+
+  jwtGenerateAccessToken(data: JwtToken, expire?: string | number): string;
 
   apiTokenValidation(
     username: string,
@@ -33,7 +36,7 @@ export interface ICClient extends ICoreCClient {
 
   permissionValidation(token: JwtToken, requestType: string): Promise<boolean>;
 
-  bearerTokenValidation(req: XRequest): Promise<JwtToken | null>;
+  bearerTokenValidation(req: XRequest): Promise<JwtToken | number>;
 }
 
 export interface IKernel extends ICoreKernel<ICClient> {

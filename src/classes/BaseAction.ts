@@ -69,10 +69,12 @@ export default abstract class BaseAction<
     }
     const dat = await cc.bearerTokenValidation(req);
     auth.stop();
-    if (dat) {
+    if (dat && typeof dat !== 'number') {
       await this.handler(req, res, next, dat, extension);
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
       await this.handler(req, res, next, null, extension);
+    } else if (dat) {
+      res.sendStatus(dat);
     } else {
       res.status(401).send('no no no ...');
     }
