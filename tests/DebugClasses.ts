@@ -48,16 +48,12 @@ export class TestAuthProvider extends BaseAuthProvider {
     return token.username === 'admin' && requestType === 'api';
   }
 
-  async bearerTokenValidation(req: XRequest): Promise<JwtToken | null> {
+  async bearerTokenValidation(req: XRequest): Promise<JwtToken | number> {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) {
-      return null;
+      return 401;
     }
-    const tokenData = await this.cc.jwtVerifyAccessToken(token);
-    if (tokenData) {
-      return tokenData;
-    }
-    return null;
+    return  await this.cc.jwtVerifyAccessToken(token);
   }
 }
