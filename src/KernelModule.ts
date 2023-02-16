@@ -22,7 +22,9 @@ export default class KernelModule extends BaseKernelModule<
       new ApiAuthTestAction(this),
       new GetTokenAction(this)
     );
+  }
 
+  async initModule(): Promise<void> {
     this.addService(new OfflineService(this));
     const endpoint = new KernelEndpoint(
       'api',
@@ -30,9 +32,6 @@ export default class KernelModule extends BaseKernelModule<
       this.getKernel().getAppServerPort()
     );
     this.setPresenter(endpoint);
-  }
-
-  async initModule(): Promise<void> {
     await this.getKernel().triggerFunction('load');
   }
 }
