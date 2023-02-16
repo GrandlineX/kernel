@@ -24,15 +24,15 @@ export default class KernelModule extends BaseKernelModule<
     );
 
     this.addService(new OfflineService(this));
-  }
-
-  async initModule(): Promise<void> {
     const endpoint = new KernelEndpoint(
       'api',
       this,
       this.getKernel().getAppServerPort()
     );
     this.setPresenter(endpoint);
+  }
+
+  async initModule(): Promise<void> {
     await this.getKernel().triggerFunction('load');
   }
 }

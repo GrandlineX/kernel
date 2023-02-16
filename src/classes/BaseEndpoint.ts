@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express } from 'express';
 import http from 'http';
 import { json } from 'body-parser';
 import { CorePresenter, IDataBase } from '@grandlinex/core';
@@ -17,7 +17,11 @@ export function keepRawBody(
   buf: Buffer,
   encoding: string
 ) {
-  if (buf && buf.length) {
+  if (
+    req.headers['content-type']?.startsWith('application/json') &&
+    buf &&
+    buf.length
+  ) {
     try {
       req.rawBody = buf.toString((encoding as BufferEncoding) || 'utf8');
     } catch (e) {
@@ -51,6 +55,11 @@ export default abstract class BaseEndpoint<
     this.port = port;
     this.appServer = express();
     this.appServer.use(json({ verify: keepRawBody }));
+    this.httpServer = http.createServer(this.appServer);
+  }
+
+  appServerOverride(app: Express) {
+    this.appServer = app;
     this.httpServer = http.createServer(this.appServer);
   }
 
