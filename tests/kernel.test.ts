@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  JestLib,
 
   setupDevKernel,
   TestContext, XUtil
@@ -60,9 +61,10 @@ kernel.setTriggerFunction('load', async (ik) => {
 const testText = 'hello_world';
 
 // Start
-require('@grandlinex/core/dist/dev/lib/start');
-require('@grandlinex/core/dist/dev/lib/core');
-require('@grandlinex/core/dist/dev/lib/store');
+JestLib.jestStart();
+JestLib.jestCore();
+JestLib.jestStore();
+
 
 // Api Tests
 describe('Express-Kernel', () => {
@@ -227,6 +229,7 @@ describe('Express-Kernel', () => {
     expect(version.data.api).toBe(1);
   });
 });
+
 // Ending
-require('@grandlinex/core/dist/dev/lib/end');
-require('@grandlinex/core/dist/dev/lib/orm');
+JestLib.jestEnd();
+JestLib.jestOrm();

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.30.0] - 2023-04-03
+### Added
+- Switch to ESM
+- Update to core 0.30.0
+
 ## [v0.27.1] - 2023-01-26
 ### Added
 - Add raw body field for express calls 

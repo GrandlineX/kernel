@@ -12,6 +12,7 @@ import BaseKernelModule from './BaseKernelModule';
 import BaseApiAction from './BaseApiAction';
 import BaseAuthProvider from './BaseAuthProvider';
 
+export * from './BaseAction';
 export * from './BaseAuthProvider';
 export * from './timing';
 
