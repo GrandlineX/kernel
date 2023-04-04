@@ -29,7 +29,7 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/core": "0.30.0",
+    "@grandlinex/core": "0.30.1",
     "axios": "1.3.4",
     "body-parser": "1.20.2",
     "express": "4.18.2",
