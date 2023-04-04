@@ -1,25 +1,9 @@
-import { IBaseKernelModule } from '../lib';
-import { BaseApiAction, JwtToken } from '../classes';
-import { XRequest, XResponse } from '../lib/express';
+import { IBaseKernelModule } from '../lib/index.js';
+import { BaseApiAction, JwtToken } from '../classes/index.js';
+import { XRequest, XResponse } from '../lib/express.js';
 
 /**
  * @name ApiAuthTestAction
- *
- * @openapi
- * /test/auth:
- *   get:
- *     summary: test call for valid access rights
- *     tags:
- *       - Kernel
- *     responses:
- *       200:
- *         description: OK
- *         content:
- *           text/plain:
- *             schema:
- *               type: string
- *       401:
- *         description: invalid token / not authorized
  *
  */
 

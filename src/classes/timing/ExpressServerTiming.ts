@@ -1,6 +1,6 @@
 import { CoreElement } from '@grandlinex/core';
-import ServerTiming from './ServerTiming';
-import { XResponse } from '../../lib/express';
+import ServerTiming from './ServerTiming.js';
+import { XResponse } from '../../lib/express.js';
 
 export type IExtensionInterface = {
   done: () => void;

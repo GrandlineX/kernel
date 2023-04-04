@@ -1,9 +1,12 @@
-import { IBaseKernelModule } from '../lib';
-import { BaseApiAction } from '../classes';
-import CryptoClient from '../modules/crypto/CryptoClient';
-import { ActionMode } from '../classes/BaseAction';
-import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
-import { XRequest, XResponse } from '../lib/express';
+import { IBaseKernelModule } from '../lib/index.js';
+import {
+  BaseApiAction,
+  IExtensionInterface,
+  ActionMode,
+} from '../classes/index.js';
+import CryptoClient from '../modules/crypto/CryptoClient.js';
+
+import { XRequest, XResponse } from '../lib/express.js';
 
 /**
  * @openapi

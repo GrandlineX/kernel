@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {
   JestLib,
-
   setupDevKernel,
-  TestContext, XUtil
+  TestContext,
+  XUtil
 } from '@grandlinex/core';
 import {
   KernelEndpoint,
@@ -11,10 +11,10 @@ import {
   cors,
   Kernel,
   ActionTypes,
-} from '../src';
+  CryptoClient
+} from '../index.js';
 
-import { TestAuthProvider, TestAllAction } from './DebugClasses';
-import CryptoClient from '../src/modules/crypto/CryptoClient';
+import { TestAuthProvider, TestAllAction } from './DebugClasses.js';
 
 const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
 
@@ -31,7 +31,7 @@ const kernel = new Kernel({
   envFilePath: __dirname,
 });
 
-setupDevKernel(kernel);
+setupDevKernel<Kernel>(kernel);
 
 kernel.setBaseModule(new KernelModule(kernel));
 

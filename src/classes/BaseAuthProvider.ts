@@ -1,7 +1,7 @@
-import { JwtPayload } from 'jsonwebtoken';
-import { XRequest } from '../lib/express';
+import * as jwt from 'jsonwebtoken';
+import { XRequest } from '../lib/express.js';
 
-export interface JwtToken extends JwtPayload {
+export interface JwtToken extends jwt.JwtPayload {
   username: string;
   userid: string;
 }

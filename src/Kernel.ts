@@ -1,8 +1,8 @@
-import CoreKernel, { CoreLogger } from '@grandlinex/core';
-import { ICClient, IKernel } from './lib';
-import CryptoClient from './modules/crypto/CryptoClient';
-import KernelModule from './KernelModule';
-import { XRequest } from './lib/express';
+import { CoreLogger, CoreKernel } from '@grandlinex/core';
+import { ICClient, IKernel } from './lib/index.js';
+import CryptoClient from './modules/crypto/CryptoClient.js';
+import KernelModule from './KernelModule.js';
+import { XRequest } from './lib/express.js';
 
 /**
  *  @class Kernel

@@ -12,10 +12,15 @@ import {
   IDataBase,
 } from '@grandlinex/core';
 import express from 'express';
-import { JwtPayload } from 'jsonwebtoken';
-import { IAuthProvider, JwtToken } from '../classes/BaseAuthProvider';
-import { IExtensionInterface } from '../classes/timing/ExpressServerTiming';
-import { XNextFc, XRequest, XResponse } from './express';
+
+import * as jwt from 'jsonwebtoken';
+import {
+  IAuthProvider,
+  JwtToken,
+  IExtensionInterface,
+} from '../classes/index.js';
+
+import { XNextFc, XRequest, XResponse } from './express.js';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
@@ -24,7 +29,7 @@ export interface ICClient extends ICoreCClient {
 
   jwtVerifyAccessToken(token: string): Promise<JwtToken | number>;
 
-  jwtDecodeAccessToken(token: string): JwtPayload | null;
+  jwtDecodeAccessToken(token: string): jwt.JwtPayload | null;
 
   jwtGenerateAccessToken(data: JwtToken, expire?: string | number): string;
 

@@ -6,11 +6,11 @@ import {
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib';
-import { JwtToken } from './BaseAuthProvider';
-import { ExpressServerTiming } from './timing';
-import { IExtensionInterface } from './timing/ExpressServerTiming';
-import { XNextFc, XRequest, XResponse } from '../lib/express';
+} from '../lib/index.js';
+import { JwtToken } from './BaseAuthProvider.js';
+import { ExpressServerTiming, IExtensionInterface } from './timing/index.js';
+
+import { XNextFc, XRequest, XResponse } from '../lib/express.js';
 
 export enum ActionMode {
   'DEFAULT',

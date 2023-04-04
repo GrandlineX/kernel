@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.30.0",
+  "version": "0.30.1",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "buildprep": "tsc",
     "lint": "eslint src",
     "test": "jest --runInBand ",
-    "run": "ts-node tests/run.ts",
+    "run": "ts-node-esm src/tests/run.ts",
     "pack-dev": "npm version -no-git-tag-version prerelease && npm run buildprep && npm pack",
     "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
     "makeDocs": "typedoc",
@@ -29,7 +29,7 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/core": "0.30.0",
+    "@grandlinex/core": "0.30.1",
     "axios": "1.3.4",
     "body-parser": "1.20.2",
     "express": "4.18.2",
