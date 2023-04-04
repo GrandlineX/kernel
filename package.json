@@ -9,7 +9,7 @@
     "buildprep": "tsc",
     "lint": "eslint src",
     "test": "jest --runInBand ",
-    "run": "ts-node tests/run.ts",
+    "run": "ts-node-esm src/tests/run.ts",
     "pack-dev": "npm version -no-git-tag-version prerelease && npm run buildprep && npm pack",
     "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
     "makeDocs": "typedoc",

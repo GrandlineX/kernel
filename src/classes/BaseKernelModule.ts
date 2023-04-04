@@ -5,7 +5,7 @@ import {
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib';
+} from '../lib/index.js';
 
 export default abstract class BaseKernelModule<
     K extends IKernel = IKernel,

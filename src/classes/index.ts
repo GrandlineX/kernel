@@ -6,15 +6,15 @@ import {
   CoreLoopService as BaseLoopService,
   CoreService as BaseService,
 } from '@grandlinex/core';
-import BaseAction from './BaseAction';
-import BaseEndpoint, { keepRawBody } from './BaseEndpoint';
-import BaseKernelModule from './BaseKernelModule';
-import BaseApiAction from './BaseApiAction';
-import BaseAuthProvider from './BaseAuthProvider';
+import BaseAction from './BaseAction.js';
+import BaseEndpoint, { keepRawBody } from './BaseEndpoint.js';
+import BaseKernelModule from './BaseKernelModule.js';
+import BaseApiAction from './BaseApiAction.js';
+import BaseAuthProvider from './BaseAuthProvider.js';
 
-export * from './BaseAction';
-export * from './BaseAuthProvider';
-export * from './timing';
+export * from './BaseAction.js';
+export * from './BaseAuthProvider.js';
+export * from './timing/index.js';
 
 export {
   BaseLoopService,

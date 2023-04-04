@@ -1,4 +1,4 @@
-import ServerTimingElement, { IServerElement } from './ServerTimingElement';
+import ServerTimingElement, { IServerElement } from './ServerTimingElement.js';
 
 export default class ServerTiming implements IServerElement {
   map: Map<string, ServerTimingElement[]>;

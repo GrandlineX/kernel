@@ -1,5 +1,5 @@
-import ApiAuthTestAction from './ApiAuthTestAction';
-import ApiVersionAction from './ApiVersionAction';
-import GetTokenAction from './GetTokenAction';
+import ApiAuthTestAction from './ApiAuthTestAction.js';
+import ApiVersionAction from './ApiVersionAction.js';
+import GetTokenAction from './GetTokenAction.js';
 
 export { ApiVersionAction, ApiAuthTestAction, GetTokenAction };

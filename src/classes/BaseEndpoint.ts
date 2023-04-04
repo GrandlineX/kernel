@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import http from 'http';
-import { json } from 'body-parser';
+import parser from 'body-parser';
 import { CorePresenter, IDataBase } from '@grandlinex/core';
 import {
   IBaseCache,
@@ -8,8 +8,8 @@ import {
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib';
-import { XRequest, XResponse } from '../lib/express';
+} from '../lib/index.js';
+import { XRequest, XResponse } from '../lib/express.js';
 
 export function keepRawBody(
   req: XRequest,
@@ -54,7 +54,7 @@ export default abstract class BaseEndpoint<
     super(`endpoint-${chanel}`, module);
     this.port = port;
     this.appServer = express();
-    this.appServer.use(json({ verify: keepRawBody }));
+    this.appServer.use(parser.json({ verify: keepRawBody }));
     this.httpServer = http.createServer(this.appServer);
   }
 

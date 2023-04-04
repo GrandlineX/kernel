@@ -7,8 +7,8 @@ import {
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib';
-import BaseAction from './BaseAction';
+} from '../lib/index.js';
+import BaseAction from './BaseAction.js';
 
 export default abstract class BaseApiAction<
     K extends IKernel = IKernel,

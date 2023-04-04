@@ -1,4 +1,4 @@
-import { XNextFc, XRequest, XResponse } from '../../../lib/express';
+import { XNextFc, XRequest, XResponse } from '../../../lib/express.js';
 
 export type CorsMiddleWare = (
   req: XRequest,

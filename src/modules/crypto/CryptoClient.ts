@@ -1,8 +1,8 @@
-import jwt, { JwtPayload, TokenExpiredError } from 'jsonwebtoken';
 import { CoreCryptoClient } from '@grandlinex/core';
-import { ICClient, IKernel } from '../../lib';
-import { IAuthProvider, JwtToken } from '../../classes/BaseAuthProvider';
-import { XRequest } from '../../lib/express';
+import * as jwt from 'jsonwebtoken';
+import { ICClient, IKernel } from '../../lib/index.js';
+import { IAuthProvider, JwtToken } from '../../classes/index.js';
+import { XRequest } from '../../lib/express.js';
 
 export default class CryptoClient extends CoreCryptoClient implements ICClient {
   protected authProvider: IAuthProvider | null;
@@ -29,7 +29,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
   jwtVerifyAccessToken(token: string): Promise<JwtToken | number> {
     return new Promise((resolve) => {
       jwt.verify(token, this.AesKey, (err, user: any) => {
-        if (err instanceof TokenExpiredError) {
+        if (err instanceof jwt.TokenExpiredError) {
           resolve(498);
         } else if (err || user === null) {
           resolve(403);
@@ -40,8 +40,8 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     });
   }
 
-  jwtDecodeAccessToken(token: string): JwtPayload | null {
-    return jwt.decode(token, { json: true });
+  jwtDecodeAccessToken(token: string): jwt.JwtPayload | null {
+    return jwt.default.decode(token, { json: true });
   }
 
   jwtGenerateAccessToken(data: JwtToken, expire?: string | number): string {
