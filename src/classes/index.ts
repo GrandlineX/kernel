@@ -6,7 +6,7 @@ import {
   CoreLoopService as BaseLoopService,
   CoreService as BaseService,
 } from '@grandlinex/core';
-import BaseAction from './BaseAction';
+import BaseAction, { ActionMode } from './BaseAction';
 import BaseEndpoint, { keepRawBody } from './BaseEndpoint';
 import BaseKernelModule from './BaseKernelModule';
 import BaseApiAction from './BaseApiAction';
@@ -28,4 +28,5 @@ export {
   BaseClient,
   BaseBridge,
   keepRawBody,
+  ActionMode,
 };
