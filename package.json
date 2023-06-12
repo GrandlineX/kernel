@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.30.3",
+  "version": "0.30.4",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "type": "module",
   "exports": {

@@ -41,6 +41,10 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
   }
 
   jwtDecodeAccessToken(token: string): jwt.JwtPayload | null {
+    // MSJ-CJS SWITCH
+    if (jwt.default.decode){
+      return jwt.default.decode(token, { json: true });
+    }
     return jwt.decode(token, { json: true });
   }
 
