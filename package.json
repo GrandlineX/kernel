@@ -1,25 +1,34 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "0.30.2",
+  "version": "0.30.3",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/mjs/index.d.ts",
+        "default": "./dist/mjs/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
       }
     }
   },
+  "types": "dist/cjs/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
   "scripts": {
-    "buildprep": "tsc",
+    "buildprep": "npm run build-mjs && npm run build-cjs && npm run build-fix",
+    "build-mjs": "tsc",
+    "build-cjs": "tsc -p tsconfig-cjs.json",
+    "build-fix": "node ./node_modules/@grandlinex/core/fix.js",
     "lint": "eslint src",
     "test": "jest --runInBand ",
-    "run": "ts-node-esm src/tests/run.ts",
+    "run": "ts-node tests/run.ts",
     "pack-dev": "npm version -no-git-tag-version prerelease && npm run buildprep && npm pack",
     "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
+    "doc-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./docs/coverage\"  --reporters=default --reporters=jest-junit",
     "makeDocs": "typedoc",
     "openDocs": "npm run makeDocs",
     "makeSpec": "makeOpenApi"
