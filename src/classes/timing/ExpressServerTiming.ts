@@ -9,7 +9,7 @@ export type IExtensionInterface = {
 export default class ExpressServerTiming {
   private timing: ServerTiming;
 
-  private baseApiAction: CoreElement<any>;
+  private baseApiAction: CoreElement<any> & { forceDebug?: boolean };
 
   constructor(baseApiAction: CoreElement<any>) {
     this.timing = new ServerTiming();
@@ -43,7 +43,8 @@ export default class ExpressServerTiming {
   addHeader(res: XResponse) {
     if (
       this.timing.map.size > 0 &&
-      this.baseApiAction.getKernel().getDevMode()
+      (this.baseApiAction.getKernel().getDevMode() ||
+        this.baseApiAction.forceDebug)
     ) {
       const a = ['Server-Timing', this.getHeader()];
       res.setHeader(a[0], a[1]);

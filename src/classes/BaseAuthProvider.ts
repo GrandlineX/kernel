@@ -1,29 +1,35 @@
 import * as jwt from 'jsonwebtoken';
 import { XRequest } from '../lib/express.js';
 
-export interface JwtToken extends jwt.JwtPayload {
+export type JwtExtend = {
   username: string;
   userid: string;
-}
+} & Partial<Record<string, string | number | number[] | string[]>>;
+
+export type JwtToken<T extends JwtExtend = JwtExtend> = T & jwt.JwtPayload;
 
 export type AuthResult = {
   valid: boolean;
   userId: string | null;
 };
 
-export interface IAuthProvider {
+export interface IAuthProvider<T extends JwtExtend> {
   authorizeToken(
     userid: string,
     token: string,
     requestType: string
   ): Promise<AuthResult>;
 
-  validateAccess(token: JwtToken, requestType: string): Promise<boolean>;
+  validateAccess(token: JwtToken<T>, requestType: string): Promise<boolean>;
 
-  bearerTokenValidation(req: XRequest): Promise<JwtToken | number>;
+  bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
+
+  jwtAddData(token: JwtToken<T>): Promise<JwtToken<T>>;
 }
 
-export default abstract class BaseAuthProvider implements IAuthProvider {
+export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
+  implements IAuthProvider<T>
+{
   abstract authorizeToken(
     username: string,
     token: string,
@@ -31,9 +37,13 @@ export default abstract class BaseAuthProvider implements IAuthProvider {
   ): Promise<AuthResult>;
 
   abstract validateAccess(
-    token: JwtToken,
+    token: JwtToken<T>,
     requestType: string
   ): Promise<boolean>;
 
-  abstract bearerTokenValidation(req: XRequest): Promise<JwtToken | number>;
+  abstract bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
+
+  async jwtAddData(token: JwtToken<T>): Promise<JwtToken<T>> {
+    return token;
+  }
 }

@@ -8,39 +8,6 @@ import CryptoClient from '../modules/crypto/CryptoClient.js';
 
 import { XRequest, XResponse } from '../lib/express.js';
 
-/**
- * @openapi
- * /token:
- *   post:
- *     summary: Get Bearer for user.
- *     tags:
- *       - Kernel
- *     description: Returns JWT.
- *     responses:
- *       '200':
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *       '403':
- *         description: Not Authorized
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *               token:
- *                 type: string
- */
-
 export default class GetTokenAction extends BaseApiAction {
   /**
    *
@@ -76,7 +43,7 @@ export default class GetTokenAction extends BaseApiAction {
       cc.apiTokenValidation(username, token, 'api')
     );
     if (valid.valid && valid.userId) {
-      const jwt = cc.jwtGenerateAccessToken({
+      const jwt = await cc.jwtGenerateAccessToken({
         userid: valid.userId,
         username,
       });

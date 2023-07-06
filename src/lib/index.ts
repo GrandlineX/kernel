@@ -18,20 +18,25 @@ import {
   IAuthProvider,
   JwtToken,
   IExtensionInterface,
+  JwtExtend,
 } from '../classes/index.js';
 
 import { XNextFc, XRequest, XResponse } from './express.js';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
-export interface ICClient extends ICoreCClient {
-  setAuthProvider(provider: IAuthProvider): boolean;
+export interface ICClient<T extends JwtExtend = JwtExtend>
+  extends ICoreCClient {
+  setAuthProvider(provider: IAuthProvider<T>): boolean;
 
-  jwtVerifyAccessToken(token: string): Promise<JwtToken | number>;
+  jwtVerifyAccessToken(token: string): Promise<JwtToken<T> | number>;
 
   jwtDecodeAccessToken(token: string): jwt.JwtPayload | null;
 
-  jwtGenerateAccessToken(data: JwtToken, expire?: string | number): string;
+  jwtGenerateAccessToken(
+    data: JwtToken<T>,
+    expire?: string | number
+  ): Promise<string>;
 
   apiTokenValidation(
     username: string,
@@ -39,12 +44,16 @@ export interface ICClient extends ICoreCClient {
     requestType: string
   ): Promise<{ valid: boolean; userId: string | null }>;
 
-  permissionValidation(token: JwtToken, requestType: string): Promise<boolean>;
+  permissionValidation(
+    token: JwtToken<T>,
+    requestType: string
+  ): Promise<boolean>;
 
-  bearerTokenValidation(req: XRequest): Promise<JwtToken | number>;
+  bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
 }
 
-export interface IKernel extends ICoreKernel<ICClient> {
+export interface IKernel<T extends JwtExtend = JwtExtend>
+  extends ICoreKernel<ICClient<T>> {
   getAppServerPort(): number;
   setAppServerPort(port: number): void;
   responseCodeFunction(data: { code: number; req: XRequest }): void;

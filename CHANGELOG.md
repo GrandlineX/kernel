@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.31.0] - 2023-07-06
+### Added
+- JTW Token now can be extended with custom payload
+- Update to core 0.31.0
+- Add forceDebug flag for BaseAction to force Server-Timing in production mode
+
 ## [v0.30.0] - 2023-04-03
 ### Added
 - Switch to ESM

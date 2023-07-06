@@ -1,11 +1,14 @@
 import { CoreCryptoClient } from '@grandlinex/core';
 import * as jwt from 'jsonwebtoken';
 import { ICClient, IKernel } from '../../lib/index.js';
-import { IAuthProvider, JwtToken } from '../../classes/index.js';
+import { IAuthProvider, JwtExtend, JwtToken } from '../../classes/index.js';
 import { XRequest } from '../../lib/express.js';
 
-export default class CryptoClient extends CoreCryptoClient implements ICClient {
-  protected authProvider: IAuthProvider | null;
+export default class CryptoClient<T extends JwtExtend = JwtExtend>
+  extends CoreCryptoClient
+  implements ICClient<T>
+{
+  protected authProvider: IAuthProvider<T> | null;
 
   protected kernel: IKernel;
 
@@ -18,7 +21,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     this.expiresIn = kernel.getConfigStore().get('JWT_EXPIRE') || '1 days';
   }
 
-  setAuthProvider(provider: IAuthProvider): boolean {
+  setAuthProvider(provider: IAuthProvider<T>): boolean {
     if (this.authProvider) {
       return false;
     }
@@ -26,7 +29,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     return true;
   }
 
-  jwtVerifyAccessToken(token: string): Promise<JwtToken | number> {
+  jwtVerifyAccessToken(token: string): Promise<JwtToken<T> | number> {
     return new Promise((resolve) => {
       jwt.verify(token, this.AesKey, (err, user: any) => {
         if (err instanceof jwt.TokenExpiredError) {
@@ -40,14 +43,25 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     });
   }
 
-  jwtDecodeAccessToken(token: string): jwt.JwtPayload | null {
+  jwtDecodeAccessToken(token: string): JwtToken<T> | null {
     // MSJ-CJS SWITCH
     const mod = (jwt as any).default || jwt;
     return mod.decode(token, { json: true });
   }
 
-  jwtGenerateAccessToken(data: JwtToken, expire?: string | number): string {
-    return jwt.sign(data, this.AesKey, { expiresIn: expire ?? this.expiresIn });
+  async jwtGenerateAccessToken(
+    data: JwtToken<T>,
+    expire?: string | number
+  ): Promise<string> {
+    let sData;
+    if (this.authProvider) {
+      sData = await this.authProvider.jwtAddData(data);
+    } else {
+      sData = data;
+    }
+    return jwt.sign(sData, this.AesKey, {
+      expiresIn: expire ?? this.expiresIn,
+    });
   }
 
   async apiTokenValidation(
@@ -79,7 +93,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
   }
 
   async permissionValidation(
-    token: JwtToken,
+    token: JwtToken<T>,
     requestType: string
   ): Promise<boolean> {
     if (this.authProvider) {
@@ -88,7 +102,7 @@ export default class CryptoClient extends CoreCryptoClient implements ICClient {
     return false;
   }
 
-  async bearerTokenValidation(req: XRequest): Promise<JwtToken | number> {
+  async bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number> {
     if (this.authProvider) {
       return this.authProvider.bearerTokenValidation(req);
     }

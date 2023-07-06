@@ -6,6 +6,7 @@ export class TestAllAction extends BaseApiAction  {
   constructor(mod: ICoreAnyModule, type: ActionTypes) {
     super(type, '/testpath', mod);
     this.handler = this.handler.bind(this);
+    this.forceDebug = true;
   }
 
   async handler(
@@ -53,5 +54,8 @@ export class TestAuthProvider extends BaseAuthProvider {
       return 401;
     }
     return  await this.cc.jwtVerifyAccessToken(token);
+  }
+  async jwtAddData(token: JwtToken): Promise<JwtToken> {
+    return { ...token,test: "test"}
   }
 }

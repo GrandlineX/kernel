@@ -29,10 +29,13 @@ export default abstract class BaseAction<
 {
   mode: ActionMode;
 
+  forceDebug: boolean;
+
   constructor(chanel: string, module: IBaseKernelModule<K, T, P, C, E>) {
     super(chanel, module);
     this.secureHandler = this.secureHandler.bind(this);
     this.mode = ActionMode.DEFAULT;
+    this.forceDebug = false;
   }
 
   abstract handler(

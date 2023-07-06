@@ -77,7 +77,7 @@ describe('Express-Kernel', () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
 
-    const token = cc!.jwtGenerateAccessToken({ username: testText, userid:testText });
+    const token = await cc!.jwtGenerateAccessToken({ username: testText, userid:testText });
 
     expect(token).not.toBeUndefined();
     if (token) {
@@ -194,10 +194,17 @@ describe('Express-Kernel', () => {
     expect(testcall.status).toBe(200);
   });
 
-  test('test auth expire', async () => {
-    const token = kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },0);
+  test('test token extra', async () => {
+    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },0);
     const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
     expect(valid?.username).toBe(testText);
+    expect(valid?.test).toBe("test");
+  });
+  test('test auth expire', async () => {
+    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },0);
+    const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
+    expect(valid?.username).toBe(testText);
+
     await XUtil.sleep(2000);
     const testcall = await axios.get(`http://localhost:${port}/test/auth`, {
       headers: { Authorization: `Bearer ${token}` },
