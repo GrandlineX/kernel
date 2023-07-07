@@ -29,7 +29,7 @@
 <ul class="tsd-hierarchy">
 <li><a href="../classes/BaseAuthProvider.html" class="tsd-signature-type tsd-kind-class">BaseAuthProvider</a></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/17cca89/src/classes/BaseAuthProvider.ts#L16">src/classes/BaseAuthProvider.ts:16</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/9c76071/src/classes/BaseAuthProvider.ts#L16">src/classes/BaseAuthProvider.ts:16</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -60,7 +60,7 @@
 <h5><span class="tsd-kind-parameter">requestType</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/AuthResult.html" class="tsd-signature-type tsd-kind-type-alias">AuthResult</a><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/17cca89/src/classes/BaseAuthProvider.ts#L17">src/classes/BaseAuthProvider.ts:17</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/9c76071/src/classes/BaseAuthProvider.ts#L17">src/classes/BaseAuthProvider.ts:17</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="bearerTokenValidation" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>bearer<wbr/>Token<wbr/>Validation</span><a href="#bearerTokenValidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -73,20 +73,22 @@
 <h5><span class="tsd-kind-parameter">req</span>: <a href="../types/XRequest.html" class="tsd-signature-type tsd-kind-type-alias">XRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/17cca89/src/classes/BaseAuthProvider.ts#L25">src/classes/BaseAuthProvider.ts:25</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/9c76071/src/classes/BaseAuthProvider.ts#L25">src/classes/BaseAuthProvider.ts:25</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="jwtAddData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>jwt<wbr/>Add<wbr/>Data</span><a href="#jwtAddData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="jwtAddData.jwtAddData-1"><span class="tsd-kind-call-signature">jwt<wbr/>Add<wbr/>Data</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">token</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><a href="#jwtAddData.jwtAddData-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="jwtAddData.jwtAddData-1"><span class="tsd-kind-call-signature">jwt<wbr/>Add<wbr/>Data</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">token</span>, <span class="tsd-kind-parameter">extend</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><a href="#jwtAddData.jwtAddData-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">token</span>: <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h5><span class="tsd-kind-parameter">token</span>: <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">extend</span>: <span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/17cca89/src/classes/BaseAuthProvider.ts#L27">src/classes/BaseAuthProvider.ts:27</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/9c76071/src/classes/BaseAuthProvider.ts#L27">src/classes/BaseAuthProvider.ts:27</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="validateAccess" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>validate<wbr/>Access</span><a href="#validateAccess" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -101,7 +103,7 @@
 <h5><span class="tsd-kind-parameter">requestType</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/17cca89/src/classes/BaseAuthProvider.ts#L23">src/classes/BaseAuthProvider.ts:23</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/9c76071/src/classes/BaseAuthProvider.ts#L23">src/classes/BaseAuthProvider.ts:23</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
