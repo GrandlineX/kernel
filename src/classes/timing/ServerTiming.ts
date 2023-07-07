@@ -19,7 +19,7 @@ export default class ServerTiming implements IServerElement {
   }
 
   completeElement(e: ServerTimingElement) {
-    const cur = this.map.get(e.chanel) || [];
+    const cur = this.map.get(e.chanel) ?? [];
     cur.push(e);
     this.map.set(e.chanel, cur);
   }

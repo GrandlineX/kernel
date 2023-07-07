@@ -195,13 +195,17 @@ describe('Express-Kernel', () => {
   });
 
   test('test token extra', async () => {
-    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },0);
+    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },{
+      server:["test"],
+    },0);
+    kernel.debug(token);
     const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
     expect(valid?.username).toBe(testText);
+    expect(valid?.server).toHaveLength(1);
     expect(valid?.test).toBe("test");
   });
   test('test auth expire', async () => {
-    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },0);
+    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },undefined,0);
     const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
     expect(valid?.username).toBe(testText);
 

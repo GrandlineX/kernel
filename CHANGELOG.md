@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.31.1] - 2023-07-07
+### Added
+- @/token pass the token body to jwt generator function
+### Fixed
+- Deal with code smells 
+
 ## [v0.31.0] - 2023-07-06
 ### Added
 - JTW Token now can be extended with custom payload

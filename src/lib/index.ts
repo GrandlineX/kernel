@@ -35,6 +35,7 @@ export interface ICClient<T extends JwtExtend = JwtExtend>
 
   jwtGenerateAccessToken(
     data: JwtToken<T>,
+    extend?: Record<string, any>,
     expire?: string | number
   ): Promise<string>;
 

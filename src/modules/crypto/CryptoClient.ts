@@ -51,11 +51,12 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
 
   async jwtGenerateAccessToken(
     data: JwtToken<T>,
+    extend?: Record<string, any>,
     expire?: string | number
   ): Promise<string> {
     let sData;
     if (this.authProvider) {
-      sData = await this.authProvider.jwtAddData(data);
+      sData = await this.authProvider.jwtAddData(data, extend);
     } else {
       sData = data;
     }
@@ -107,7 +108,7 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
       return this.authProvider.bearerTokenValidation(req);
     }
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = authHeader?.split(' ')?.[1];
     if (!token) {
       return 401;
     }

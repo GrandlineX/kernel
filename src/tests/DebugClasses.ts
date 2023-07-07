@@ -55,7 +55,11 @@ export class TestAuthProvider extends BaseAuthProvider {
     }
     return  await this.cc.jwtVerifyAccessToken(token);
   }
-  async jwtAddData(token: JwtToken): Promise<JwtToken> {
-    return { ...token,test: "test"}
+  async jwtAddData(token: JwtToken,extend?: Record<string, any>): Promise<JwtToken> {
+    return {
+      ...token,
+      test: "test",
+      ...extend
+    };
   }
 }

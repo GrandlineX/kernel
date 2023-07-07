@@ -24,7 +24,10 @@ export interface IAuthProvider<T extends JwtExtend> {
 
   bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
 
-  jwtAddData(token: JwtToken<T>): Promise<JwtToken<T>>;
+  jwtAddData(
+    token: JwtToken<T>,
+    extend?: Record<string, any>
+  ): Promise<JwtToken<T>>;
 }
 
 export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
@@ -43,7 +46,10 @@ export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
 
   abstract bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
 
-  async jwtAddData(token: JwtToken<T>): Promise<JwtToken<T>> {
+  async jwtAddData(
+    token: JwtToken<T>,
+    extend?: Record<string, any>
+  ): Promise<JwtToken<T>> {
     return token;
   }
 }

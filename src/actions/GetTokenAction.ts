@@ -43,10 +43,13 @@ export default class GetTokenAction extends BaseApiAction {
       cc.apiTokenValidation(username, token, 'api')
     );
     if (valid.valid && valid.userId) {
-      const jwt = await cc.jwtGenerateAccessToken({
-        userid: valid.userId,
-        username,
-      });
+      const jwt = await cc.jwtGenerateAccessToken(
+        {
+          userid: valid.userId,
+          username,
+        },
+        req.body
+      );
       ex.done();
       res.status(200).send({ token: jwt });
     } else {
