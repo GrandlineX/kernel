@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.32.10] - 2023-10-06
+### Changed
+- Breaking Change: BaseApiAction now use XActionEvent
+
 ## [v0.31.1] - 2023-07-07
 ### Added
 - @/token pass the token body to jwt generator function
