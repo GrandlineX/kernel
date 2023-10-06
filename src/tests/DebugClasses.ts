@@ -1,6 +1,15 @@
 // eslint-disable-next-line max-classes-per-file
 import { ICoreAnyModule } from '@grandlinex/core';
-import { JwtToken, XNextFc, XRequest, XResponse,ActionTypes, AuthResult, BaseApiAction, BaseAuthProvider, ICClient } from '../index.js';
+import {
+  ActionTypes,
+  AuthResult,
+  BaseApiAction,
+  BaseAuthProvider,
+  ICClient,
+  JwtToken,
+  XActionEvent,
+  XRequest
+} from '../index.js';
 
 export class TestAllAction extends BaseApiAction  {
   constructor(mod: ICoreAnyModule, type: ActionTypes) {
@@ -10,10 +19,7 @@ export class TestAllAction extends BaseApiAction  {
   }
 
   async handler(
-    req: XRequest,
-    res: XResponse,
-    next: XNextFc,
-    data: JwtToken | null
+    { req, res, next }: XActionEvent,
   ): Promise<void> {
     if (req.rawBody){
       console.log(req.rawBody)

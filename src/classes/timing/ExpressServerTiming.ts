@@ -54,7 +54,7 @@ export default class ExpressServerTiming {
 
   static init(
     baseApiAction: CoreElement<any>,
-    res: XResponse
+    res: XResponse,
   ): [ExpressServerTiming, () => void] {
     const el = new ExpressServerTiming(baseApiAction);
     const total = el.start('total');

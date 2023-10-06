@@ -34,6 +34,7 @@
     "no-restricted-syntax": "warn",
     "no-underscore-dangle": "warn",
     "no-await-in-loop": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
     "class-methods-use-this": "warn",
     "linebreak-style": "off",
     "no-restricted-properties": "warn",

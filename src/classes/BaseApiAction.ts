@@ -15,7 +15,7 @@ export default abstract class BaseApiAction<
     T extends IDataBase<any, any> | null = any,
     P extends IBaseClient | null = any,
     C extends IBaseCache | null = any,
-    E extends IBasePresenter | null = any
+    E extends IBasePresenter | null = any,
   >
   extends BaseAction<K, T, P, C, E>
   implements IBaseAction<K, T, P, C, E>
@@ -28,7 +28,7 @@ export default abstract class BaseApiAction<
     type: ActionTypes,
     chanel: string,
     module: IBaseKernelModule<K, T, P, C, E>,
-    extMod?: IBaseKernelModule<K>
+    extMod?: IBaseKernelModule<K>,
   ) {
     super(chanel, module);
     this.exmod = extMod;

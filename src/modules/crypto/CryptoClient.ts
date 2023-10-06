@@ -52,7 +52,7 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
   async jwtGenerateAccessToken(
     data: JwtToken<T>,
     extend?: Record<string, any>,
-    expire?: string | number
+    expire?: string | number,
   ): Promise<string> {
     let sData;
     if (this.authProvider) {
@@ -68,7 +68,7 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
   async apiTokenValidation(
     username: string,
     token: string,
-    requestType: string
+    requestType: string,
   ): Promise<{ valid: boolean; userId: string | null }> {
     if (this.authProvider) {
       return this.authProvider.authorizeToken(username, token, requestType);
@@ -95,7 +95,7 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
 
   async permissionValidation(
     token: JwtToken<T>,
-    requestType: string
+    requestType: string,
   ): Promise<boolean> {
     if (this.authProvider) {
       return this.authProvider.validateAccess(token, requestType);

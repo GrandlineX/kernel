@@ -7,10 +7,9 @@ import {
   IBasePresenter,
   IKernel,
 } from '../lib/index.js';
-import { JwtToken } from './BaseAuthProvider.js';
 import { ExpressServerTiming, IExtensionInterface } from './timing/index.js';
 
-import { XNextFc, XRequest, XResponse } from '../lib/express.js';
+import { XActionEvent, XRequest, XResponse } from '../lib/express.js';
 
 export enum ActionMode {
   'DEFAULT',
@@ -22,7 +21,7 @@ export default abstract class BaseAction<
     T extends IDataBase<any, any> | null = any,
     P extends IBaseClient | null = any,
     C extends IBaseCache | null = any,
-    E extends IBasePresenter | null = any
+    E extends IBasePresenter | null = any,
   >
   extends CoreAction<K, T, P, C, E>
   implements IBaseAction<K, T, P, C, E>
@@ -38,18 +37,12 @@ export default abstract class BaseAction<
     this.forceDebug = false;
   }
 
-  abstract handler(
-    req: XRequest,
-    res: XResponse,
-    next: XNextFc,
-    data: JwtToken | null,
-    extension: IExtensionInterface
-  ): Promise<void>;
+  abstract handler(event: XActionEvent): Promise<void>;
 
   async secureHandler(
     req: XRequest,
     res: XResponse,
-    next: () => void
+    next: () => void,
   ): Promise<void> {
     const extension = this.initExtension(res);
     const auth = extension.timing.start('auth');
@@ -67,15 +60,33 @@ export default abstract class BaseAction<
 
     if (this.mode === ActionMode.DMZ) {
       auth.stop();
-      await this.handler(req, res, next, null, extension);
+      await this.handler({
+        res,
+        req,
+        next,
+        data: null,
+        extension,
+      });
       return;
     }
     const dat = await cc.bearerTokenValidation(req);
     auth.stop();
     if (dat && typeof dat !== 'number') {
-      await this.handler(req, res, next, dat, extension);
+      await this.handler({
+        res,
+        req,
+        next,
+        data: dat,
+        extension,
+      });
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
-      await this.handler(req, res, next, null, extension);
+      await this.handler({
+        res,
+        req,
+        next,
+        data: null,
+        extension,
+      });
     } else if (dat) {
       res.sendStatus(dat);
     } else {

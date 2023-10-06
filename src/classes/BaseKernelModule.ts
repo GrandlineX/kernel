@@ -12,7 +12,7 @@ export default abstract class BaseKernelModule<
     T extends IDataBase<any, any> | null = any,
     P extends IBaseClient | null = any,
     C extends IBaseCache | null = any,
-    E extends IBasePresenter | null = any
+    E extends IBasePresenter | null = any,
   >
   extends CoreKernelModule<K, T, P, C, E>
   implements IBaseKernelModule<K, T, P, C, E> {}

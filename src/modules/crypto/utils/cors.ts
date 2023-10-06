@@ -3,7 +3,7 @@ import { XNextFc, XRequest, XResponse } from '../../../lib/express.js';
 export type CorsMiddleWare = (
   req: XRequest,
   res: XResponse,
-  next: XNextFc
+  next: XNextFc,
 ) => void;
 
 export const cors: CorsMiddleWare = (req, res, next) => {

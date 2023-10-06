@@ -20,7 +20,7 @@ export default class KernelModule extends BaseKernelModule<
     this.addAction(
       new ApiVersionAction(this),
       new ApiAuthTestAction(this),
-      new GetTokenAction(this)
+      new GetTokenAction(this),
     );
   }
 
@@ -29,7 +29,7 @@ export default class KernelModule extends BaseKernelModule<
     const endpoint = new KernelEndpoint(
       'api',
       this,
-      this.getKernel().getAppServerPort()
+      this.getKernel().getAppServerPort(),
     );
     this.setPresenter(endpoint);
     await this.getKernel().triggerFunction('load');

@@ -14,14 +14,9 @@ import {
 import express from 'express';
 
 import * as jwt from 'jsonwebtoken';
-import {
-  IAuthProvider,
-  JwtToken,
-  IExtensionInterface,
-  JwtExtend,
-} from '../classes/index.js';
+import { IAuthProvider, JwtExtend, JwtToken } from '../classes/index.js';
 
-import { XNextFc, XRequest, XResponse } from './express.js';
+import { XActionEvent, XRequest } from './express.js';
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
@@ -36,18 +31,18 @@ export interface ICClient<T extends JwtExtend = JwtExtend>
   jwtGenerateAccessToken(
     data: JwtToken<T>,
     extend?: Record<string, any>,
-    expire?: string | number
+    expire?: string | number,
   ): Promise<string>;
 
   apiTokenValidation(
     username: string,
     token: string,
-    requestType: string
+    requestType: string,
   ): Promise<{ valid: boolean; userId: string | null }>;
 
   permissionValidation(
     token: JwtToken<T>,
-    requestType: string
+    requestType: string,
   ): Promise<boolean>;
 
   bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
@@ -56,6 +51,7 @@ export interface ICClient<T extends JwtExtend = JwtExtend>
 export interface IKernel<T extends JwtExtend = JwtExtend>
   extends ICoreKernel<ICClient<T>> {
   getAppServerPort(): number;
+  getApiVersion(): number;
   setAppServerPort(port: number): void;
   responseCodeFunction(data: { code: number; req: XRequest }): void;
 }
@@ -65,7 +61,7 @@ export type IBaseKernelModule<
   T extends IDataBase<any, any> | null = any,
   P extends IBaseClient | null = any,
   C extends IBaseCache | null = any,
-  E extends IBasePresenter | null = any
+  E extends IBasePresenter | null = any,
 > = ICoreKernelModule<K, T, P, C, E>;
 
 export type IBasePresenter = ICorePresenter<express.Express>;
@@ -75,14 +71,19 @@ export type IBaseService<
   T extends IDataBase<any, any> | null = any,
   P extends IBaseClient | null = any,
   C extends IBaseCache | null = any,
-  E extends IBasePresenter | null = any
+  E extends IBasePresenter | null = any,
 > = ICoreService<K, T, P, C, E>;
 export type IBaseClient<
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   K extends IKernel = IKernel,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   T extends IDataBase<any, any> | null = any,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   P extends IBaseClient | null = any,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   C extends IBaseCache | null = any,
-  E extends IBasePresenter | null = any
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  E extends IBasePresenter | null = any,
 > = ICoreClient;
 export type IBaseBrige = ICoreBridge;
 export type IBaseCache<
@@ -90,14 +91,14 @@ export type IBaseCache<
   T extends IDataBase<any, any> | null = any,
   P extends IBaseClient | null = any,
   C extends IBaseCache | null = any,
-  E extends IBasePresenter | null = any
+  E extends IBasePresenter | null = any,
 > = ICoreCache<K, T, P, C, E>;
 export type IBaseElement<
   K extends IKernel = IKernel,
   T extends IDataBase<any, any> | null = any,
   P extends IBaseClient | null = any,
   C extends IBaseCache | null = any,
-  E extends IBasePresenter | null = any
+  E extends IBasePresenter | null = any,
 > = ICoreElement<K, T, P, C, E>;
 
 export interface IBaseAction<
@@ -105,13 +106,7 @@ export interface IBaseAction<
   T extends IDataBase<any, any> | null = any,
   P extends IBaseClient | null = any,
   C extends IBaseCache | null = any,
-  E extends IBasePresenter | null = any
+  E extends IBasePresenter | null = any,
 > extends ICoreAction<K, T, P, C, E> {
-  handler(
-    req: XRequest,
-    res: XResponse,
-    next: XNextFc,
-    data: JwtToken | null,
-    extension: IExtensionInterface
-  ): Promise<void>;
+  handler(event: XActionEvent): Promise<void>;
 }

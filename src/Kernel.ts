@@ -1,4 +1,4 @@
-import { CoreLogger, CoreKernel } from '@grandlinex/core';
+import { CoreKernel, CoreLogger } from '@grandlinex/core';
 import { ICClient, IKernel } from './lib/index.js';
 import CryptoClient from './modules/crypto/CryptoClient.js';
 import KernelModule from './KernelModule.js';
@@ -11,6 +11,8 @@ import { XRequest } from './lib/express.js';
 export default class Kernel extends CoreKernel<ICClient> implements IKernel {
   private expressPort: number;
 
+  private readonly apiVersion: number;
+
   /**
    * Default Constructor
    * @param options App Name
@@ -18,6 +20,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
   constructor(options: {
     appName: string;
     appCode: string;
+    apiVersion?: number;
     pathOverride?: string;
     portOverride?: number;
     envFilePath?: string;
@@ -25,6 +28,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     logger?: (k: CoreKernel<any>) => CoreLogger;
   }) {
     super({ ...options });
+    this.apiVersion = options.apiVersion ?? 1;
     this.setBaseModule(new KernelModule(this));
     if (options.portOverride) {
       this.debug(`use custiom api port @ ${options.portOverride}`);
@@ -37,8 +41,8 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
       this.setCryptoClient(
         new CryptoClient(
           CryptoClient.fromPW(store.get('SERVER_PASSWORD') as string),
-          this
-        )
+          this,
+        ),
       );
     }
   }
@@ -49,6 +53,10 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
 
   setAppServerPort(port: number): void {
     this.expressPort = port;
+  }
+
+  getApiVersion(): number {
+    return this.apiVersion;
   }
 
   responseCodeFunction(data: { code: number; req: XRequest }) {

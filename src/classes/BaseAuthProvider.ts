@@ -17,7 +17,7 @@ export interface IAuthProvider<T extends JwtExtend> {
   authorizeToken(
     userid: string,
     token: string,
-    requestType: string
+    requestType: string,
   ): Promise<AuthResult>;
 
   validateAccess(token: JwtToken<T>, requestType: string): Promise<boolean>;
@@ -26,7 +26,7 @@ export interface IAuthProvider<T extends JwtExtend> {
 
   jwtAddData(
     token: JwtToken<T>,
-    extend?: Record<string, any>
+    extend?: Record<string, any>,
   ): Promise<JwtToken<T>>;
 }
 
@@ -36,19 +36,20 @@ export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
   abstract authorizeToken(
     username: string,
     token: string,
-    requestType: string
+    requestType: string,
   ): Promise<AuthResult>;
 
   abstract validateAccess(
     token: JwtToken<T>,
-    requestType: string
+    requestType: string,
   ): Promise<boolean>;
 
   abstract bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
 
   async jwtAddData(
     token: JwtToken<T>,
-    extend?: Record<string, any>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    extend?: Record<string, any>,
   ): Promise<JwtToken<T>> {
     return token;
   }

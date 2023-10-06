@@ -15,7 +15,7 @@ export function keepRawBody(
   req: XRequest,
   res: XResponse,
   buf: Buffer,
-  encoding: string
+  encoding: string,
 ) {
   if (
     req.headers['content-type']?.startsWith('application/json') &&
@@ -35,7 +35,7 @@ export default abstract class BaseEndpoint<
     T extends IDataBase<any, any> | null = any,
     P extends IBaseClient | null = any,
     C extends IBaseCache | null = any,
-    E extends IBasePresenter | null = any
+    E extends IBasePresenter | null = any,
   >
   extends CorePresenter<express.Express, K, T, P, C, E>
   implements IBasePresenter
@@ -49,7 +49,7 @@ export default abstract class BaseEndpoint<
   constructor(
     chanel: string,
     module: IBaseKernelModule<any, any, any, any>,
-    port: number
+    port: number,
   ) {
     super(`endpoint-${chanel}`, module);
     this.port = port;

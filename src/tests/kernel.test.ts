@@ -1,20 +1,8 @@
 import axios from 'axios';
-import {
-  JestLib,
-  setupDevKernel,
-  TestContext,
-  XUtil
-} from '@grandlinex/core';
-import {
-  KernelEndpoint,
-  KernelModule,
-  cors,
-  Kernel,
-  ActionTypes,
-  CryptoClient
-} from '../index.js';
+import { JestLib, setupDevKernel, TestContext, XUtil } from '@grandlinex/core';
+import { ActionTypes, cors, CryptoClient, Kernel, KernelEndpoint, KernelModule } from '../index.js';
 
-import { TestAuthProvider, TestAllAction } from './DebugClasses.js';
+import { TestAllAction, TestAuthProvider } from './DebugClasses.js';
 
 const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
 

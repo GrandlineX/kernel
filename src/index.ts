@@ -12,5 +12,6 @@ export * from './modules/crypto/index.js';
 export * from './lib/index.js';
 export * from './lib/express.js';
 export * from '@grandlinex/core';
+export * from '@grandlinex/swagger-mate';
 export { KernelModule, Kernel };
 export default Kernel;
