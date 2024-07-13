@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [v0.32.11] - 2024-07-13
+### Changed
+- Update Deps
+- Error Handling for BaseApiAction
+
 ## [v0.32.10] - 2023-10-06
 ### Changed
 - Breaking Change: BaseApiAction now use XActionEvent

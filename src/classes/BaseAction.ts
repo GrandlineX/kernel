@@ -60,33 +60,57 @@ export default abstract class BaseAction<
 
     if (this.mode === ActionMode.DMZ) {
       auth.stop();
-      await this.handler({
-        res,
-        req,
-        next,
-        data: null,
-        extension,
-      });
+      try {
+        await this.handler({
+          res,
+          req,
+          next,
+          data: null,
+          extension,
+        });
+      } catch (e: any) {
+        this.error(e);
+        this.error(e?.message);
+        if (!res.headersSent) {
+          res.sendStatus(500);
+        }
+      }
       return;
     }
     const dat = await cc.bearerTokenValidation(req);
     auth.stop();
     if (dat && typeof dat !== 'number') {
-      await this.handler({
-        res,
-        req,
-        next,
-        data: dat,
-        extension,
-      });
+      try {
+        await this.handler({
+          res,
+          req,
+          next,
+          data: dat,
+          extension,
+        });
+      } catch (e: any) {
+        this.error(e);
+        this.error(e?.message);
+        if (!res.headersSent) {
+          res.sendStatus(500);
+        }
+      }
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
-      await this.handler({
-        res,
-        req,
-        next,
-        data: null,
-        extension,
-      });
+      try {
+        await this.handler({
+          res,
+          req,
+          next,
+          data: null,
+          extension,
+        });
+      } catch (e: any) {
+        this.error(e);
+        this.error(e?.message);
+        if (!res.headersSent) {
+          res.sendStatus(500);
+        }
+      }
     } else if (dat) {
       res.sendStatus(dat);
     } else {
