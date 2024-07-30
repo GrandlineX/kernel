@@ -19,10 +19,22 @@ export class TestAllAction extends BaseApiAction  {
   }
 
   async handler(
-    { req, res, next }: XActionEvent,
+    { req, res, agent }: XActionEvent,
   ): Promise<void> {
     if (req.rawBody){
-      console.log(req.rawBody)
+      console.log(req.rawBody, [
+        agent.getBrowser(),
+        agent.getRaw(),
+        agent.getChromeVersion(),
+        agent.getEdgeVersion(),
+        agent.getFirefoxVersion(),
+        agent.getOperaVersion(),
+        agent.getGeckoVersion(),
+        agent.getOculusVersion(),
+        agent.getSafariVersion(),
+        agent.getMozillaVersion(),
+        agent.getXVersion("WrongParam"),
+      ])
     }
     res.sendStatus(200);
   }

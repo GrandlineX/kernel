@@ -32,6 +32,6 @@ export default class KernelModule extends BaseKernelModule<
       this.getKernel().getAppServerPort(),
     );
     this.setPresenter(endpoint);
-    await this.getKernel().triggerFunction('load');
+    await this.getKernel().triggerEvent('load');
   }
 }

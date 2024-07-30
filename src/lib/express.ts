@@ -1,5 +1,9 @@
 import express from 'express';
-import { IExtensionInterface, JwtToken } from '../classes/index.js';
+import {
+  BaseUserAgent,
+  IExtensionInterface,
+  JwtToken,
+} from '../classes/index.js';
 
 export type XRequest = express.Request & {
   rawBody?: string | null;
@@ -13,4 +17,5 @@ export type XActionEvent<G = JwtToken | null> = {
   next: XNextFc;
   data: G;
   extension: IExtensionInterface;
+  agent: BaseUserAgent;
 };

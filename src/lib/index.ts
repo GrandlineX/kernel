@@ -16,7 +16,11 @@ import express from 'express';
 import * as jwt from 'jsonwebtoken';
 import { IAuthProvider, JwtExtend, JwtToken } from '../classes/index.js';
 
+import EntitySchemaExtender from './EntitySchemaExtender.js';
+
 import { XActionEvent, XRequest } from './express.js';
+
+export { EntitySchemaExtender };
 
 export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
 
