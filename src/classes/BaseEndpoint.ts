@@ -56,11 +56,20 @@ export default abstract class BaseEndpoint<
     this.appServer = express();
     this.appServer.use(parser.json({ verify: keepRawBody }));
     this.httpServer = http.createServer(this.appServer);
+    this.setAppHeader();
+  }
+
+  private setAppHeader() {
+    this.appServer.use((req, res, next) => {
+      res.setHeader('X-Powered-By', 'GrandLineX');
+      next();
+    });
   }
 
   appServerOverride(app: Express) {
     this.appServer = app;
     this.httpServer = http.createServer(this.appServer);
+    this.setAppHeader();
   }
 
   start(): Promise<boolean> {

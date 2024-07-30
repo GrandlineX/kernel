@@ -13,6 +13,7 @@ import BaseApiAction from './BaseApiAction.js';
 import BaseAuthProvider from './BaseAuthProvider.js';
 
 export * from './BaseAction.js';
+export * from './BaseUserAgent.js';
 export * from './BaseAuthProvider.js';
 export * from './timing/index.js';
 

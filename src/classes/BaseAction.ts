@@ -10,6 +10,7 @@ import {
 import { ExpressServerTiming, IExtensionInterface } from './timing/index.js';
 
 import { XActionEvent, XRequest, XResponse } from '../lib/express.js';
+import { BaseUserAgent } from './BaseUserAgent.js';
 
 export enum ActionMode {
   'DEFAULT',
@@ -67,6 +68,7 @@ export default abstract class BaseAction<
           next,
           data: null,
           extension,
+          agent: new BaseUserAgent(req),
         });
       } catch (e: any) {
         this.error(e);
@@ -87,6 +89,7 @@ export default abstract class BaseAction<
           next,
           data: dat,
           extension,
+          agent: new BaseUserAgent(req),
         });
       } catch (e: any) {
         this.error(e);
@@ -103,6 +106,7 @@ export default abstract class BaseAction<
           next,
           data: null,
           extension,
+          agent: new BaseUserAgent(req),
         });
       } catch (e: any) {
         this.error(e);

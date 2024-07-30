@@ -1,13 +1,23 @@
 import axios from 'axios';
-import { JestLib, setupDevKernel, TestContext, XUtil } from '@grandlinex/core';
-import { ActionTypes, cors, CryptoClient, Kernel, KernelEndpoint, KernelModule } from '../index.js';
+import { GKey, JestLib, setupDevKernel, TestContext, XUtil } from '@grandlinex/core';
+import {
+  ActionTypes,
+  cors,
+  CryptoClient,
+  EntitySchemaExtender,
+  Kernel,
+  KernelEndpoint,
+  KernelModule
+} from '../index.js';
 
 import { TestAllAction, TestAuthProvider } from './DebugClasses.js';
 
-const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
+const [testPath] = XUtil.setupEnvironment(
+  [__dirname, '..'],
+  ['data', 'config'],
+);
 
 process.env.DLOG_LEVEL = 'debug';
-
 
 const port = 9900;
 const appName = 'TestKernel';
@@ -41,7 +51,7 @@ kernel.setCryptoClient(new CryptoClient(CryptoClient.fromPW('testpw'), kernel));
 
 TestContext.getEntity({ kernel, cleanUpPath: testPath });
 
-kernel.setTriggerFunction('load', async (ik) => {
+kernel.on('load', async (ik) => {
   const ep = ik.getModule().getPresenter() as KernelEndpoint;
   ep.getApp().use(cors);
 });
@@ -53,7 +63,6 @@ JestLib.jestStart();
 JestLib.jestCore();
 JestLib.jestStore();
 
-
 // Api Tests
 describe('Express-Kernel', () => {
   let jwtToken: any;
@@ -61,20 +70,30 @@ describe('Express-Kernel', () => {
   test('dev mode', async () => {
     kernel.setDevMode(true);
   });
+  test('dev mode', async () => {
+    EntitySchemaExtender.extendEntitySchema(new GKey(), {
+      key: 'test',
+      schema: {
+        type: 'string',
+      },
+    });
+  });
   test('crypto jwt', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
 
-    const token = await cc!.jwtGenerateAccessToken({ username: testText, userid:testText });
+    const token = await cc!.jwtGenerateAccessToken({
+      username: testText,
+      userid: testText,
+    });
 
     expect(token).not.toBeUndefined();
     if (token) {
       const res = await cc!.jwtVerifyAccessToken(token);
-      expect(typeof res ==="number").toBeFalsy();
-      if (typeof res !=="number"){
+      expect(typeof res === 'number').toBeFalsy();
+      if (typeof res !== 'number') {
         expect(res?.username).toBe(testText);
       }
-
     }
   });
 
@@ -87,7 +106,7 @@ describe('Express-Kernel', () => {
       {
         username: 'admin',
         token: store.get('SERVER_PASSWORD'),
-      }
+      },
     );
 
     expect(token.status).toBe(200);
@@ -97,8 +116,8 @@ describe('Express-Kernel', () => {
     jwtToken = token.data.token;
     const res = await cc!.jwtVerifyAccessToken(jwtToken);
     expect(await cc?.permissionValidation(jwtToken, 'api')).not.toBeTruthy();
-    expect(typeof res ==="number").toBeFalsy();
-    if (typeof res!=="number"){
+    expect(typeof res === 'number').toBeFalsy();
+    if (typeof res !== 'number') {
       expect(res.username).toBe('admin');
     }
   });
@@ -155,14 +174,14 @@ describe('Express-Kernel', () => {
 
     const testcall = await axios.post<{ token: string }>(
       `http://localhost:${port}/token`,
-      { token: 'admin', username: 'admin' }
+      { token: 'admin', username: 'admin' },
     );
     expect(testcall.status).toBe(200);
 
     const adminToken = await cc!.jwtVerifyAccessToken(testcall.data.token);
     expect(adminToken).not.toBeNull();
 
-    if (typeof  adminToken !=="number") {
+    if (typeof adminToken !== 'number') {
       expect(await cc?.permissionValidation(adminToken, 'api')).toBeTruthy();
     }
   });
@@ -183,27 +202,37 @@ describe('Express-Kernel', () => {
   });
 
   test('test token extra', async () => {
-    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },{
-      server:["test"],
-    },0);
+    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken(
+      { username: testText, userid: testText },
+      {
+        server: ['test'],
+      },
+      0,
+    );
     kernel.debug(token);
     const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
     expect(valid?.username).toBe(testText);
     expect(valid?.server).toHaveLength(1);
-    expect(valid?.test).toBe("test");
+    expect(valid?.test).toBe('test');
   });
   test('test auth expire', async () => {
-    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken({ username: testText, userid:testText },undefined,0);
+    const token = await kernel
+      .getCryptoClient()!
+      .jwtGenerateAccessToken(
+        { username: testText, userid: testText },
+        undefined,
+        0,
+      );
     const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
     expect(valid?.username).toBe(testText);
 
     await XUtil.sleep(2000);
     const testcall = await axios.get(`http://localhost:${port}/test/auth`, {
       headers: { Authorization: `Bearer ${token}` },
-      validateStatus:()=>true
+      validateStatus: () => true,
     });
     expect(testcall.status).toBe(498);
-  },30000);
+  }, 30000);
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   test.each(types)('Type (%s):', async (type, fc: Function) => {
@@ -215,14 +244,14 @@ describe('Express-Kernel', () => {
     if (type === 'GET' || type === 'DELETE') {
       testcall = await fc(qPath, conf);
     } else {
-      testcall = await fc(qPath, { test: "value" }, conf);
+      testcall = await fc(qPath, { test: 'value' }, conf);
     }
     expect(testcall.status).toBe(200);
   });
 
   test('test api version', async () => {
     const version = await axios.get<{ api: number }>(
-      `http://localhost:${port}/version`
+      `http://localhost:${port}/version`,
     );
     expect(version.status).toBe(200);
     expect(version.data.api).toBe(1);
