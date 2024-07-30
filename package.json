@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "type": "module",
   "exports": {
@@ -46,8 +46,8 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@grandlinex/core": "1.0.0",
-    "@grandlinex/swagger-mate": "1.0.0",
+    "@grandlinex/core": "1.0.1",
+    "@grandlinex/swagger-mate": "1.0.1",
     "axios": "1.7.2",
     "body-parser": "1.20.2",
     "express": "4.19.2",
