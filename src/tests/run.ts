@@ -1,14 +1,10 @@
 import { XUtil } from '@grandlinex/core';
-import * as url from 'url';
 import Kernel from '../Kernel.js';
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const apiPort = 9257;
 
 const [testPath] = XUtil.setupEnvironment(
-  [__dirname, '..'],
+  [process.cwd()],
   ['data', 'config'],
 );
 
@@ -18,6 +14,6 @@ const kernel = new Kernel({
   appCode: appName.toLowerCase(),
   pathOverride: testPath,
   portOverride: apiPort,
-  envFilePath: __dirname,
+  envFilePath: process.cwd(),
 });
 kernel.start();

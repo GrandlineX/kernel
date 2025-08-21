@@ -1,5 +1,11 @@
 import { CoreAction, IDataBase } from '@grandlinex/core';
 import {
+  ErrorType,
+  isErrorType,
+  isSwaggerRef,
+  SSchemaEl,
+} from '@grandlinex/swagger-mate';
+import {
   IBaseAction,
   IBaseCache,
   IBaseClient,
@@ -31,14 +37,120 @@ export default abstract class BaseAction<
 
   forceDebug: boolean;
 
+  schema: SSchemaEl | null;
+
   constructor(chanel: string, module: IBaseKernelModule<K, T, P, C, E>) {
     super(chanel, module);
     this.secureHandler = this.secureHandler.bind(this);
     this.mode = ActionMode.DEFAULT;
     this.forceDebug = false;
+    this.schema = null;
   }
 
   abstract handler(event: XActionEvent): Promise<void>;
+
+  static validateSchema(
+    error: ErrorType,
+    schema: SSchemaEl,
+    key: string,
+    field: any,
+    required: boolean = true,
+  ) {
+    if (isSwaggerRef(schema)) {
+      error.field?.push({
+        key,
+        message: `Ref schema body validation is not supported yet`,
+      });
+      return;
+    }
+    if (!required && (field === undefined || field === null)) {
+      return;
+    }
+    switch (schema?.type) {
+      case 'boolean':
+        if (typeof field !== 'boolean') {
+          error.field?.push({
+            key,
+            message: `must be a boolean`,
+          });
+        }
+        break;
+      case 'integer':
+      case 'number':
+        if (typeof field !== 'number') {
+          error.field?.push({
+            key,
+            message: `must be a number`,
+          });
+        }
+        break;
+      case 'string':
+        if (typeof field !== 'string') {
+          error.field?.push({
+            key,
+            message: `must be a string`,
+          });
+        }
+        break;
+      case 'array':
+        if (!Array.isArray(field)) {
+          error.field?.push({
+            key,
+            message: `must be a array`,
+          });
+        }
+        if (schema.items) {
+          field.forEach((it: any, id: number) => {
+            this.validateSchema(error, schema.items!, `${key}[${id}]`, it);
+          });
+        }
+        break;
+      case 'object':
+        if (typeof field !== 'object') {
+          error.field?.push({
+            key,
+            message: `must be a object`,
+          });
+        }
+        if (schema.properties) {
+          Object.entries(schema.properties).forEach(([k, s]) => {
+            this.validateSchema(
+              error,
+              s,
+              `${key}.${k}`,
+              field[k],
+              schema.required ? schema.required.includes(k) : false,
+            );
+          });
+        }
+        break;
+      case undefined:
+      default:
+        error.field?.push({
+          key,
+          message: `Schema type is not defined or not supported`,
+        });
+    }
+  }
+
+  bodyValidation<A>(req: XRequest): A | ErrorType | null {
+    if (!this.schema) {
+      return null;
+    }
+    if (!req.body) {
+      return null;
+    }
+    const error: ErrorType = {
+      type: 'error',
+      global: [],
+      field: [],
+    };
+    BaseAction.validateSchema(error, this.schema, 'body', req.body);
+    if (error.field!.length > 0 || error.global!.length > 0) {
+      return error;
+    }
+    return req.body as A;
+  }
 
   async secureHandler(
     req: XRequest,
@@ -62,6 +174,18 @@ export default abstract class BaseAction<
     if (this.mode === ActionMode.DMZ) {
       auth.stop();
       try {
+        let body = null;
+        if (this.schema) {
+          body = this.bodyValidation(req);
+        }
+        if (isErrorType(body)) {
+          res.status(400).send(body);
+          return;
+        }
+        if (this.schema && body === null) {
+          res.sendStatus(400);
+          return;
+        }
         await this.handler({
           res,
           req,
@@ -69,6 +193,7 @@ export default abstract class BaseAction<
           data: null,
           extension,
           agent: new BaseUserAgent(req),
+          body,
         });
       } catch (e: any) {
         this.error(e);
@@ -83,6 +208,18 @@ export default abstract class BaseAction<
     auth.stop();
     if (dat && typeof dat !== 'number') {
       try {
+        let body = null;
+        if (this.schema) {
+          body = this.bodyValidation(req);
+        }
+        if (isErrorType(body)) {
+          res.status(400).send(body);
+          return;
+        }
+        if (this.schema && body === null) {
+          res.sendStatus(400);
+          return;
+        }
         await this.handler({
           res,
           req,
@@ -90,6 +227,7 @@ export default abstract class BaseAction<
           data: dat,
           extension,
           agent: new BaseUserAgent(req),
+          body,
         });
       } catch (e: any) {
         this.error(e);
@@ -100,6 +238,18 @@ export default abstract class BaseAction<
       }
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
       try {
+        let body = null;
+        if (this.schema) {
+          body = this.bodyValidation(req);
+        }
+        if (isErrorType(body)) {
+          res.status(400).send(body);
+          return;
+        }
+        if (this.schema && body === null) {
+          res.sendStatus(400);
+          return;
+        }
         await this.handler({
           res,
           req,
@@ -107,6 +257,7 @@ export default abstract class BaseAction<
           data: null,
           extension,
           agent: new BaseUserAgent(req),
+          body,
         });
       } catch (e: any) {
         this.error(e);
@@ -118,7 +269,7 @@ export default abstract class BaseAction<
     } else if (dat) {
       res.sendStatus(dat);
     } else {
-      res.status(401).send('no no no ...');
+      res.sendStatus(401);
     }
   }
 

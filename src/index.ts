@@ -7,6 +7,7 @@ import KernelModule from './KernelModule.js';
 
 export * from './actions/index.js';
 export * from './api/index.js';
+export * from './annotation/index.js';
 export * from './classes/index.js';
 export * from './modules/crypto/index.js';
 export * from './lib/index.js';

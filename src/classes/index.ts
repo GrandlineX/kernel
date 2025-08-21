@@ -10,6 +10,7 @@ import BaseAction, { ActionMode } from './BaseAction.js';
 import BaseEndpoint, { keepRawBody } from './BaseEndpoint.js';
 import BaseKernelModule from './BaseKernelModule.js';
 import BaseApiAction from './BaseApiAction.js';
+import RouteApiAction from './RouteApiAction.js';
 import BaseAuthProvider from './BaseAuthProvider.js';
 
 export * from './BaseAction.js';
@@ -25,6 +26,7 @@ export {
   BaseApiAction,
   BaseEndpoint,
   BaseElement,
+  RouteApiAction,
   BaseCache,
   BaseAction,
   BaseClient,

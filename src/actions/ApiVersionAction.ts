@@ -1,8 +1,8 @@
 import { SPath, SPathUtil } from '@grandlinex/swagger-mate';
-import { IBaseKernelModule } from '../lib/index.js';
-import { ActionMode, BaseApiAction } from '../classes/index.js';
+import { ActionMode, RouteApiAction } from '../classes/index.js';
 
 import { XActionEvent } from '../lib/express.js';
+import { Route } from '../annotation/index.js';
 
 @SPath({
   '/version': {
@@ -27,13 +27,8 @@ import { XActionEvent } from '../lib/express.js';
     },
   },
 })
-export default class ApiVersionAction extends BaseApiAction {
-  constructor(module: IBaseKernelModule) {
-    super('GET', '/version', module);
-    this.handler = this.handler.bind(this);
-    this.setMode(ActionMode.DMZ);
-  }
-
+@Route('GET', '/version', ActionMode.DMZ)
+export default class ApiVersionAction extends RouteApiAction {
   async handler({ res, extension }: XActionEvent): Promise<void> {
     extension.done();
     res.status(200).send({ api: this.getKernel().getApiVersion() });

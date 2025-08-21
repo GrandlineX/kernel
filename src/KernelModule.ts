@@ -1,4 +1,4 @@
-import { InMemCache, OfflineService } from '@grandlinex/core';
+import { BackgroundService, InMemCache } from '@grandlinex/core';
 import BaseKernelModule from './classes/BaseKernelModule.js';
 import { IKernel } from './lib/index.js';
 
@@ -25,7 +25,7 @@ export default class KernelModule extends BaseKernelModule<
   }
 
   async initModule(): Promise<void> {
-    this.addService(new OfflineService(this));
+    this.addService(new BackgroundService(this));
     const endpoint = new KernelEndpoint(
       'api',
       this,

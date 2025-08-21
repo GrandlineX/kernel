@@ -13,7 +13,7 @@ import {
 import { TestAllAction, TestAuthProvider } from './DebugClasses.js';
 
 const [testPath] = XUtil.setupEnvironment(
-  [__dirname, '..'],
+  [__dirname, '..', '..'],
   ['data', 'config'],
 );
 
@@ -137,7 +137,7 @@ describe('Express-Kernel', () => {
         token: store.get('SERVER_PASSWORD'),
       });
     } catch (e: any) {
-      expect(e.response.status).toBe(401);
+      expect(e.response.status).toBe(400);
     }
   });
 
@@ -146,7 +146,7 @@ describe('Express-Kernel', () => {
     try {
       const response = await axios.post(`http://localhost:${port}/token`, {
         token: store.get('SERVER_PASSWORD'),
-        user: 'noAdmin',
+        username: 'noAdmin',
       });
     } catch (e: any) {
       expect(e.response.status).toBe(401);

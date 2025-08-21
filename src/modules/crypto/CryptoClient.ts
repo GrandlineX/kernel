@@ -1,5 +1,6 @@
 import { CoreCryptoClient } from '@grandlinex/core';
 import * as jwt from 'jsonwebtoken';
+import { type StringValue } from 'ms';
 import { ICClient, IKernel } from '../../lib/index.js';
 import { IAuthProvider, JwtExtend, JwtToken } from '../../classes/index.js';
 import { XRequest } from '../../lib/express.js';
@@ -12,13 +13,14 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
 
   protected kernel: IKernel;
 
-  protected expiresIn: string;
+  protected expiresIn: StringValue;
 
   constructor(key: string, kernel: IKernel) {
     super(kernel, key);
     this.kernel = kernel;
     this.authProvider = null;
-    this.expiresIn = kernel.getConfigStore().get('JWT_EXPIRE') || '1 days';
+    this.expiresIn = (kernel.getConfigStore().get('JWT_EXPIRE') ||
+      '1 days') as StringValue;
   }
 
   setAuthProvider(provider: IAuthProvider<T>): boolean {
@@ -52,7 +54,7 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
   async jwtGenerateAccessToken(
     data: JwtToken<T>,
     extend?: Record<string, any>,
-    expire?: string | number,
+    expire?: StringValue | number,
   ): Promise<string> {
     let sData;
     if (this.authProvider) {

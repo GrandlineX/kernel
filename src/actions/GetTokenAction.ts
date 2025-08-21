@@ -1,9 +1,26 @@
-import { SPath, SPathUtil } from '@grandlinex/swagger-mate';
-import { IBaseKernelModule } from '../lib/index.js';
-import { ActionMode, BaseApiAction, JwtToken } from '../classes/index.js';
+import { SPath, SPathUtil, SSchemaEl } from '@grandlinex/swagger-mate';
+import { ActionMode, JwtToken, RouteApiAction } from '../classes/index.js';
 import CryptoClient from '../modules/crypto/CryptoClient.js';
 
 import { XActionEvent } from '../lib/express.js';
+import { Route } from '../annotation/index.js';
+
+const schema: SSchemaEl = {
+  type: 'object',
+  properties: {
+    username: {
+      type: 'string',
+    },
+    token: {
+      type: 'string',
+    },
+  },
+  required: ['username', 'token'],
+};
+type SchemaType = {
+  username: string;
+  token: string;
+};
 
 @SPath({
   '/token': {
@@ -11,18 +28,7 @@ import { XActionEvent } from '../lib/express.js';
       operationId: 'getToken',
       summary: 'Get API token',
       tags: ['kernel'],
-      requestBody: SPathUtil.jsonBody({
-        type: 'object',
-        properties: {
-          username: {
-            type: 'string',
-          },
-          token: {
-            type: 'string',
-          },
-        },
-        required: ['username', 'token'],
-      }),
+      requestBody: SPathUtil.jsonBody(schema),
       responses: SPathUtil.jsonResponse(
         '200',
         {
@@ -40,35 +46,16 @@ import { XActionEvent } from '../lib/express.js';
     },
   },
 })
-export default class GetTokenAction extends BaseApiAction {
-  /**
-   *
-   * @param module Parent Module
-   */
-  constructor(module: IBaseKernelModule<any, any, any, any>) {
-    super('POST', '/token', module);
-    this.handler = this.handler.bind(this);
-    this.setMode(ActionMode.DMZ);
-  }
-
+@Route('POST', '/token', ActionMode.DMZ, schema)
+export default class GetTokenAction extends RouteApiAction {
   async handler({
     req,
     res,
     extension,
-  }: XActionEvent<JwtToken>): Promise<void> {
+    body,
+  }: XActionEvent<JwtToken, SchemaType>): Promise<void> {
     const cc = this.getKernel().getCryptoClient() as CryptoClient;
-
-    if (!req.body.token) {
-      res.status(400).send('no token');
-      return;
-    }
-    if (!req.body.username) {
-      res.status(401).send('no username');
-      return;
-    }
-
-    const { username, token } = req.body;
-
+    const { username, token } = body;
     const valid = await extension.timing.startFunc('validation', () =>
       cc.apiTokenValidation(username, token, 'api'),
     );

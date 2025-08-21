@@ -1,7 +1,7 @@
 import { SPath, SPathUtil } from '@grandlinex/swagger-mate';
-import { IBaseKernelModule } from '../lib/index.js';
-import { BaseApiAction, JwtToken } from '../classes/index.js';
+import { JwtToken, RouteApiAction } from '../classes/index.js';
 import { XActionEvent } from '../lib/express.js';
+import { Route } from '../annotation/index.js';
 
 @SPath({
   '/test/auth': {
@@ -13,12 +13,8 @@ import { XActionEvent } from '../lib/express.js';
     },
   },
 })
-export default class ApiAuthTestAction extends BaseApiAction {
-  constructor(module: IBaseKernelModule<any, any, any, any>) {
-    super('GET', '/test/auth', module);
-    this.handler = this.handler.bind(this);
-  }
-
+@Route('GET', '/test/auth')
+export default class ApiAuthTestAction extends RouteApiAction {
   async handler({ data, res }: XActionEvent<JwtToken>): Promise<void> {
     this.debug(data.userid);
     res.status(200).send("It work's");

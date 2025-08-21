@@ -40,7 +40,7 @@ export default abstract class BaseApiAction<
     if (this.exmod) {
       endpoint = this.exmod.getPresenter();
     } else {
-      endpoint = this.getModule().getPresenter();
+      endpoint = this.getKernel().getModule().getPresenter();
     }
     if (endpoint) {
       this.debug(`register ${this.type} ${this.getName()}`);

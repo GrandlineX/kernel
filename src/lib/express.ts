@@ -11,11 +11,12 @@ export type XRequest = express.Request & {
 export type XResponse = express.Response;
 export type XNextFc = express.NextFunction;
 
-export type XActionEvent<G = JwtToken | null> = {
+export type XActionEvent<G = JwtToken | null, B = any> = {
   req: XRequest;
   res: XResponse;
   next: XNextFc;
   data: G;
   extension: IExtensionInterface;
   agent: BaseUserAgent;
+  body: B;
 };
