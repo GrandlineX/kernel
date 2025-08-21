@@ -152,6 +152,13 @@ export default abstract class BaseAction<
     return req.body as A;
   }
 
+  static sendError(res: XResponse, code: number, error: Partial<ErrorType>) {
+    res.status(code).send({
+      type: 'error',
+      ...error,
+    });
+  }
+
   async secureHandler(
     req: XRequest,
     res: XResponse,
@@ -194,6 +201,8 @@ export default abstract class BaseAction<
           extension,
           agent: new BaseUserAgent(req),
           body,
+          sendError: (code: number, error: Partial<ErrorType>) =>
+            BaseAction.sendError(res, code, error),
         });
       } catch (e: any) {
         this.error(e);
@@ -228,6 +237,8 @@ export default abstract class BaseAction<
           extension,
           agent: new BaseUserAgent(req),
           body,
+          sendError: (code: number, error: Partial<ErrorType>) =>
+            BaseAction.sendError(res, code, error),
         });
       } catch (e: any) {
         this.error(e);
@@ -258,6 +269,8 @@ export default abstract class BaseAction<
           extension,
           agent: new BaseUserAgent(req),
           body,
+          sendError: (code: number, error: Partial<ErrorType>) =>
+            BaseAction.sendError(res, code, error),
         });
       } catch (e: any) {
         this.error(e);

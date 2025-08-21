@@ -1,4 +1,5 @@
 import express from 'express';
+import { ErrorType } from '@grandlinex/swagger-mate';
 import {
   BaseUserAgent,
   IExtensionInterface,
@@ -19,4 +20,5 @@ export type XActionEvent<G = JwtToken | null, B = any> = {
   extension: IExtensionInterface;
   agent: BaseUserAgent;
   body: B;
+  sendError: (code: number, error: Partial<ErrorType>) => void;
 };
