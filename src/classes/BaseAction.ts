@@ -1,5 +1,6 @@
 import { CoreAction, IDataBase } from '@grandlinex/core';
 import {
+  ActionMode,
   ErrorType,
   isErrorType,
   isSwaggerRef,
@@ -18,11 +19,6 @@ import { ExpressServerTiming, IExtensionInterface } from './timing/index.js';
 import { XActionEvent, XRequest, XResponse } from '../lib/express.js';
 import { BaseUserAgent } from './BaseUserAgent.js';
 
-export enum ActionMode {
-  'DEFAULT',
-  'DMZ',
-  'DMZ_WITH_USER',
-}
 export default abstract class BaseAction<
     K extends IKernel = IKernel,
     T extends IDataBase<any, any> | null = any,
@@ -37,14 +33,14 @@ export default abstract class BaseAction<
 
   forceDebug: boolean;
 
-  schema: SSchemaEl | null;
+  requestSchema: SSchemaEl | null;
 
   constructor(chanel: string, module: IBaseKernelModule<K, T, P, C, E>) {
     super(chanel, module);
     this.secureHandler = this.secureHandler.bind(this);
     this.mode = ActionMode.DEFAULT;
     this.forceDebug = false;
-    this.schema = null;
+    this.requestSchema = null;
   }
 
   abstract handler(event: XActionEvent): Promise<void>;
@@ -134,7 +130,7 @@ export default abstract class BaseAction<
   }
 
   bodyValidation<A>(req: XRequest): A | ErrorType | null {
-    if (!this.schema) {
+    if (!this.requestSchema) {
       return null;
     }
     if (!req.body) {
@@ -145,7 +141,7 @@ export default abstract class BaseAction<
       global: [],
       field: [],
     };
-    BaseAction.validateSchema(error, this.schema, 'body', req.body);
+    BaseAction.validateSchema(error, this.requestSchema, 'body', req.body);
     if (error.field!.length > 0 || error.global!.length > 0) {
       return error;
     }
@@ -182,14 +178,14 @@ export default abstract class BaseAction<
       auth.stop();
       try {
         let body = null;
-        if (this.schema) {
+        if (this.requestSchema) {
           body = this.bodyValidation(req);
         }
         if (isErrorType(body)) {
           res.status(400).send(body);
           return;
         }
-        if (this.schema && body === null) {
+        if (this.requestSchema && body === null) {
           res.sendStatus(400);
           return;
         }
@@ -218,14 +214,14 @@ export default abstract class BaseAction<
     if (dat && typeof dat !== 'number') {
       try {
         let body = null;
-        if (this.schema) {
+        if (this.requestSchema) {
           body = this.bodyValidation(req);
         }
         if (isErrorType(body)) {
           res.status(400).send(body);
           return;
         }
-        if (this.schema && body === null) {
+        if (this.requestSchema && body === null) {
           res.sendStatus(400);
           return;
         }
@@ -250,14 +246,14 @@ export default abstract class BaseAction<
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
       try {
         let body = null;
-        if (this.schema) {
+        if (this.requestSchema) {
           body = this.bodyValidation(req);
         }
         if (isErrorType(body)) {
           res.status(400).send(body);
           return;
         }
-        if (this.schema && body === null) {
+        if (this.requestSchema && body === null) {
           res.sendStatus(400);
           return;
         }

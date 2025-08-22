@@ -1,4 +1,5 @@
 import { IDataBase } from '@grandlinex/core';
+import { getRouteMeta } from '@grandlinex/swagger-mate';
 import {
   IBaseAction,
   IBaseCache,
@@ -7,7 +8,6 @@ import {
   IBasePresenter,
   IKernel,
 } from '../lib/index.js';
-import { getRouteMeta } from '../annotation/index.js';
 import BaseApiAction from './BaseApiAction.js';
 
 export default abstract class RouteApiAction<
@@ -26,16 +26,16 @@ export default abstract class RouteApiAction<
   ) {
     super('GET', 'action', module, extMod);
     this.exmod = extMod;
-    const meta = getRouteMeta(this);
-    if (!meta) {
+    const route = getRouteMeta(this);
+    if (!route) {
       throw this.lError('No route meta found for action');
     }
-    const { type, path, mode, schema } = meta;
+    const { type, path, meta } = route;
     this.type = type;
     this.channel = path;
-    if (mode) {
-      this.setMode(mode);
+    if (meta?.mode) {
+      this.setMode(meta.mode);
     }
-    this.schema = schema ?? null;
+    this.requestSchema = meta?.requestSchema ?? null;
   }
 }

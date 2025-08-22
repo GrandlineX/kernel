@@ -22,8 +22,6 @@ import { XActionEvent, XRequest } from './express.js';
 
 export { EntitySchemaExtender };
 
-export type ActionTypes = 'POST' | 'GET' | 'USE' | 'PATCH' | 'DELETE';
-
 export interface ICClient<T extends JwtExtend = JwtExtend>
   extends ICoreCClient {
   setAuthProvider(provider: IAuthProvider<T>): boolean;

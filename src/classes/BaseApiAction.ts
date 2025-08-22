@@ -1,6 +1,6 @@
 import { IDataBase } from '@grandlinex/core';
+import { ActionTypes } from '@grandlinex/swagger-mate';
 import {
-  ActionTypes,
   IBaseAction,
   IBaseCache,
   IBaseClient,

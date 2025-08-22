@@ -1,52 +1,42 @@
-import { SPath, SPathUtil, SSchemaEl } from '@grandlinex/swagger-mate';
-import { ActionMode, JwtToken, RouteApiAction } from '../classes/index.js';
+import { ActionMode, Route } from '@grandlinex/swagger-mate';
+import { JwtToken, RouteApiAction } from '../classes/index.js';
 import CryptoClient from '../modules/crypto/CryptoClient.js';
 
 import { XActionEvent } from '../lib/express.js';
-import { Route } from '../annotation/index.js';
 
-const schema: SSchemaEl = {
-  type: 'object',
-  properties: {
-    username: {
-      type: 'string',
-    },
-    token: {
-      type: 'string',
-    },
-  },
-  required: ['username', 'token'],
-};
 type SchemaType = {
   username: string;
   token: string;
 };
 
-@SPath({
-  '/token': {
-    post: {
-      operationId: 'getToken',
-      summary: 'Get API token',
-      tags: ['kernel'],
-      requestBody: SPathUtil.jsonBody(schema),
-      responses: SPathUtil.jsonResponse(
-        '200',
-        {
-          type: 'object',
-          properties: {
-            token: {
-              type: 'string',
-            },
-          },
-          required: ['token'],
-        },
-        false,
-        '403',
-      ),
+@Route('POST', '/token', {
+  mode: ActionMode.DMZ,
+  operationId: 'getToken',
+  summary: 'Get API token',
+  tags: ['kernel'],
+  requestSchema: {
+    type: 'object',
+    properties: {
+      username: {
+        type: 'string',
+      },
+      token: {
+        type: 'string',
+      },
     },
+    required: ['username', 'token'],
   },
+  responseSchema: {
+    type: 'object',
+    properties: {
+      token: {
+        type: 'string',
+      },
+    },
+    required: ['token'],
+  },
+  responseCodes: ['200', '403'],
 })
-@Route('POST', '/token', ActionMode.DMZ, schema)
 export default class GetTokenAction extends RouteApiAction {
   async handler({
     req,
