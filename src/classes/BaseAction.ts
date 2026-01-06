@@ -59,7 +59,10 @@ export default abstract class BaseAction<
       });
       return;
     }
-    if (!required && (field === undefined || field === null)) {
+    if (!required && field === undefined) {
+      return;
+    }
+    if (schema.nullable && field === null) {
       return;
     }
     switch (schema?.type) {
