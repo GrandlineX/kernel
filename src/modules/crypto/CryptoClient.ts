@@ -1,7 +1,7 @@
 import { CoreCryptoClient } from '@grandlinex/core';
 import * as jwt from 'jsonwebtoken';
 import { type StringValue } from 'ms';
-import { ICClient, IKernel } from '../../lib/index.js';
+import { ICClient, IKernel, ValidationRequest } from '../../lib/index.js';
 import { IAuthProvider, JwtExtend, JwtToken } from '../../classes/index.js';
 import { XRequest } from '../../lib/express.js';
 
@@ -95,12 +95,9 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
     };
   }
 
-  async permissionValidation(
-    token: JwtToken<T>,
-    requestType: string,
-  ): Promise<boolean> {
+  async permissionValidation(request: ValidationRequest<T>): Promise<boolean> {
     if (this.authProvider) {
-      return this.authProvider.validateAccess(token, requestType);
+      return this.authProvider.validateAccess(request);
     }
     return false;
   }

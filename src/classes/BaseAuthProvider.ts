@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import { XRequest } from '../lib/express.js';
+import { ValidationRequest } from '../lib/index.js';
 
 export type JwtExtend = {
   username: string;
@@ -20,7 +21,7 @@ export interface IAuthProvider<T extends JwtExtend> {
     requestType: string,
   ): Promise<AuthResult>;
 
-  validateAccess(token: JwtToken<T>, requestType: string): Promise<boolean>;
+  validateAccess(request: ValidationRequest<T>): Promise<boolean>;
 
   bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
 
@@ -39,10 +40,7 @@ export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
     requestType: string,
   ): Promise<AuthResult>;
 
-  abstract validateAccess(
-    token: JwtToken<T>,
-    requestType: string,
-  ): Promise<boolean>;
+  abstract validateAccess(request: ValidationRequest<T>): Promise<boolean>;
 
   abstract bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number>;
 

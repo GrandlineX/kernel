@@ -1,9 +1,15 @@
-import { CoreAction, IDataBase } from '@grandlinex/core';
+import {
+  CoreAction,
+  CoreEntity,
+  IDataBase,
+  instanceOfEntity,
+} from '@grandlinex/core';
 import {
   ActionMode,
   ErrorType,
   isErrorType,
   isSwaggerRef,
+  SPathUtil,
   SSchemaEl,
 } from '@grandlinex/swagger-mate';
 import {
@@ -33,7 +39,7 @@ export default abstract class BaseAction<
 
   forceDebug: boolean;
 
-  requestSchema: SSchemaEl | null;
+  requestSchema: SSchemaEl | CoreEntity | string | null;
 
   constructor(chanel: string, module: IBaseKernelModule<K, T, P, C, E>) {
     super(chanel, module);
@@ -47,15 +53,21 @@ export default abstract class BaseAction<
 
   static validateSchema(
     error: ErrorType,
-    schema: SSchemaEl,
+    inputSchema: SSchemaEl | CoreEntity | string,
     key: string,
     field: any,
     required: boolean = true,
   ) {
-    if (isSwaggerRef(schema)) {
+    let schema: SSchemaEl | string;
+    if (instanceOfEntity(inputSchema)) {
+      schema = SPathUtil.schemaFromEntity(inputSchema)!;
+    } else {
+      schema = inputSchema;
+    }
+    if (isSwaggerRef(schema) || typeof schema === 'string') {
       error.field?.push({
         key,
-        message: `Ref schema body validation is not supported yet`,
+        message: `Ref or string schema body validation is not supported yet`,
       });
       return;
     }
@@ -185,6 +197,7 @@ export default abstract class BaseAction<
           body = this.bodyValidation(req);
         }
         if (isErrorType(body)) {
+          this.debug(body);
           res.status(400).send(body);
           return;
         }
@@ -221,6 +234,7 @@ export default abstract class BaseAction<
           body = this.bodyValidation(req);
         }
         if (isErrorType(body)) {
+          this.debug(body);
           res.status(400).send(body);
           return;
         }
@@ -253,6 +267,7 @@ export default abstract class BaseAction<
           body = this.bodyValidation(req);
         }
         if (isErrorType(body)) {
+          this.debug(body);
           res.status(400).send(body);
           return;
         }

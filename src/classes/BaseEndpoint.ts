@@ -46,11 +46,7 @@ export default abstract class BaseEndpoint<
 
   protected port: number;
 
-  constructor(
-    chanel: string,
-    module: IBaseKernelModule<any, any, any, any>,
-    port: number,
-  ) {
+  constructor(chanel: string, module: IBaseKernelModule<any>, port: number) {
     super(`endpoint-${chanel}`, module);
     this.port = port;
     this.appServer = express();
@@ -60,7 +56,7 @@ export default abstract class BaseEndpoint<
   }
 
   private setAppHeader() {
-    this.appServer.use((req, res, next) => {
+    this.appServer.use((_, res, next) => {
       res.setHeader('X-Powered-By', 'GrandLineX');
       next();
     });

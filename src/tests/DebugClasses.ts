@@ -6,7 +6,7 @@ import {
   BaseApiAction,
   BaseAuthProvider,
   ICClient,
-  JwtToken,
+  JwtToken, ValidationRequest,
   XActionEvent,
   XRequest
 } from '../index.js';
@@ -52,7 +52,7 @@ export class TestAuthProvider extends BaseAuthProvider {
     username: string,
     token: string,
     requestType: string
-  ): Promise< AuthResult> {
+  ): Promise<AuthResult> {
 
     const valid=username === 'admin' && token === 'admin' && requestType === 'api';
     return {
@@ -61,8 +61,9 @@ export class TestAuthProvider extends BaseAuthProvider {
     };
   }
 
-  async validateAccess(token: JwtToken, requestType: string): Promise<boolean> {
-    return token.username === 'admin' && requestType === 'api';
+  async validateAccess(request:ValidationRequest<any>): Promise<boolean> {
+    const { token, requestType } = request;
+    return token.username === 'admin' && requestType.includes('api');
   }
 
   async bearerTokenValidation(req: XRequest): Promise<JwtToken | number> {

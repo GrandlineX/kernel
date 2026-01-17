@@ -4,13 +4,13 @@ import {
   ActionTypes,
   cors,
   CryptoClient,
-  EntitySchemaExtender,
   Kernel,
   KernelEndpoint,
   KernelModule
 } from '../index.js';
 
 import { TestAllAction, TestAuthProvider } from './DebugClasses.js';
+import { SPathUtil } from '@grandlinex/swagger-mate';
 
 const [testPath] = XUtil.setupEnvironment(
   [__dirname, '..', '..'],
@@ -71,7 +71,7 @@ describe('Express-Kernel', () => {
     kernel.setDevMode(true);
   });
   test('dev mode', async () => {
-    EntitySchemaExtender.extendEntitySchema(new GKey(), {
+    SPathUtil.extendEntitySchema(new GKey(), {
       key: 'test',
       schema: {
         type: 'string',
@@ -115,7 +115,9 @@ describe('Express-Kernel', () => {
     expect(token.data).not.toBeUndefined();
     jwtToken = token.data.token;
     const res = await cc!.jwtVerifyAccessToken(jwtToken);
-    expect(await cc?.permissionValidation(jwtToken, 'api')).not.toBeTruthy();
+    expect(await cc?.permissionValidation({
+      token:jwtToken, requestType: ['api']
+    })).not.toBeTruthy();
     expect(typeof res === 'number').toBeFalsy();
     if (typeof res !== 'number') {
       expect(res.username).toBe('admin');
@@ -182,7 +184,10 @@ describe('Express-Kernel', () => {
     expect(adminToken).not.toBeNull();
 
     if (typeof adminToken !== 'number') {
-      expect(await cc?.permissionValidation(adminToken, 'api')).toBeTruthy();
+      expect(await cc?.permissionValidation({
+        token:adminToken,
+        requestType: ['api']
+      })).toBeTruthy();
     }
   });
 
