@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GKey, JestLib, setupDevKernel, TestContext, XUtil } from '@grandlinex/core';
+import { JestLib, setupDevKernel, TestContext, XUtil } from '@grandlinex/core';
 import {
   ActionTypes,
   cors,
@@ -10,7 +10,6 @@ import {
 } from '../index.js';
 
 import { TestAllAction, TestAuthProvider } from './DebugClasses.js';
-import { SPathUtil } from '@grandlinex/swagger-mate';
 
 const [testPath] = XUtil.setupEnvironment(
   [__dirname, '..', '..'],
@@ -69,14 +68,6 @@ describe('Express-Kernel', () => {
 
   test('dev mode', async () => {
     kernel.setDevMode(true);
-  });
-  test('dev mode', async () => {
-    SPathUtil.extendEntitySchema(new GKey(), {
-      key: 'test',
-      schema: {
-        type: 'string',
-      },
-    });
   });
   test('crypto jwt', async () => {
     const cc = kernel.getCryptoClient();
