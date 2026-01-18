@@ -12,11 +12,16 @@ export type XRequest = express.Request & {
 export type XResponse = express.Response;
 export type XNextFc = express.NextFunction;
 
+export type XPath = Record<string, string>;
+export type XQuery = Record<string, string | undefined>;
+
 export type XActionEvent<G = JwtToken | null, B = any> = {
   req: XRequest;
   res: XResponse;
   next: XNextFc;
   data: G;
+  path: XPath;
+  query: XQuery;
   extension: IExtensionInterface;
   agent: BaseUserAgent;
   body: B;

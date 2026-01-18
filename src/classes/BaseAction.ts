@@ -22,7 +22,13 @@ import {
 } from '../lib/index.js';
 import { ExpressServerTiming, IExtensionInterface } from './timing/index.js';
 
-import { XActionEvent, XRequest, XResponse } from '../lib/express.js';
+import {
+  XActionEvent,
+  XPath,
+  XQuery,
+  XRequest,
+  XResponse,
+} from '../lib/express.js';
 import { BaseUserAgent } from './BaseUserAgent.js';
 
 export default abstract class BaseAction<
@@ -175,6 +181,18 @@ export default abstract class BaseAction<
     res: XResponse,
     next: () => void,
   ): Promise<void> {
+    const xPath: XPath = {};
+    Object.entries(req.params).forEach(([k, v]) => {
+      if (typeof v === 'string') {
+        xPath[k] = v;
+      }
+    });
+    const xQuery: XQuery = {};
+    Object.entries(req.query).forEach(([k, v]) => {
+      if (typeof v === 'string' || v === undefined) {
+        xQuery[k] = v;
+      }
+    });
     const extension = this.initExtension(res);
     const auth = extension.timing.start('auth');
     res.on('finish', () => {
@@ -213,6 +231,8 @@ export default abstract class BaseAction<
           extension,
           agent: new BaseUserAgent(req),
           body,
+          path: xPath,
+          query: xQuery,
           sendError: (code: number, error: Partial<ErrorType>) =>
             BaseAction.sendError(res, code, error),
         });
@@ -250,6 +270,8 @@ export default abstract class BaseAction<
           extension,
           agent: new BaseUserAgent(req),
           body,
+          path: xPath,
+          query: xQuery,
           sendError: (code: number, error: Partial<ErrorType>) =>
             BaseAction.sendError(res, code, error),
         });
@@ -283,6 +305,8 @@ export default abstract class BaseAction<
           extension,
           agent: new BaseUserAgent(req),
           body,
+          path: xPath,
+          query: xQuery,
           sendError: (code: number, error: Partial<ErrorType>) =>
             BaseAction.sendError(res, code, error),
         });
