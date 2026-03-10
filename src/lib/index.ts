@@ -17,6 +17,7 @@ import * as jwt from 'jsonwebtoken';
 import { IAuthProvider, JwtExtend, JwtToken } from '../classes/index.js';
 
 import { XActionEvent, XRequest } from './express.js';
+import { BaseKernelMetric } from '../classes/BaseKernelMetric.js';
 
 /**
  * Represents a request for validating a JWT token with optional constraints.
@@ -113,7 +114,7 @@ export interface IKernel<T extends JwtExtend = JwtExtend>
   getAppServerPort(): number;
   getApiVersion(): number;
   setAppServerPort(port: number): void;
-  responseCodeFunction(data: { code: number; req: XRequest }): void;
+  getMetric(): BaseKernelMetric<any> | null;
 }
 
 export type IBaseKernelModule<

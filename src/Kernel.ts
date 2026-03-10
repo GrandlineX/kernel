@@ -2,7 +2,7 @@ import { CoreKernel, CoreLogger } from '@grandlinex/core';
 import { ICClient, IKernel } from './lib/index.js';
 import CryptoClient from './modules/crypto/CryptoClient.js';
 import KernelModule from './KernelModule.js';
-import { XRequest } from './lib/express.js';
+import { BaseKernelMetric } from './classes/index.js';
 
 /**
  *  @class Kernel
@@ -12,6 +12,8 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
   private expressPort: number;
 
   private readonly apiVersion: number;
+
+  protected metric: BaseKernelMetric<unknown> | null;
 
   /**
    * Default Constructor
@@ -28,6 +30,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     logger?: (k: CoreKernel<any>) => CoreLogger;
   }) {
     super({ ...options });
+    this.metric = null;
     this.apiVersion = options.apiVersion ?? 1;
     this.setBaseModule(new KernelModule(this));
     if (options.portOverride) {
@@ -59,10 +62,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     return this.apiVersion;
   }
 
-  responseCodeFunction(data: { code: number; req: XRequest }) {
-    const { code } = data;
-    if (code < 200 || code >= 300) {
-      this.debug(data.req.path, data.req.ip, data.code);
-    }
+  getMetric() {
+    return this.metric;
   }
 }

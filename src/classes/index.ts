@@ -13,6 +13,7 @@ import BaseApiAction from './BaseApiAction.js';
 import RouteApiAction from './RouteApiAction.js';
 import BaseAuthProvider from './BaseAuthProvider.js';
 
+export * from './BaseKernelMetric.js';
 export * from './BaseAction.js';
 export * from './BaseUserAgent.js';
 export * from './BaseAuthProvider.js';

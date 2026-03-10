@@ -7,9 +7,9 @@ import {
 import {
   ActionMode,
   ErrorType,
+  ESchemaEditor,
   isErrorType,
   isSwaggerRef,
-  SPathUtil,
   SSchemaEl,
 } from '@grandlinex/swagger-mate';
 import {
@@ -66,7 +66,7 @@ export default abstract class BaseAction<
   ) {
     let schema: SSchemaEl | string;
     if (instanceOfEntity(inputSchema)) {
-      schema = SPathUtil.schemaFromEntity(inputSchema)!;
+      schema = ESchemaEditor.schemaFromEntity(inputSchema)!;
     } else {
       schema = inputSchema;
     }
@@ -181,6 +181,24 @@ export default abstract class BaseAction<
     res: XResponse,
     next: () => void,
   ): Promise<void> {
+    const metric = this.getKernel().getMetric();
+    if (metric) {
+      const end = metric.start({
+        req,
+        action: this,
+      });
+      if (end) {
+        res.on('finish', () =>
+          metric.end({
+            started: end,
+            req,
+            res,
+            action: this,
+          }),
+        );
+      }
+    }
+
     const xPath: XPath = {};
     Object.entries(req.params).forEach(([k, v]) => {
       if (typeof v === 'string') {
@@ -195,12 +213,6 @@ export default abstract class BaseAction<
     });
     const extension = this.initExtension(res);
     const auth = extension.timing.start('auth');
-    res.on('finish', () => {
-      (this.getKernel() as IKernel).responseCodeFunction({
-        code: res.statusCode,
-        req,
-      });
-    });
     const cc = this.getKernel().getCryptoClient();
     if (!cc) {
       res.status(504).send('internal server error');
