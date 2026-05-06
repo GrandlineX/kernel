@@ -67,8 +67,7 @@ export class TestAuthProvider extends BaseAuthProvider {
   }
 
   async bearerTokenValidation(req: XRequest): Promise<JwtToken | number> {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = this.tokenExtractor(req);
     if (token == null) {
       return 401;
     }

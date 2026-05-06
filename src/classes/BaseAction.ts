@@ -257,7 +257,18 @@ export default abstract class BaseAction<
       }
       return;
     }
-    const dat = await cc.bearerTokenValidation(req);
+    let dat: Awaited<ReturnType<typeof cc.bearerTokenValidation>>;
+    try {
+      dat = await cc.bearerTokenValidation(req);
+    } catch (e: any) {
+      auth.stop();
+      this.error(e);
+      this.error(e?.message);
+      if (!res.headersSent) {
+        res.sendStatus(500);
+      }
+      return;
+    }
     auth.stop();
     if (dat && typeof dat !== 'number') {
       try {

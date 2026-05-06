@@ -29,6 +29,7 @@ export interface IAuthProvider<T extends JwtExtend> {
     token: JwtToken<T>,
     extend?: Record<string, any>,
   ): Promise<JwtToken<T>>;
+  tokenExtractor(req: XRequest, key: string): string | undefined;
 }
 
 export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
@@ -49,6 +50,22 @@ export default abstract class BaseAuthProvider<T extends JwtExtend = JwtExtend>
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     extend?: Record<string, any>,
   ): Promise<JwtToken<T>> {
+    return token;
+  }
+
+  tokenExtractor(req: XRequest, key = 'glxauth') {
+    let token: string | undefined;
+    if (req.headers.authorization !== undefined) {
+      const authHeader = req.headers.authorization;
+      token = authHeader && authHeader.split(' ')[1];
+    } else if (req.query[key] !== undefined) {
+      token = req.query[key] as string;
+    } else if (req.headers.cookie !== undefined) {
+      const crumbs = req.headers.cookie.trim();
+      const coList = crumbs.split(';');
+      const oel = coList.find((el) => el.startsWith(`${key}=`));
+      token = oel?.split('=')[1];
+    }
     return token;
   }
 }

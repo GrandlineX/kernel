@@ -11,10 +11,6 @@ import {
 
 import { TestAllAction, TestAuthProvider } from './DebugClasses.js';
 
-const [testPath] = XUtil.setupEnvironment(
-  [__dirname, '..', '..'],
-  ['data', 'config'],
-);
 
 process.env.DLOG_LEVEL = 'debug';
 
@@ -23,7 +19,6 @@ const appName = 'TestKernel';
 const kernel = new Kernel({
   appName: appName.toUpperCase(),
   appCode: appName.toLowerCase(),
-  pathOverride: testPath,
   portOverride: port,
   envFilePath: __dirname,
 });
@@ -48,7 +43,7 @@ types.forEach(([type]) => {
 
 kernel.setCryptoClient(new CryptoClient(CryptoClient.fromPW('testpw'), kernel));
 
-TestContext.getEntity({ kernel, cleanUpPath: testPath });
+TestContext.getEntity({ kernel,cleanUp: true });
 
 kernel.on('load', async (ik) => {
   const ep = ik.getModule().getPresenter() as KernelEndpoint;
@@ -256,4 +251,3 @@ describe('Express-Kernel', () => {
 
 // Ending
 JestLib.jestEnd();
-JestLib.jestOrm();

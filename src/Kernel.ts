@@ -1,4 +1,4 @@
-import { CoreKernel, CoreLogger } from '@grandlinex/core';
+import { CoreKernel, CoreKernelProps } from '@grandlinex/core';
 import { ICClient, IKernel } from './lib/index.js';
 import CryptoClient from './modules/crypto/CryptoClient.js';
 import KernelModule from './KernelModule.js';
@@ -19,16 +19,12 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
    * Default Constructor
    * @param options App Name
    */
-  constructor(options: {
-    appName: string;
-    appCode: string;
-    apiVersion?: number;
-    pathOverride?: string;
-    portOverride?: number;
-    envFilePath?: string;
-    loadFromLocalEnv?: boolean;
-    logger?: (k: CoreKernel<any>) => CoreLogger;
-  }) {
+  constructor(
+    options: CoreKernelProps & {
+      apiVersion?: number;
+      portOverride?: number;
+    },
+  ) {
     super({ ...options });
     this.metric = null;
     this.apiVersion = options.apiVersion ?? 1;
