@@ -22,7 +22,7 @@ export class BaseUserAgent {
   constructor(req: XRequest) {
     this.raw = req.headers['user-agent'] || '';
     this.version = new Map<string, number>();
-    const parts = this.raw.matchAll(/[A-Za-z]*\/[0-9.]*/gm);
+    const parts = this.raw.matchAll(/[A-Za-z]+\/[0-9.]+/gm);
     for (const part of parts) {
       const [name, version] = part[0].split('/');
       const [release] = version.split('.');

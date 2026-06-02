@@ -30,6 +30,7 @@ import {
   XResponse,
 } from '../lib/express.js';
 import { BaseUserAgent } from './BaseUserAgent.js';
+import { JwtToken } from './BaseAuthProvider.js';
 
 export default abstract class BaseAction<
     K extends IKernel = IKernel,
@@ -176,6 +177,50 @@ export default abstract class BaseAction<
     });
   }
 
+  private async invokeHandler(
+    req: XRequest,
+    res: XResponse,
+    next: () => void,
+    data: JwtToken | null,
+    extension: IExtensionInterface,
+    xPath: XPath,
+    xQuery: XQuery,
+  ): Promise<void> {
+    let body = null;
+    if (this.requestSchema) {
+      body = this.bodyValidation(req);
+    }
+    if (isErrorType(body)) {
+      this.debug(body);
+      res.status(400).send(body);
+      return;
+    }
+    if (this.requestSchema && body === null) {
+      res.sendStatus(400);
+      return;
+    }
+    try {
+      await this.handler({
+        res,
+        req,
+        next,
+        data,
+        extension,
+        agent: new BaseUserAgent(req),
+        body,
+        path: xPath,
+        query: xQuery,
+        sendError: (code: number, error: Partial<ErrorType>) =>
+          BaseAction.sendError(res, code, error),
+      });
+    } catch (e: any) {
+      this.error(e);
+      if (!res.headersSent) {
+        res.sendStatus(500);
+      }
+    }
+  }
+
   async secureHandler(
     req: XRequest,
     res: XResponse,
@@ -221,125 +266,27 @@ export default abstract class BaseAction<
 
     if (this.mode === ActionMode.DMZ) {
       auth.stop();
-      try {
-        let body = null;
-        if (this.requestSchema) {
-          body = this.bodyValidation(req);
-        }
-        if (isErrorType(body)) {
-          this.debug(body);
-          res.status(400).send(body);
-          return;
-        }
-        if (this.requestSchema && body === null) {
-          res.sendStatus(400);
-          return;
-        }
-        await this.handler({
-          res,
-          req,
-          next,
-          data: null,
-          extension,
-          agent: new BaseUserAgent(req),
-          body,
-          path: xPath,
-          query: xQuery,
-          sendError: (code: number, error: Partial<ErrorType>) =>
-            BaseAction.sendError(res, code, error),
-        });
-      } catch (e: any) {
-        this.error(e);
-        this.error(e?.message);
-        if (!res.headersSent) {
-          res.sendStatus(500);
-        }
-      }
+      await this.invokeHandler(req, res, next, null, extension, xPath, xQuery);
       return;
     }
+
     let dat: Awaited<ReturnType<typeof cc.bearerTokenValidation>>;
     try {
       dat = await cc.bearerTokenValidation(req);
     } catch (e: any) {
       auth.stop();
       this.error(e);
-      this.error(e?.message);
       if (!res.headersSent) {
         res.sendStatus(500);
       }
       return;
     }
     auth.stop();
+
     if (dat && typeof dat !== 'number') {
-      try {
-        let body = null;
-        if (this.requestSchema) {
-          body = this.bodyValidation(req);
-        }
-        if (isErrorType(body)) {
-          this.debug(body);
-          res.status(400).send(body);
-          return;
-        }
-        if (this.requestSchema && body === null) {
-          res.sendStatus(400);
-          return;
-        }
-        await this.handler({
-          res,
-          req,
-          next,
-          data: dat,
-          extension,
-          agent: new BaseUserAgent(req),
-          body,
-          path: xPath,
-          query: xQuery,
-          sendError: (code: number, error: Partial<ErrorType>) =>
-            BaseAction.sendError(res, code, error),
-        });
-      } catch (e: any) {
-        this.error(e);
-        this.error(e?.message);
-        if (!res.headersSent) {
-          res.sendStatus(500);
-        }
-      }
+      await this.invokeHandler(req, res, next, dat, extension, xPath, xQuery);
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
-      try {
-        let body = null;
-        if (this.requestSchema) {
-          body = this.bodyValidation(req);
-        }
-        if (isErrorType(body)) {
-          this.debug(body);
-          res.status(400).send(body);
-          return;
-        }
-        if (this.requestSchema && body === null) {
-          res.sendStatus(400);
-          return;
-        }
-        await this.handler({
-          res,
-          req,
-          next,
-          data: null,
-          extension,
-          agent: new BaseUserAgent(req),
-          body,
-          path: xPath,
-          query: xQuery,
-          sendError: (code: number, error: Partial<ErrorType>) =>
-            BaseAction.sendError(res, code, error),
-        });
-      } catch (e: any) {
-        this.error(e);
-        this.error(e?.message);
-        if (!res.headersSent) {
-          res.sendStatus(500);
-        }
-      }
+      await this.invokeHandler(req, res, next, null, extension, xPath, xQuery);
     } else if (dat) {
       res.sendStatus(dat);
     } else {
@@ -354,11 +301,17 @@ export default abstract class BaseAction<
 
   private initExtension(res: XResponse): IExtensionInterface {
     const [el, fx] = ExpressServerTiming.init(this, res);
-    return {
-      done: () => {
-        fx();
-      },
-      timing: el,
+    let finalized = false;
+    const done = () => {
+      if (finalized) return;
+      finalized = true;
+      fx();
     };
+    const originalSend = res.send.bind(res);
+    res.send = ((...args: Parameters<XResponse['send']>) => {
+      done();
+      return originalSend(...args);
+    }) as XResponse['send'];
+    return { done, timing: el };
   }
 }

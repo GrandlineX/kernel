@@ -85,7 +85,10 @@ export default abstract class BaseEndpoint<
   stop(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       if (this.httpServer) {
+        this.httpServer.closeAllConnections();
         this.httpServer.close((err) => (err ? resolve(false) : resolve(true)));
+      } else {
+        resolve(false);
       }
     });
   }

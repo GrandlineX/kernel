@@ -13,9 +13,12 @@ export default class ServerTiming implements IServerElement {
 
   async startFunc<T>(chanel: string, fc: () => Promise<T>): Promise<T> {
     const el = new ServerTimingElement(this, chanel);
-    const content = await fc();
-    el.stop();
-    return content;
+    try {
+      const content = await fc();
+      return content;
+    } finally {
+      el.stop();
+    }
   }
 
   completeElement(e: ServerTimingElement) {

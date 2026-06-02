@@ -30,7 +30,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     this.apiVersion = options.apiVersion ?? 1;
     this.setBaseModule(new KernelModule(this));
     if (options.portOverride) {
-      this.debug(`use custiom api port @ ${options.portOverride}`);
+      this.debug(`use custom api port @ ${options.portOverride}`);
       this.expressPort = options.portOverride;
     } else {
       this.expressPort = 9257;

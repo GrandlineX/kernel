@@ -57,7 +57,6 @@ export default class GetTokenAction extends RouteApiAction {
         },
         req.body,
       );
-      extension.done();
       res.status(200).send({ token: jwt });
     } else {
       res.status(403).send('no no no ...');

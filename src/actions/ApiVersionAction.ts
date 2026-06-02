@@ -20,8 +20,7 @@ import { XActionEvent } from '../lib/express.js';
   responseCodes: ['200', '403'],
 })
 export default class ApiVersionAction extends RouteApiAction {
-  async handler({ res, extension }: XActionEvent): Promise<void> {
-    extension.done();
+  async handler({ res }: XActionEvent): Promise<void> {
     res.status(200).send({ api: this.getKernel().getApiVersion() });
   }
 }
