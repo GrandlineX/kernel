@@ -13,19 +13,32 @@ export const cors: GLXMiddleWare = (_, res, next) => {
   next();
 };
 
-export function corsWithOrigins(origins: string[] | '*'): GLXMiddleWare {
+export function buildCors(
+  allowedOrigins: string[] | '*' = '*',
+  allowedHeaders: string[] | '*' = '*',
+): GLXMiddleWare {
   return (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    if (origins === '*') {
-      res.setHeader('Access-Control-Allow-Origin', '*');
+    const { origin } = req.headers;
+    if (
+      origin &&
+      allowedOrigins !== '*' &&
+      allowedOrigins.some((value) => origin.endsWith(value))
+    ) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Vary', 'Origin');
     } else {
-      const requestOrigin = req.headers.origin;
-      if (requestOrigin && origins.includes(requestOrigin)) {
-        res.setHeader('Access-Control-Allow-Origin', requestOrigin);
-        res.setHeader('Vary', 'Origin');
-      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
     }
+    if (allowedHeaders !== '*') {
+      res.setHeader('Access-Control-Allow-Headers', allowedHeaders.join(', '));
+    } else {
+      res.setHeader('Access-Control-Allow-Headers', '*');
+    }
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    );
+    res.setHeader('Access-Control-Max-Age', '86400');
     next();
   };
 }
