@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>CryptoClient | @grandlinex/kernel</title><meta name="description" content="Documentation for @grandlinex/kernel"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>BaseCryptoClient | @grandlinex/kernel</title><meta name="description" content="Documentation for @grandlinex/kernel"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@grandlinex/kernel</a>
 <div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
 <ul role="listbox" id="tsd-search-results"></ul>
@@ -8,8 +8,8 @@
 <div class="col-content">
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-<li><a href="" aria-current="page">CryptoClient</a></li></ul>
-<h1>Class CryptoClient</h1></div>
+<li><a href="" aria-current="page">BaseCryptoClient</a></li></ul>
+<h1>Class BaseCryptoClient<code class="tsd-tag">Abstract</code></h1></div>
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>Provides cryptographic utilities used by the Core module.</p>
 <p>This client handles key derivation, encryption/decryption,
@@ -18,18 +18,20 @@ interaction with the kernel's key storage. The implementation
 relies on the Node.js <code>crypto</code> module and expects a 32‑byte
 AES key.</p>
 </div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="2022">
-<h4>Hierarchy (<a href="../hierarchy.html#CryptoClient">View Summary</a>)</h4>
+<section class="tsd-panel tsd-hierarchy" data-refl="1857">
+<h4>Hierarchy (<a href="../hierarchy.html#BaseCryptoClient">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
-<li class="tsd-hierarchy-item"><a href="BaseCryptoClient.html" class="tsd-signature-type tsd-kind-class">BaseCryptoClient</a>
+<li class="tsd-hierarchy-item"><a href="CoreCryptoClient.html" class="tsd-signature-type tsd-kind-class">CoreCryptoClient</a>
 <ul class="tsd-hierarchy">
-<li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">CryptoClient</span></li></ul></li></ul></section>
+<li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">BaseCryptoClient</span>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><a href="CryptoClient.html" class="tsd-signature-type tsd-kind-class">CryptoClient</a></li></ul></li></ul></li></ul></section>
 <section class="tsd-panel">
 <h4>Implements</h4>
 <ul class="tsd-hierarchy">
 <li><a href="../interfaces/ICClient.html" class="tsd-signature-type tsd-kind-interface">ICClient</a></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L10">src/modules/crypto/CryptoClient.ts:10</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L14">src/classes/BaseCryptoClient.ts:14</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -43,9 +45,9 @@ AES key.</p>
 <h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#aesiv" class="tsd-index-link tsd-is-protected tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>Aes<wbr/>IV</span></a>
 <a href="#aeskey" class="tsd-index-link tsd-is-protected tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>Aes<wbr/>Key</span></a>
-<a href="#expiresin" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In</span></a>
-<a href="#expiresinrefresh" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In<wbr/>Refresh</span></a>
-<a href="#kernel" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>kernel</span></a>
+<a href="#expiresin" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In</span></a>
+<a href="#expiresinrefresh" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In<wbr/>Refresh</span></a>
+<a href="#kernel" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>kernel</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
@@ -59,9 +61,9 @@ AES key.</p>
 <a href="#gethash" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Hash</span></a>
 <a href="#getuuid" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>UUID</span></a>
 <a href="#isvalid" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Valid</span></a>
-<a href="#jwtdecodeaccesstoken" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Decode<wbr/>Access<wbr/>Token</span></a>
-<a href="#jwtgenerateaccesstoken" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Generate<wbr/>Access<wbr/>Token</span></a>
-<a href="#jwtverifyaccesstoken" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Verify<wbr/>Access<wbr/>Token</span></a>
+<a href="#jwtdecodeaccesstoken" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Decode<wbr/>Access<wbr/>Token</span></a>
+<a href="#jwtgenerateaccesstoken" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Generate<wbr/>Access<wbr/>Token</span></a>
+<a href="#jwtverifyaccesstoken" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Verify<wbr/>Access<wbr/>Token</span></a>
 <a href="#keystoreload" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>key<wbr/>Store<wbr/>Load</span></a>
 <a href="#keystoresave" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>key<wbr/>Store<wbr/>Save</span></a>
 <a href="#permissionvalidation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>permission<wbr/>Validation</span></a>
@@ -78,15 +80,15 @@ AES key.</p>
 <h3 class="tsd-anchor-link" id="constructor"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="constructorcryptoclient"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">CryptoClient</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">key</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">kernel</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/IKernel.html" class="tsd-signature-type tsd-kind-interface">IKernel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">CryptoClient</a><a href="#constructorcryptoclient" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="constructorbasecryptoclient"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">BaseCryptoClient</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">key</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">kernel</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/IKernel.html" class="tsd-signature-type tsd-kind-interface">IKernel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">BaseCryptoClient</a><a href="#constructorbasecryptoclient" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">key</span>: <span class="tsd-signature-type">string</span></span></li>
 <li><span><span class="tsd-kind-parameter">kernel</span>: <a href="../interfaces/IKernel.html" class="tsd-signature-type tsd-kind-interface">IKernel</a></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">CryptoClient</a></h4><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#constructor">constructor</a></p>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">BaseCryptoClient</a></h4><aside class="tsd-sources">
+<p>Overrides <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#constructor">constructor</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L24">src/classes/BaseCryptoClient.ts:24</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -95,38 +97,36 @@ AES key.</p>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="aesiv"><code class="tsd-tag">Protected</code><span>Aes<wbr/>IV</span><a href="#aesiv" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">AesIV</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#aesiv">AesIV</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#aesiv">AesIV</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1533</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="aeskey"><code class="tsd-tag">Protected</code><span>Aes<wbr/>Key</span><a href="#aeskey" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">AesKey</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#aeskey">AesKey</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#aeskey">AesKey</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1532</li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-is-inherited">
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="expiresin"><code class="tsd-tag">Readonly</code><span>expires<wbr/>In</span><a href="#expiresin" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">expiresIn</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">StringValue</span></div><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#expiresin">expiresIn</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L20">src/classes/BaseCryptoClient.ts:20</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-is-inherited">
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="expiresinrefresh"><code class="tsd-tag">Readonly</code><span>expires<wbr/>In<wbr/>Refresh</span><a href="#expiresinrefresh" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">expiresInRefresh</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">StringValue</span></div><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#expiresinrefresh">expiresInRefresh</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L22">src/classes/BaseCryptoClient.ts:22</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="kernel"><code class="tsd-tag">Protected</code><span>kernel</span><a href="#kernel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">kernel</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/IKernel.html" class="tsd-signature-type tsd-kind-interface">IKernel</a></div><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#kernel">kernel</a></p>
+<p>Overrides <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#kernel">kernel</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L18">src/classes/BaseCryptoClient.ts:18</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="apitokenvalidation"><span>api<wbr/>Token<wbr/>Validation</span><a href="#apitokenvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="apitokenvalidation"><code class="tsd-tag">Abstract</code><span>api<wbr/>Token<wbr/>Validation</span><a href="#apitokenvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="apitokenvalidation-1"><span class="tsd-kind-call-signature">apiTokenValidation</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">request</span><span class="tsd-signature-symbol">:</span> <a href="../types/TokAuthValidationRequest.html" class="tsd-signature-type tsd-kind-type-alias">TokAuthValidationRequest</a><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">valid</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span><a href="#apitokenvalidation-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
@@ -140,11 +140,10 @@ AES key.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">valid</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to an object containing a boolean indicating whether the token is valid and the user ID if validation succeeds; otherwise, <code>null</code> is returned for the user ID.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#apitokenvalidation">apiTokenValidation</a></p>
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#apitokenvalidation">apiTokenValidation</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L11">src/modules/crypto/CryptoClient.ts:11</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L73">src/classes/BaseCryptoClient.ts:73</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="bearertokenvalidation"><span>bearer<wbr/>Token<wbr/>Validation</span><a href="#bearertokenvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="bearertokenvalidation"><code class="tsd-tag">Abstract</code><span>bearer<wbr/>Token<wbr/>Validation</span><a href="#bearertokenvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="bearertokenvalidation-1"><span class="tsd-kind-call-signature">bearerTokenValidation</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">req</span><span class="tsd-signature-symbol">:</span> <a href="../types/XRequest.html" class="tsd-signature-type tsd-kind-type-alias">XRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&gt;</span><a href="#bearertokenvalidation-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
@@ -160,9 +159,8 @@ AES key.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to the decoded JWT payload if the token is valid, or a numeric status code (e.g., 401) if validation fails.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#bearertokenvalidation">bearerTokenValidation</a></p>
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#bearertokenvalidation">bearerTokenValidation</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L65">src/modules/crypto/CryptoClient.ts:65</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L89">src/classes/BaseCryptoClient.ts:89</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="decrypt"><span>decrypt</span><a href="#decrypt" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -177,7 +175,7 @@ AES key.</p>
 <li><span><span class="tsd-kind-parameter">authTag</span>: <span class="tsd-signature-type">Buffer</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#decrypt">decrypt</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#decrypt">decrypt</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#decrypt">decrypt</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1544</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
@@ -192,11 +190,11 @@ AES key.</p>
 <li><span><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">auth</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">enc</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">iv</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span> <span class="tsd-signature-symbol">}</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#encrypt">encrypt</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#encrypt">encrypt</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#encrypt">encrypt</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1539</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="generaterefreshtoken"><span>generate<wbr/>Refresh<wbr/>Token</span><a href="#generaterefreshtoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="generaterefreshtoken"><code class="tsd-tag">Abstract</code><span>generate<wbr/>Refresh<wbr/>Token</span><a href="#generaterefreshtoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="generaterefreshtoken-1"><span class="tsd-kind-call-signature">generateRefreshToken</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">token</span><span class="tsd-signature-symbol">:</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span><a href="#generaterefreshtoken-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
@@ -212,9 +210,8 @@ AES key.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to the new <a href="../types/TokenData.html" class="tsd-kind-type-alias">TokenData</a> object or {@code null} if the token cannot be refreshed.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#generaterefreshtoken">generateRefreshToken</a></p>
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#generaterefreshtoken">generateRefreshToken</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L55">src/modules/crypto/CryptoClient.ts:55</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L87">src/classes/BaseCryptoClient.ts:87</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="generatesecuretoken"><span>generate<wbr/>Secure<wbr/>Token</span><a href="#generatesecuretoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -227,14 +224,14 @@ AES key.</p>
 <li><span><span class="tsd-kind-parameter">length</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#generatesecuretoken">generateSecureToken</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#generatesecuretoken">generateSecureToken</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#generatesecuretoken">generateSecureToken</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1538</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="generatetoken"><span>generate<wbr/>Token</span><a href="#generatetoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="generatetoken"><code class="tsd-tag">Abstract</code><span>generate<wbr/>Token</span><a href="#generatetoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="generatetoken-1"><span class="tsd-kind-call-signature">generateToken</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userID</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">userName</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a><span class="tsd-signature-symbol">&gt;</span><a href="#generatetoken-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="generatetoken-1"><span class="tsd-kind-call-signature">generateToken</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">userID</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">userName</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">refresh</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">jti</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a><span class="tsd-signature-symbol">&gt;</span><a href="#generatetoken-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Generates a token for the specified user.</p>
 </div>
@@ -246,13 +243,18 @@ AES key.</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">userName</span>: <span class="tsd-signature-type">string</span></span>
 <div class="tsd-comment tsd-typography"><p>The display name of the user.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">refresh</span>: <span class="tsd-signature-type">boolean</span></span>
+<div class="tsd-comment tsd-typography"><p>Indicates whether a refresh token should be issued.</p>
+</div></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">jti</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Optional JWT ID to correlate tokens.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves with the generated token and, if requested, a refresh token.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#generatetoken">generateToken</a></p>
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#generatetoken">generateToken</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L44">src/modules/crypto/CryptoClient.ts:44</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L80">src/classes/BaseCryptoClient.ts:80</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="gethash"><span>get<wbr/>Hash</span><a href="#gethash" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -266,7 +268,7 @@ AES key.</p>
 <li><span><span class="tsd-kind-parameter">val</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#gethash">getHash</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#gethash">getHash</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#gethash">getHash</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1546</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
@@ -277,7 +279,7 @@ AES key.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#getuuid">getUUID</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#getuuid">getUUID</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#getuuid">getUUID</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1547</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
@@ -288,13 +290,13 @@ AES key.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#isvalid">isValid</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#isvalid">isValid</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#isvalid">isValid</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1545</li></ul></aside></div></li></ul></section>
-<section class="tsd-panel tsd-member tsd-is-inherited">
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="jwtdecodeaccesstoken"><span>jwt<wbr/>Decode<wbr/>Access<wbr/>Token</span><a href="#jwtdecodeaccesstoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-is-inherited">
-<li class="tsd-is-inherited">
+<ul class="tsd-signatures">
+<li class="">
 <div class="tsd-signature tsd-anchor-link" id="jwtdecodeaccesstoken-1"><span class="tsd-kind-call-signature">jwtDecodeAccessToken</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">token</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><a href="#jwtdecodeaccesstoken-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Decodes a JWT access token and returns its payload.</p>
@@ -308,13 +310,12 @@ AES key.</p>
 <h4 class="tsd-returns-title">Returns <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><p>The decoded payload if the token is valid, otherwise null.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#jwtdecodeaccesstoken">jwtDecodeAccessToken</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#jwtdecodeaccesstoken">jwtDecodeAccessToken</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L48">src/classes/BaseCryptoClient.ts:48</a></li></ul></aside></div></li></ul></section>
-<section class="tsd-panel tsd-member tsd-is-inherited">
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="jwtgenerateaccesstoken"><span>jwt<wbr/>Generate<wbr/>Access<wbr/>Token</span><a href="#jwtgenerateaccesstoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-is-inherited">
-<li class="tsd-is-inherited">
+<ul class="tsd-signatures">
+<li class="">
 <div class="tsd-signature tsd-anchor-link" id="jwtgenerateaccesstoken-1"><span class="tsd-kind-call-signature">jwtGenerateAccessToken</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">data</span><span class="tsd-signature-symbol">:</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">expire</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;default&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;refresh&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">StringValue</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><a href="#jwtgenerateaccesstoken-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Generates a signed JWT access token.</p>
@@ -331,13 +332,12 @@ AES key.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to the generated JWT token string.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#jwtgenerateaccesstoken">jwtGenerateAccessToken</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#jwtgenerateaccesstoken">jwtGenerateAccessToken</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L54">src/classes/BaseCryptoClient.ts:54</a></li></ul></aside></div></li></ul></section>
-<section class="tsd-panel tsd-member tsd-is-inherited">
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="jwtverifyaccesstoken"><span>jwt<wbr/>Verify<wbr/>Access<wbr/>Token</span><a href="#jwtverifyaccesstoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-is-inherited">
-<li class="tsd-is-inherited">
+<ul class="tsd-signatures">
+<li class="">
 <div class="tsd-signature tsd-anchor-link" id="jwtverifyaccesstoken-1"><span class="tsd-kind-call-signature">jwtVerifyAccessToken</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">token</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&gt;</span><a href="#jwtverifyaccesstoken-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Verifies a JWT access token and returns the decoded payload or an error code.</p>
@@ -351,7 +351,6 @@ AES key.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <a href="../types/JwtToken.html" class="tsd-signature-type tsd-kind-type-alias">JwtToken</a><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to the decoded token payload of type <a href="../types/JwtToken.html" class="tsd-kind-type-alias"><T></a> if verification succeeds, or a numeric error code if verification fails.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#jwtverifyaccesstoken">jwtVerifyAccessToken</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#jwtverifyaccesstoken">jwtVerifyAccessToken</a></p>
 <ul>
 <li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L34">src/classes/BaseCryptoClient.ts:34</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
@@ -366,7 +365,7 @@ AES key.</p>
 <li><span><span class="tsd-kind-parameter">e_id</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#keystoreload">keyStoreLoad</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#keystoreload">keyStoreLoad</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#keystoreload">keyStoreLoad</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1549</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
@@ -381,38 +380,53 @@ AES key.</p>
 <li><span><span class="tsd-kind-parameter">data</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#keystoresave">keyStoreSave</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#keystoresave">keyStoreSave</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#keystoresave">keyStoreSave</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1548</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="permissionvalidation"><span>permission<wbr/>Validation</span><a href="#permissionvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="permissionvalidation"><code class="tsd-tag">Abstract</code><span>permission<wbr/>Validation</span><a href="#permissionvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="permissionvalidation-1"><span class="tsd-kind-call-signature">permissionValidation</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#permissionvalidation-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="permissionvalidation-1"><span class="tsd-kind-call-signature">permissionValidation</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">request</span><span class="tsd-signature-symbol">:</span> <a href="../types/ValidationRequest.html" class="tsd-signature-type tsd-kind-type-alias">ValidationRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#permissionvalidation-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Validates user permissions according to the supplied validation request.</p>
 </div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">request</span>: <a href="../types/ValidationRequest.html" class="tsd-signature-type tsd-kind-type-alias">ValidationRequest</a></span>
+<div class="tsd-comment tsd-typography"><p>The request object containing the necessary
+data for permission evaluation, such as user identity, requested action,
+and contextual parameters.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to <code>true</code> if the permissions
 are valid for the specified request, otherwise resolves to <code>false</code>.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#permissionvalidation">permissionValidation</a></p>
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#permissionvalidation">permissionValidation</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L40">src/modules/crypto/CryptoClient.ts:40</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L78">src/classes/BaseCryptoClient.ts:78</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="setcookie"><span>set<wbr/>Cookie</span><a href="#setcookie" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="setcookie"><code class="tsd-tag">Abstract</code><span>set<wbr/>Cookie</span><a href="#setcookie" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="setcookie-1"><span class="tsd-kind-call-signature">setCookie</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#setcookie-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="setcookie-1"><span class="tsd-kind-call-signature">setCookie</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">req</span><span class="tsd-signature-symbol">:</span> <a href="../types/XResponse.html" class="tsd-signature-type tsd-kind-type-alias">XResponse</a><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">data</span><span class="tsd-signature-symbol">:</span> <a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#setcookie-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Sets an authentication cookie on the given response using the provided token data.</p>
 </div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">req</span>: <a href="../types/XResponse.html" class="tsd-signature-type tsd-kind-type-alias">XResponse</a></span>
+<div class="tsd-comment tsd-typography"><p>The XResponse object on which the cookie will be set.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">data</span>: <a href="../types/TokenData.html" class="tsd-signature-type tsd-kind-type-alias">TokenData</a></span>
+<div class="tsd-comment tsd-typography"><p>The TokenData containing the information to store in the cookie.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves when the cookie has been set successfully.</p>
 <aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#setcookie">setCookie</a></p>
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#setcookie">setCookie</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L93">src/modules/crypto/CryptoClient.ts:93</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L93">src/classes/BaseCryptoClient.ts:93</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="timesavepwvalidation"><span>time<wbr/>Save<wbr/>PW<wbr/>Validation</span><a href="#timesavepwvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -426,11 +440,11 @@ are valid for the specified request, otherwise resolves to <code>false</code>.</
 <li><span><span class="tsd-kind-parameter">validator</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/ICClient.html">ICClient</a>.<a href="../interfaces/ICClient.html#timesavepwvalidation">timeSavePWValidation</a></p>
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#timesavepwvalidation">timeSavePWValidation</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#timesavepwvalidation">timeSavePWValidation</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1550</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="tokenextractor"><span>token<wbr/>Extractor</span><a href="#tokenextractor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 class="tsd-anchor-link" id="tokenextractor"><code class="tsd-tag">Abstract</code><span>token<wbr/>Extractor</span><a href="#tokenextractor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="tokenextractor-1"><span class="tsd-kind-call-signature">tokenExtractor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">req</span><span class="tsd-signature-symbol">:</span> <a href="../types/XRequest.html" class="tsd-signature-type tsd-kind-type-alias">XRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><a href="#tokenextractor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
@@ -440,9 +454,8 @@ are valid for the specified request, otherwise resolves to <code>false</code>.</
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">req</span>: <a href="../types/XRequest.html" class="tsd-signature-type tsd-kind-type-alias">XRequest</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></h4><aside class="tsd-sources">
-<p>Overrides <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#tokenextractor">tokenExtractor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/modules/crypto/CryptoClient.ts#L77">src/modules/crypto/CryptoClient.ts:77</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/da6759801b77b5c750d44c3c02cdaee477cf1b6a/src/classes/BaseCryptoClient.ts#L91">src/classes/BaseCryptoClient.ts:91</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="clientfrompw"><code class="tsd-tag">Static</code><span>client<wbr/>From<wbr/>PW</span><a href="#clientfrompw" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -455,7 +468,7 @@ are valid for the specified request, otherwise resolves to <code>false</code>.</
 <li><span><span class="tsd-kind-parameter">kernel</span>: <a href="../interfaces/ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></span></li>
 <li><span><span class="tsd-kind-parameter">pw</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="CoreCryptoClient.html" class="tsd-signature-type tsd-kind-class">CoreCryptoClient</a></h4><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#clientfrompw">clientFromPW</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#clientfrompw">clientFromPW</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1537</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
@@ -469,7 +482,7 @@ are valid for the specified request, otherwise resolves to <code>false</code>.</
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">pw</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="BaseCryptoClient.html">BaseCryptoClient</a>.<a href="BaseCryptoClient.html#frompw">fromPW</a></p>
+<p>Inherited from <a href="CoreCryptoClient.html">CoreCryptoClient</a>.<a href="CoreCryptoClient.html#frompw">fromPW</a></p>
 <ul>
 <li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:1536</li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
@@ -490,9 +503,9 @@ are valid for the specified request, otherwise resolves to <code>false</code>.</
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#aesiv" class="tsd-is-protected tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>Aes<wbr/>IV</span></a><a href="#aeskey" class="tsd-is-protected tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>Aes<wbr/>Key</span></a><a href="#expiresin" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In</span></a><a href="#expiresinrefresh" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In<wbr/>Refresh</span></a><a href="#kernel" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>kernel</span></a></div></details>
+<div><a href="#aesiv" class="tsd-is-protected tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>Aes<wbr/>IV</span></a><a href="#aeskey" class="tsd-is-protected tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>Aes<wbr/>Key</span></a><a href="#expiresin"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In</span></a><a href="#expiresinrefresh"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>expires<wbr/>In<wbr/>Refresh</span></a><a href="#kernel" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>kernel</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#apitokenvalidation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>api<wbr/>Token<wbr/>Validation</span></a><a href="#bearertokenvalidation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>bearer<wbr/>Token<wbr/>Validation</span></a><a href="#decrypt" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>decrypt</span></a><a href="#encrypt" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>encrypt</span></a><a href="#generaterefreshtoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>generate<wbr/>Refresh<wbr/>Token</span></a><a href="#generatesecuretoken" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>generate<wbr/>Secure<wbr/>Token</span></a><a href="#generatetoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>generate<wbr/>Token</span></a><a href="#gethash" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Hash</span></a><a href="#getuuid" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>UUID</span></a><a href="#isvalid" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Valid</span></a><a href="#jwtdecodeaccesstoken" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Decode<wbr/>Access<wbr/>Token</span></a><a href="#jwtgenerateaccesstoken" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Generate<wbr/>Access<wbr/>Token</span></a><a href="#jwtverifyaccesstoken" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Verify<wbr/>Access<wbr/>Token</span></a><a href="#keystoreload" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>key<wbr/>Store<wbr/>Load</span></a><a href="#keystoresave" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>key<wbr/>Store<wbr/>Save</span></a><a href="#permissionvalidation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>permission<wbr/>Validation</span></a><a href="#setcookie"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Cookie</span></a><a href="#timesavepwvalidation" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>time<wbr/>Save<wbr/>PW<wbr/>Validation</span></a><a href="#tokenextractor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>token<wbr/>Extractor</span></a><a href="#clientfrompw" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>client<wbr/>From<wbr/>PW</span></a><a href="#frompw" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>from<wbr/>PW</span></a></div></details></div></details></div>
+<div><a href="#apitokenvalidation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>api<wbr/>Token<wbr/>Validation</span></a><a href="#bearertokenvalidation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>bearer<wbr/>Token<wbr/>Validation</span></a><a href="#decrypt" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>decrypt</span></a><a href="#encrypt" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>encrypt</span></a><a href="#generaterefreshtoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>generate<wbr/>Refresh<wbr/>Token</span></a><a href="#generatesecuretoken" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>generate<wbr/>Secure<wbr/>Token</span></a><a href="#generatetoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>generate<wbr/>Token</span></a><a href="#gethash" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Hash</span></a><a href="#getuuid" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>UUID</span></a><a href="#isvalid" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Valid</span></a><a href="#jwtdecodeaccesstoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Decode<wbr/>Access<wbr/>Token</span></a><a href="#jwtgenerateaccesstoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Generate<wbr/>Access<wbr/>Token</span></a><a href="#jwtverifyaccesstoken"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>jwt<wbr/>Verify<wbr/>Access<wbr/>Token</span></a><a href="#keystoreload" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>key<wbr/>Store<wbr/>Load</span></a><a href="#keystoresave" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>key<wbr/>Store<wbr/>Save</span></a><a href="#permissionvalidation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>permission<wbr/>Validation</span></a><a href="#setcookie"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Cookie</span></a><a href="#timesavepwvalidation" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>time<wbr/>Save<wbr/>PW<wbr/>Validation</span></a><a href="#tokenextractor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>token<wbr/>Extractor</span></a><a href="#clientfrompw" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>client<wbr/>From<wbr/>PW</span></a><a href="#frompw" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>from<wbr/>PW</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html">@grandlinex/kernel</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">

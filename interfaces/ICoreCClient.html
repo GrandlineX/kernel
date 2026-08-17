@@ -11,7 +11,7 @@
 <li><a href="" aria-current="page">ICoreCClient</a></li></ul>
 <h1>Interface ICoreCClient</h1></div>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">ICoreCClient</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-call-signature" href="#decrypt-1">decrypt</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">enc</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">iv</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">authTag</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#encrypt-1">encrypt</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">auth</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">enc</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">iv</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#generatesecuretoken-1">generateSecureToken</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">length</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#gethash-1">getHash</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">seed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">val</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getuuid-1">getUUID</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#isvalid-1">isValid</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#keystoreload-1">keyStoreLoad</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">e_id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#keystoresave-1">keyStoreSave</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">data</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#timesavepwvalidation-1">timeSavePWValidation</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">content</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">validator</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
-<section class="tsd-panel tsd-hierarchy" data-refl="881">
+<section class="tsd-panel tsd-hierarchy" data-refl="4238">
 <h4>Hierarchy (<a href="../hierarchy.html#ICoreCClient">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">ICoreCClient</span>
@@ -22,7 +22,7 @@
 <ul class="tsd-hierarchy">
 <li><a href="../classes/CoreCryptoClient.html" class="tsd-signature-type tsd-kind-class">CoreCryptoClient</a></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:64</li></ul></aside>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:374</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -57,7 +57,7 @@
 <li><span><span class="tsd-kind-parameter">authTag</span>: <span class="tsd-signature-type">Buffer</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:70</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:380</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="encrypt"><span>encrypt</span><a href="#encrypt" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -70,7 +70,7 @@
 <li><span><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">auth</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">enc</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">iv</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span> <span class="tsd-signature-symbol">}</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:65</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:375</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="generatesecuretoken"><span>generate<wbr/>Secure<wbr/>Token</span><a href="#generatesecuretoken" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -83,7 +83,7 @@
 <li><span><span class="tsd-kind-parameter">length</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:72</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:382</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="gethash"><span>get<wbr/>Hash</span><a href="#gethash" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -97,7 +97,7 @@
 <li><span><span class="tsd-kind-parameter">val</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:73</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:383</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="getuuid"><span>get<wbr/>UUID</span><a href="#getuuid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -106,7 +106,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:76</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:386</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="isvalid"><span>is<wbr/>Valid</span><a href="#isvalid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -115,7 +115,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:71</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:381</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="keystoreload"><span>key<wbr/>Store<wbr/>Load</span><a href="#keystoreload" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -128,7 +128,7 @@
 <li><span><span class="tsd-kind-parameter">e_id</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:75</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:385</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="keystoresave"><span>key<wbr/>Store<wbr/>Save</span><a href="#keystoresave" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -141,7 +141,7 @@
 <li><span><span class="tsd-kind-parameter">data</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:74</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:384</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="timesavepwvalidation"><span>time<wbr/>Save<wbr/>PW<wbr/>Validation</span><a href="#timesavepwvalidation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -155,7 +155,7 @@
 <li><span><span class="tsd-kind-parameter">validator</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/mjs/lib/index.d.ts:77</li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-BGiM7nPc.d.mts:387</li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
