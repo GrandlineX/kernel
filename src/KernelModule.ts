@@ -1,11 +1,12 @@
 import { BackgroundService, InMemCache } from '@grandlinex/core';
-import BaseKernelModule from './classes/BaseKernelModule.js';
-import { IKernel } from './lib/index.js';
+import BaseKernelModule from './classes/BaseKernelModule';
+import type { IKernel } from './lib';
 
-import KernelEndpoint from './api/KernelEndpoint.js';
-import ApiVersionAction from './actions/ApiVersionAction.js';
-import GetTokenAction from './actions/GetTokenAction.js';
-import ApiAuthTestAction from './actions/ApiAuthTestAction.js';
+import KernelEndpoint from './api/KernelEndpoint';
+import ApiVersionAction from './actions/ApiVersionAction';
+import GetTokenAction from './actions/GetTokenAction';
+import ApiAuthTestAction from './actions/ApiAuthTestAction';
+import RefreshTokenAction from './actions/RefreshTokenAction';
 
 export default class KernelModule extends BaseKernelModule<
   IKernel,
@@ -21,6 +22,7 @@ export default class KernelModule extends BaseKernelModule<
       new ApiVersionAction(this),
       new ApiAuthTestAction(this),
       new GetTokenAction(this),
+      new RefreshTokenAction(this),
     );
   }
 

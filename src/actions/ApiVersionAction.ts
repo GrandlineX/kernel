@@ -1,9 +1,9 @@
 import { ActionMode, Route } from '@grandlinex/swagger-mate';
-import { RouteApiAction } from '../classes/index.js';
+import { RouteApiAction } from '../classes';
 
-import { XActionEvent } from '../lib/express.js';
+import type { XActionEvent } from '../lib/express';
 
-@Route('GET', '/version', {
+@Route('GET', '/api/version', {
   mode: ActionMode.DMZ,
   operationId: 'getVersion',
   summary: 'Get API version',

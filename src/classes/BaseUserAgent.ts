@@ -1,4 +1,4 @@
-import { XRequest } from '../lib/express.js';
+import type { XRequest } from '../lib/express';
 
 export enum BrowserENUM {
   Edge = 'edg',

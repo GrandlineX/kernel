@@ -1,88 +1,30 @@
-import { CoreCryptoClient } from '@grandlinex/core';
-import * as jwt from 'jsonwebtoken';
-import { type StringValue } from 'ms';
-import { ICClient, IKernel, ValidationRequest } from '../../lib/index.js';
-import { IAuthProvider, JwtExtend, JwtToken } from '../../classes/index.js';
-import { XRequest } from '../../lib/express.js';
+import type {
+  ICClient,
+  JwtToken,
+  TokAuthValidationRequest,
+  TokenData,
+} from '../../lib';
+import { BaseCryptoClient } from '../../classes';
+import type { XRequest } from '../../lib/express';
 
-export default class CryptoClient<T extends JwtExtend = JwtExtend>
-  extends CoreCryptoClient
-  implements ICClient<T>
-{
-  protected authProvider: IAuthProvider<T> | null;
-
-  protected kernel: IKernel;
-
-  protected expiresIn: StringValue;
-
-  constructor(key: string, kernel: IKernel) {
-    super(kernel, key);
-    this.kernel = kernel;
-    this.authProvider = null;
-    this.expiresIn = (kernel.getConfigStore().get('JWT_EXPIRE') ||
-      '1 days') as StringValue;
-  }
-
-  setAuthProvider(provider: IAuthProvider<T>): boolean {
-    if (this.authProvider) {
-      return false;
+export default class CryptoClient extends BaseCryptoClient implements ICClient {
+  async apiTokenValidation(request: TokAuthValidationRequest): Promise<{
+    valid: boolean;
+    userId: string | null;
+  }> {
+    if ('refresh' in request) {
+      return { valid: false, userId: null };
     }
-    this.authProvider = provider;
-    return true;
-  }
-
-  jwtVerifyAccessToken(token: string): Promise<JwtToken<T> | number> {
-    return new Promise((resolve) => {
-      jwt.verify(token, this.AesKey, (err, user: any) => {
-        if (err instanceof jwt.TokenExpiredError) {
-          resolve(498);
-        } else if (err || user === null) {
-          resolve(403);
-        } else {
-          resolve(user);
-        }
-      });
-    });
-  }
-
-  jwtDecodeAccessToken(token: string): JwtToken<T> | null {
-    // MSJ-CJS SWITCH
-    const mod = (jwt as any).default || jwt;
-    return mod.decode(token, { json: true });
-  }
-
-  async jwtGenerateAccessToken(
-    data: JwtToken<T>,
-    extend?: Record<string, any>,
-    expire?: StringValue | number,
-  ): Promise<string> {
-    let sData;
-    if (this.authProvider) {
-      sData = await this.authProvider.jwtAddData(data, extend);
-    } else {
-      sData = data;
-    }
-    return jwt.sign(sData, this.AesKey, {
-      expiresIn: expire ?? this.expiresIn,
-    });
-  }
-
-  async apiTokenValidation(
-    username: string,
-    token: string,
-    requestType: string,
-  ): Promise<{ valid: boolean; userId: string | null }> {
-    if (this.authProvider) {
-      return this.authProvider.authorizeToken(username, token, requestType);
-    }
+    const { password, username } = request;
     const store = this.kernel.getConfigStore();
     const cc = this.kernel.getCryptoClient();
-    if (!store.has('SERVER_PASSWORD')) {
+    if (!password || !store.has('SERVER_PASSWORD')) {
       return { valid: false, userId: null };
     }
     if (
-      cc?.timeSavePWValidation(token, store.get('SERVER_PASSWORD') || '') ||
-      (token === store.get('SERVER_PASSWORD') && username === 'admin')
+      (cc?.timeSavePWValidation(password, store.get('SERVER_PASSWORD') || '') ||
+        password === store.get('SERVER_PASSWORD')) &&
+      username === 'admin'
     ) {
       return {
         valid: true,
@@ -95,19 +37,33 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
     };
   }
 
-  async permissionValidation(request: ValidationRequest<T>): Promise<boolean> {
-    if (this.authProvider) {
-      return this.authProvider.validateAccess(request);
-    }
+  async permissionValidation(): Promise<boolean> {
     return false;
   }
 
-  async bearerTokenValidation(req: XRequest): Promise<JwtToken<T> | number> {
-    if (this.authProvider) {
-      return this.authProvider.bearerTokenValidation(req);
-    }
-    const authHeader = req.headers.authorization;
-    const token = authHeader?.split(' ')?.[1];
+  async generateToken(userID: string, userName: string): Promise<TokenData> {
+    const jti = this.getUUID();
+    const token = await this.jwtGenerateAccessToken({
+      sub: userID,
+      username: userName,
+      jti,
+      type: 'token',
+    });
+    return { token };
+  }
+
+  async generateRefreshToken(token: JwtToken): Promise<TokenData | null> {
+    const newToken = await this.jwtGenerateAccessToken({
+      sub: token.sub!,
+      username: token.username,
+      jti: token.jti,
+      type: 'token',
+    });
+    return { token: newToken };
+  }
+
+  async bearerTokenValidation(req: XRequest): Promise<JwtToken | number> {
+    const token = this.tokenExtractor(req);
     if (!token) {
       return 401;
     }
@@ -116,5 +72,25 @@ export default class CryptoClient<T extends JwtExtend = JwtExtend>
       return tokenData;
     }
     return 403;
+  }
+
+  tokenExtractor(req: XRequest) {
+    let token: string | undefined;
+    if (req.headers.authorization !== undefined) {
+      const authHeader = req.headers.authorization;
+      token = authHeader && authHeader.split(' ')[1];
+    } else if (req.query.glxauth !== undefined) {
+      token = req.query.glxauth as string;
+    } else if (req.headers.cookie !== undefined) {
+      const crumbs = req.headers.cookie.trim();
+      const coList = crumbs.split(';');
+      const oel = coList.find((el) => el.startsWith(`glxauth=`));
+      token = oel?.split('=')[1];
+    }
+    return token;
+  }
+
+  async setCookie(): Promise<void> {
+    return Promise.resolve();
   }
 }

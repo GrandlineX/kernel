@@ -1,14 +1,14 @@
-import { IDataBase } from '@grandlinex/core';
-import { ActionTypes } from '@grandlinex/swagger-mate';
-import {
+import type { IDataBase } from '@grandlinex/core';
+import type { ActionTypes } from '@grandlinex/swagger-mate';
+import type {
   IBaseAction,
   IBaseCache,
   IBaseClient,
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib/index.js';
-import BaseAction from './BaseAction.js';
+} from '../lib';
+import BaseAction from './BaseAction';
 
 export default abstract class BaseApiAction<
     K extends IKernel = IKernel,

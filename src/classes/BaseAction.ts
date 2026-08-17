@@ -1,36 +1,36 @@
 import {
   CoreAction,
   CoreEntity,
-  IDataBase,
+  type IDataBase,
   instanceOfEntity,
 } from '@grandlinex/core';
 import {
   ActionMode,
-  ErrorType,
+  type ErrorType,
   ESchemaEditor,
   isErrorType,
   isSwaggerRef,
-  SSchemaEl,
+  type SSchemaEl,
 } from '@grandlinex/swagger-mate';
-import {
+import type {
   IBaseAction,
   IBaseCache,
   IBaseClient,
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib/index.js';
-import { ExpressServerTiming, IExtensionInterface } from './timing/index.js';
+  JwtToken,
+} from '../lib';
+import { ExpressServerTiming, type IExtensionInterface } from './timing';
 
-import {
+import type {
   XActionEvent,
   XPath,
   XQuery,
   XRequest,
   XResponse,
-} from '../lib/express.js';
-import { BaseUserAgent } from './BaseUserAgent.js';
-import { JwtToken } from './BaseAuthProvider.js';
+} from '../lib/express';
+import { BaseUserAgent } from './BaseUserAgent';
 
 export default abstract class BaseAction<
     K extends IKernel = IKernel,
@@ -283,11 +283,11 @@ export default abstract class BaseAction<
     }
     auth.stop();
 
-    if (dat && typeof dat !== 'number') {
+    if (dat && typeof dat !== 'number' && dat.type === 'token') {
       await this.invokeHandler(req, res, next, dat, extension, xPath, xQuery);
     } else if (this.mode === ActionMode.DMZ_WITH_USER) {
       await this.invokeHandler(req, res, next, null, extension, xPath, xQuery);
-    } else if (dat) {
+    } else if (typeof dat === 'number') {
       res.sendStatus(dat);
     } else {
       res.sendStatus(401);

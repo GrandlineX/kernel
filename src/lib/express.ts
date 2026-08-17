@@ -1,10 +1,7 @@
 import express from 'express';
-import { ErrorType } from '@grandlinex/swagger-mate';
-import {
-  BaseUserAgent,
-  IExtensionInterface,
-  JwtToken,
-} from '../classes/index.js';
+import type { ErrorType } from '@grandlinex/swagger-mate';
+import { BaseUserAgent, type IExtensionInterface } from '../classes';
+import type { JwtToken } from './index';
 
 export type XRequest = express.Request & {
   rawBody?: string | null;

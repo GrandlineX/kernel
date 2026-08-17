@@ -1,11 +1,11 @@
-import { CoreKernelModule, IDataBase } from '@grandlinex/core';
-import {
+import { CoreKernelModule, type IDataBase } from '@grandlinex/core';
+import type {
   IBaseCache,
   IBaseClient,
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib/index.js';
+} from '../lib';
 
 export default abstract class BaseKernelModule<
     K extends IKernel = IKernel,

@@ -1,4 +1,4 @@
-import { XNextFc, XRequest, XResponse } from '../../../lib/express.js';
+import type { XNextFc, XRequest, XResponse } from '../../../lib/express';
 
 export type GLXMiddleWare = (
   req: XRequest,

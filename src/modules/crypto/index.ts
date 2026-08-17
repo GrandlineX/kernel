@@ -1,4 +1,4 @@
-import CryptoClient from './CryptoClient.js';
+import CryptoClient from './CryptoClient';
 
 export { CryptoClient };
-export * from './utils/cors.js';
+export * from './utils/cors';

@@ -1,8 +1,8 @@
-import { CoreKernel, CoreKernelProps } from '@grandlinex/core';
-import { ICClient, IKernel } from './lib/index.js';
-import CryptoClient from './modules/crypto/CryptoClient.js';
-import KernelModule from './KernelModule.js';
-import { BaseKernelMetric } from './classes/index.js';
+import { CoreKernel, type CoreKernelProps } from '@grandlinex/core';
+import type { ICClient, IKernel } from './lib';
+import CryptoClient from './modules/crypto/CryptoClient';
+import KernelModule from './KernelModule';
+import { BaseKernelMetric } from './classes';
 
 /**
  *  @class Kernel
@@ -39,7 +39,7 @@ export default class Kernel extends CoreKernel<ICClient> implements IKernel {
     if (store.has('SERVER_PASSWORD')) {
       this.setCryptoClient(
         new CryptoClient(
-          CryptoClient.fromPW(store.get('SERVER_PASSWORD') as string),
+          CryptoClient.fromPW(store.get('SERVER_PASSWORD')!),
           this,
         ),
       );

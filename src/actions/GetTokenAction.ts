@@ -1,15 +1,38 @@
-import { ActionMode, Route } from '@grandlinex/swagger-mate';
-import { JwtToken, RouteApiAction } from '../classes/index.js';
-import CryptoClient from '../modules/crypto/CryptoClient.js';
+import {
+  ActionMode,
+  Route,
+  SComponent,
+  SPathUtil,
+} from '@grandlinex/swagger-mate';
 
-import { XActionEvent } from '../lib/express.js';
+import { RouteApiAction } from '../classes';
+
+import type { XActionEvent } from '../lib/express';
+import type { JwtToken } from '../lib';
 
 type SchemaType = {
   username: string;
-  token: string;
+  password: string;
+  top?: string;
 };
 
-@Route('POST', '/token', {
+@SComponent({
+  schemas: {
+    TokenData: {
+      type: 'object',
+      properties: {
+        token: {
+          type: 'string',
+        },
+        refresh: {
+          type: 'string',
+        },
+      },
+      required: ['token'],
+    },
+  },
+})
+@Route('POST', '/api/token', {
   mode: ActionMode.DMZ,
   operationId: 'getToken',
   summary: 'Get API token',
@@ -20,44 +43,52 @@ type SchemaType = {
       username: {
         type: 'string',
       },
-      token: {
+      password: {
+        type: 'string',
+      },
+      top: {
         type: 'string',
       },
     },
-    required: ['username', 'token'],
+    required: ['username', 'password'],
   },
-  responseSchema: {
-    type: 'object',
-    properties: {
-      token: {
-        type: 'string',
-      },
+  parameters: [
+    {
+      in: 'query',
+      name: 'refresh',
+      schema: { type: 'string' },
+      required: false,
     },
-    required: ['token'],
-  },
+  ],
+  responseSchema: SPathUtil.schemaPath('TokenData'),
   responseCodes: ['200', '403'],
 })
 export default class GetTokenAction extends RouteApiAction {
   async handler({
-    req,
     res,
     extension,
     body,
+    query: { refresh },
   }: XActionEvent<JwtToken, SchemaType>): Promise<void> {
-    const cc = this.getKernel().getCryptoClient() as CryptoClient;
-    const { username, token } = body;
+    const cc = this.getKernel().getCryptoClient()!;
+    const { username, password, top } = body;
     const valid = await extension.timing.startFunc('validation', () =>
-      cc.apiTokenValidation(username, token, 'api'),
+      cc.apiTokenValidation({
+        username,
+        password,
+        top,
+        requestType: 'api',
+      }),
     );
     if (valid.valid && valid.userId) {
-      const jwt = await cc.jwtGenerateAccessToken(
-        {
-          userid: valid.userId,
-          username,
-        },
-        req.body,
+      const tokenData = await cc.generateToken(
+        valid.userId,
+        username,
+        refresh === 'true',
       );
-      res.status(200).send({ token: jwt });
+
+      await cc.setCookie(res, tokenData);
+      res.status(200).send(tokenData);
     } else {
       res.status(403).send('no no no ...');
     }

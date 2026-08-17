@@ -1,8 +1,9 @@
 import { Route } from '@grandlinex/swagger-mate';
-import { JwtToken, RouteApiAction } from '../classes/index.js';
-import { XActionEvent } from '../lib/express.js';
+import { RouteApiAction } from '../classes';
+import type { XActionEvent } from '../lib/express';
+import type { JwtToken } from '../lib';
 
-@Route('GET', '/test/auth', {
+@Route('GET', '/api/auth/test', {
   operationId: 'testAuth',
   summary: 'Test user auth',
   tags: ['kernel'],

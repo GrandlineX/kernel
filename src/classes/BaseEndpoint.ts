@@ -1,15 +1,15 @@
-import express, { Express } from 'express';
+import express, { type Express } from 'express';
 import http from 'http';
 import parser from 'body-parser';
-import { CorePresenter, IDataBase } from '@grandlinex/core';
-import {
+import { CorePresenter, type IDataBase } from '@grandlinex/core';
+import type {
   IBaseCache,
   IBaseClient,
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib/index.js';
-import { XRequest, XResponse } from '../lib/express.js';
+} from '../lib';
+import type { XRequest, XResponse } from '../lib/express';
 
 export function keepRawBody(
   req: XRequest,

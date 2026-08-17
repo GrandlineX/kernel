@@ -1,12 +1,8 @@
 import ExpressServerTiming, {
-  IExtensionInterface,
-} from './ExpressServerTiming.js';
-import ServerTiming from './ServerTiming.js';
-import ServerTimingElement from './ServerTimingElement.js';
+  type IExtensionInterface,
+} from './ExpressServerTiming';
+import ServerTiming from './ServerTiming';
+import ServerTimingElement from './ServerTimingElement';
 
-export {
-  ExpressServerTiming,
-  ServerTimingElement,
-  ServerTiming,
-  IExtensionInterface,
-};
+export { ExpressServerTiming, ServerTimingElement, ServerTiming };
+export type { IExtensionInterface };

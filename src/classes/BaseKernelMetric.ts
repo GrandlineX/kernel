@@ -1,5 +1,5 @@
-import { XRequest, XResponse } from '../lib/express.js';
-import BaseAction from './BaseAction.js';
+import type { XRequest, XResponse } from '../lib/express';
+import BaseAction from './BaseAction';
 
 export type MetricEventStart = {
   req: XRequest;

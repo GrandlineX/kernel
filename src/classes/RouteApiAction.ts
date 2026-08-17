@@ -1,14 +1,14 @@
-import { IDataBase } from '@grandlinex/core';
+import type { IDataBase } from '@grandlinex/core';
 import { getRouteMeta } from '@grandlinex/swagger-mate';
-import {
+import type {
   IBaseAction,
   IBaseCache,
   IBaseClient,
   IBaseKernelModule,
   IBasePresenter,
   IKernel,
-} from '../lib/index.js';
-import BaseApiAction from './BaseApiAction.js';
+} from '../lib';
+import BaseApiAction from './BaseApiAction';
 
 export default abstract class RouteApiAction<
     K extends IKernel = IKernel,

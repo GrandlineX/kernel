@@ -1,6 +1,6 @@
 import e from 'express';
-import BaseEndpoint from '../classes/BaseEndpoint.js';
-import { GLXMiddleWare } from '../modules/crypto/index.js';
+import BaseEndpoint from '../classes/BaseEndpoint';
+import type { GLXMiddleWare } from '../modules/crypto';
 
 export default class KernelEndpoint extends BaseEndpoint {
   registerStaticFolder(staticPath: string) {
