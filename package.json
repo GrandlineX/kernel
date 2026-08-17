@@ -1,23 +1,24 @@
 {
   "name": "@grandlinex/kernel",
-  "version": "3.0.0-alpha.6",
+  "version": "3.0.0-alpha.7",
   "description": "GrandLineX is an out-of-the-box server framework on top of ExpressJs.",
   "type": "module",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/mjs/index.d.ts",
-        "default": "./dist/mjs/index.js"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       },
       "require": {
-        "types": "./dist/cjs/index.d.ts",
-        "default": "./dist/cjs/index.js"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
-    }
+    },
+    "./package.json": "./package.json"
   },
-  "types": "dist/cjs/index.d.ts",
-  "main": "dist/cjs/index.js",
-  "module": "dist/mjs/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
@@ -25,7 +26,6 @@
     "lint": "eslint src",
     "test": "vitest run",
     "run": "tsx tests/run.ts",
-    "run2": "tsx tests/run2.ts",
     "run-swagger": "tsx tests/SwaggerTest.ts",
     "pack-dev": "npm version -no-git-tag-version prerelease && npm run build && npm pack",
     "test-coverage": "vitest run --coverage",
