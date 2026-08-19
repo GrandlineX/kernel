@@ -54,7 +54,7 @@ export default class CryptoClient extends BaseCryptoClient implements ICClient {
 
   async generateRefreshToken(token: JwtToken): Promise<TokenData | null> {
     const newToken = await this.jwtGenerateAccessToken({
-      sub: token.sub!,
+      sub: token.sub,
       username: token.username,
       jti: token.jti,
       type: 'token',

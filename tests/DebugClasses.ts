@@ -45,7 +45,7 @@ export class TestCryptoClient extends BaseCryptoClient {
     request: TokAuthValidationRequest,
   ): Promise<{ valid: boolean; userId: string | null }> {
     if (request.requestType === 'refresh') {
-      return { valid: true, userId: request.refresh.sub! };
+      return { valid: true, userId: request.refresh.sub };
     }
     const { username, password } = request;
     const valid = username === 'admin' && password === 'admin';
@@ -92,7 +92,7 @@ export class TestCryptoClient extends BaseCryptoClient {
 
   async generateRefreshToken(token: JwtToken): Promise<TokenData | null> {
     if (token.type === 'refresh') {
-      return this.generateToken(token.username, token.sub!, true, token.jti);
+      return this.generateToken(token.username, token.sub, true, token.jti);
     }
     return null;
   }

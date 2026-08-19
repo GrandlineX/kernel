@@ -268,12 +268,16 @@ describe.each([
     }
   });
   test('test auth expire', async () => {
-    const token = await kernel
-      .getCryptoClient()!
-      .jwtGenerateAccessToken(
-        { username: testText, userid: testText, type: 'token', sid: 'test' },
-        0,
-      );
+    const token = await kernel.getCryptoClient()!.jwtGenerateAccessToken(
+      {
+        username: testText,
+        userid: testText,
+        type: 'token',
+        sub: 'test',
+        jti: 'dev',
+      },
+      0,
+    );
     const valid = kernel.getCryptoClient()!.jwtDecodeAccessToken(token);
     expect(valid?.username).toBe(testText);
 

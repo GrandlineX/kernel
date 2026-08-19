@@ -13,7 +13,7 @@ import type {
 } from '@grandlinex/core';
 import express from 'express';
 
-import * as jwt from 'jsonwebtoken';
+import { type JwtPayload } from 'jsonwebtoken';
 import type { StringValue } from 'ms';
 import type { XActionEvent, XRequest, XResponse } from './express';
 import { BaseKernelMetric } from '../classes/BaseKernelMetric';
@@ -21,7 +21,9 @@ import { BaseKernelMetric } from '../classes/BaseKernelMetric';
 export type JwtToken = {
   username: string;
   type: 'token' | 'refresh';
-} & jwt.JwtPayload;
+  jti: string;
+  sub: string;
+} & JwtPayload;
 
 /**
  * Represents a request for validating a JWT token with optional constraints.
@@ -73,9 +75,9 @@ export interface ICClient extends ICoreCClient {
    * Decodes a JWT access token and returns its payload.
    *
    * @param {string} token - The JWT access token to decode.
-   * @returns {jwt.JwtPayload | null} The decoded payload if the token is valid, otherwise null.
+   * @returns {JwtPayload | null} The decoded payload if the token is valid, otherwise null.
    */
-  jwtDecodeAccessToken(token: string): jwt.JwtPayload | null;
+  jwtDecodeAccessToken(token: string): JwtToken | null;
 
   /**
    * Generates a signed JWT access token.
