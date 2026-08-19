@@ -16,7 +16,7 @@ string manipulation, entity metadata handling, environment setup, command execut
 and file downloading.</p>
 </div></section><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:270</li></ul></aside>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:221</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -72,7 +72,7 @@ and file downloading.</p>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">exclude</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:435</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:386</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="cameltosnakecase"><code class="tsd-tag">Static</code><span>camel<wbr/>To<wbr/>Snake<wbr/>Case</span><a href="#cameltosnakecase" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -90,7 +90,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The converted snake_case string. If the input string is empty, the same empty string is returned.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:371</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:322</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="createfolderbulk"><code class="tsd-tag">Static</code><span>create<wbr/>Folder<wbr/>Bulk</span><a href="#createfolderbulk" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -108,7 +108,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>Returns <code>true</code> if all folders were successfully created, otherwise <code>false</code> if some already exist.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:349</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:300</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="createfolderifnotexist"><code class="tsd-tag">Static</code><span>create<wbr/>Folder<wbr/>If<wbr/>Not<wbr/>Exist</span><a href="#createfolderifnotexist" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -126,7 +126,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p><code>true</code> if the folder was created during this call; <code>false</code> if the folder already existed.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:356</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:307</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="downloadfile"><code class="tsd-tag">Static</code><span>download<wbr/>File</span><a href="#downloadfile" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -153,7 +153,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">size</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to an object containing the file name, size in bytes, and MIME type, or null if the download fails.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:430</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:381</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="entityrelation"><code class="tsd-tag">Static</code><span>entity<wbr/>Relation</span><a href="#entityrelation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -183,7 +183,7 @@ and file downloading.</p>
 </ul>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:392</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:343</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="entityrelationcolumn"><code class="tsd-tag">Static</code><span>entity<wbr/>Relation<wbr/>Column</span><a href="#entityrelationcolumn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -208,7 +208,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/ColumnProps.html" class="tsd-signature-type tsd-kind-interface">ColumnProps</a></h4><p>An object containing the column data type and foreign key definition.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:404</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:355</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="exec"><code class="tsd-tag">Static</code><span>exec</span><a href="#exec" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -232,7 +232,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/XExecResult.html" class="tsd-signature-type tsd-kind-type-alias">XExecResult</a><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves with the execution result.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:420</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:371</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="getentitynames"><code class="tsd-tag">Static</code><span>get<wbr/>Entity<wbr/>Names</span><a href="#getentitynames" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -250,7 +250,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/ClassNameInterface.html" class="tsd-signature-type tsd-kind-interface">ClassNameInterface</a></h4><p>An object containing the class name and the corresponding table name derived from the entity metadata.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:411</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:362</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="gettimestamp"><code class="tsd-tag">Static</code><span>get<wbr/>Time<wbr/>Stamp</span><a href="#gettimestamp" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -262,7 +262,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>A string in the format &quot;YYYY-MM-DD HH:mm:ss&quot; representing the current date and time.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:291</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:242</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="numprint"><code class="tsd-tag">Static</code><span>num<wbr/>Print</span><a href="#numprint" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -281,7 +281,7 @@ and file downloading.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The formatted number as a string, padded with a leading zero if necessary.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:285</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:236</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="promisewithtimeout"><code class="tsd-tag">Static</code><span>promise<wbr/>With<wbr/>Timeout</span><a href="#promisewithtimeout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -307,7 +307,7 @@ the returned promise is rejected with an Error.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#promisewithtimeoutt">T</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves or rejects with the original promise's outcome, or rejects with a timeout error if the specified time elapses.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:379</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:330</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="removefolderifexist"><code class="tsd-tag">Static</code><span>remove<wbr/>Folder<wbr/>If<wbr/>Exist</span><a href="#removefolderifexist" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -327,7 +327,7 @@ performs the deletion only when the folder is present; otherwise it
 simply returns true.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:365</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:316</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="sleep"><code class="tsd-tag">Static</code><span>sleep</span><a href="#sleep" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -345,7 +345,7 @@ simply returns true.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves after the specified delay.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:277</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:228</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="workerfactoryfromarray"><code class="tsd-tag">Static</code><span>worker<wbr/>Factory<wbr/>From<wbr/>Array</span><a href="#workerfactoryfromarray" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -374,7 +374,7 @@ simply returns true.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#workerfactoryfromarrayf">F</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves when all workers have finished processing, with the value returned by <a href="#workerfactorywithproducer" class="tsd-kind-method">workerFactoryWithProducer</a>.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:343</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:294</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="workerfactorywithproducer"><code class="tsd-tag">Static</code><span>worker<wbr/>Factory<wbr/>With<wbr/>Producer</span><a href="#workerfactorywithproducer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -407,7 +407,7 @@ simply returns true.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#workerfactorywithproducerf">F</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise that resolves to an array containing the <code>F</code> values extracted from the processed <code>WDat&lt;F&gt;</code> objects.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:327</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:278</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external">
 <h3 class="tsd-anchor-link" id="workerfc"><code class="tsd-tag">Static</code><span>worker<wbr/>Fc</span><a href="#workerfc" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -444,7 +444,7 @@ more items are available to process.</p>
 been consumed and stored in the provided map.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:314</li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in node_modules/@grandlinex/core/dist/index.d.mts:265</li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
