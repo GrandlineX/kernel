@@ -11,7 +11,7 @@
 <li><a href="" aria-current="page">IKernel</a></li></ul>
 <h1>Interface IKernel</h1></div>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">IKernel</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#getlogger">getLogger</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">()</span> <span class="tsd-signature-symbol">=&gt;</span> <a href="../classes/CoreLogger.html" class="tsd-signature-type tsd-kind-class">CoreLogger</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#addextension-1">addExtension</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">ext</span><span class="tsd-signature-symbol">:</span> <a href="../classes/CoreKernelExtension.html" class="tsd-signature-type tsd-kind-class">CoreKernelExtension</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#addmodule-1">addModule</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">module</span><span class="tsd-signature-symbol">:</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#debug-1">debug</a><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">ags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#error-1">error</a><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">ags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getactionlist-1">getActionList</a><span class="tsd-signature-symbol">(</span><br/>        <span class="tsd-kind-parameter">full</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="ICoreAction.html" class="tsd-signature-type tsd-kind-interface">ICoreAction</a><span class="tsd-signature-symbol">&lt;</span><a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getapiversion-1">getApiVersion</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getappcode-1">getAppCode</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getappname-1">getAppName</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getappserverport-1">getAppServerPort</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getchildmodule-1">getChildModule</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#getchildmodulet">T</a> <span class="tsd-signature-keyword">extends</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a> <span class="tsd-signature-symbol">=</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>        <span class="tsd-kind-parameter">modName</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#getchildmodulet">T</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getconfigstore-1">getConfigStore</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="IStore.html" class="tsd-signature-type tsd-kind-interface">IStore</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getcoremodule-1">getCoreModule</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../types/ICoreModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreModule</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getcryptoclient-1">getCryptoClient</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="ICClient.html" class="tsd-signature-type tsd-kind-interface">ICClient</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getdb-1">getDb</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="ICoreDb.html" class="tsd-signature-type tsd-kind-interface">ICoreDb</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getdevmode-1">getDevMode</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getextension-1">getExtension</a><span class="tsd-signature-symbol">&lt;</span><br/>        <a class="tsd-signature-type tsd-kind-type-parameter" href="#getextensiona">A</a> <span class="tsd-signature-keyword">extends</span><br/>            <a href="../classes/CoreKernelExtension.html" class="tsd-signature-type tsd-kind-class">CoreKernelExtension</a><span class="tsd-signature-symbol">&lt;</span><br/>                <a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span><br/>                <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span><br/>                <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span><br/>                <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span><br/>                <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span><br/>            <span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>        <span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#getextensiona">A</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getmetric-1">getMetric</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../classes/BaseKernelMetric.html" class="tsd-signature-type tsd-kind-class">BaseKernelMetric</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getmodule-1">getModule</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getname-1">getName</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getoffline-1">getOffline</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getservicelist-1">getServiceList</a><span class="tsd-signature-symbol">(</span><br/>        <span class="tsd-kind-parameter">full</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="ICoreService.html" class="tsd-signature-type tsd-kind-interface">ICoreService</a><span class="tsd-signature-symbol">&lt;</span><a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#getstate-1">getState</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#hascryptoclient-1">hasCryptoClient</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#info-1">info</a><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">ags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#lerror-1">lError</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#log-1">log</a><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">ags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#on-1">on</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#ona">A</a> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>        <span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>        <span class="tsd-kind-parameter">callback</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">ik</span><span class="tsd-signature-symbol">:</span> <a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><a href="ICClient.html" class="tsd-signature-type tsd-kind-interface">ICClient</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">payload</span><span class="tsd-signature-symbol">?:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#ona">A</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#setappserverport-1">setAppServerPort</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">port</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#setbasemodule-1">setBaseModule</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">module</span><span class="tsd-signature-symbol">:</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#setcryptoclient-1">setCryptoClient</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">crypto</span><span class="tsd-signature-symbol">:</span> <a href="ICClient.html" class="tsd-signature-type tsd-kind-interface">ICClient</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#setdevmode-1">setDevMode</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">mode</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#setoffline-1">setOffline</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">mode</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#setstate-1">setState</a><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#start-1">start</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#stop-1">stop</a><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#triggerevent-1">triggerEvent</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#triggereventa">A</a> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">trigger</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">payload</span><span class="tsd-signature-symbol">?:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#triggereventa">A</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#verbose-1">verbose</a><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">ags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-call-signature" href="#warn-1">warn</a><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">ags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
-<section class="tsd-panel tsd-hierarchy" data-refl="164">
+<section class="tsd-panel tsd-hierarchy" data-refl="167">
 <h4>Hierarchy (<a href="../hierarchy.html#IKernel">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><a href="ICClient.html" class="tsd-signature-type tsd-kind-interface">ICClient</a><span class="tsd-signature-symbol">&gt;</span>
@@ -22,7 +22,7 @@
 <ul class="tsd-hierarchy">
 <li><a href="../classes/Kernel.html" class="tsd-signature-type tsd-kind-class">Kernel</a></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/3e610ace789e7fc929477b0a0712e8eab8bb3ef6/src/lib/index.ts#L154">src/lib/index.ts:154</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/eaea94f4710138bc54fbdf738de8da28f2461844/src/lib/index.ts#L163">src/lib/index.ts:163</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -81,7 +81,7 @@
 <div class="tsd-signature"><span class="tsd-kind-property">getLogger</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">()</span> <span class="tsd-signature-symbol">=&gt;</span> <a href="../classes/CoreLogger.html" class="tsd-signature-type tsd-kind-class">CoreLogger</a></div><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getlogger">getLogger</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:534</li></ul></aside></section></section></details>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:534</li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -99,7 +99,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#addextension">addExtension</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:415</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:415</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="addmodule"><span>add<wbr/>Module</span><a href="#addmodule" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -113,7 +113,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#addmodule">addModule</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:403</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:403</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="debug"><span>debug</span><a href="#debug" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -127,7 +127,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#debug">debug</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:479</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:479</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="error"><span>error</span><a href="#error" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -141,7 +141,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#error">error</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:481</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:481</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getactionlist"><span>get<wbr/>Action<wbr/>List</span><a href="#getactionlist" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -155,7 +155,7 @@
 <h4 class="tsd-returns-title">Returns <a href="ICoreAction.html" class="tsd-signature-type tsd-kind-interface">ICoreAction</a><span class="tsd-signature-symbol">&lt;</span><a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getactionlist">getActionList</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:413</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:413</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getapiversion"><span>get<wbr/>Api<wbr/>Version</span><a href="#getapiversion" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -164,7 +164,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/3e610ace789e7fc929477b0a0712e8eab8bb3ef6/src/lib/index.ts#L156">src/lib/index.ts:156</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/eaea94f4710138bc54fbdf738de8da28f2461844/src/lib/index.ts#L165">src/lib/index.ts:165</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getappcode"><span>get<wbr/>App<wbr/>Code</span><a href="#getappcode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -174,7 +174,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getappcode">getAppCode</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:395</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:395</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getappname"><span>get<wbr/>App<wbr/>Name</span><a href="#getappname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -184,7 +184,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getappname">getAppName</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:396</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:396</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getappserverport"><span>get<wbr/>App<wbr/>Server<wbr/>Port</span><a href="#getappserverport" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -193,7 +193,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/3e610ace789e7fc929477b0a0712e8eab8bb3ef6/src/lib/index.ts#L155">src/lib/index.ts:155</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/eaea94f4710138bc54fbdf738de8da28f2461844/src/lib/index.ts#L164">src/lib/index.ts:164</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getchildmodule"><span>get<wbr/>Child<wbr/>Module</span><a href="#getchildmodule" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -211,7 +211,7 @@
 <h4 class="tsd-returns-title">Returns <a class="tsd-signature-type tsd-kind-type-parameter" href="#getchildmodulet">T</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getchildmodule">getChildModule</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:407</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:407</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getconfigstore"><span>get<wbr/>Config<wbr/>Store</span><a href="#getconfigstore" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -221,7 +221,7 @@
 <h4 class="tsd-returns-title">Returns <a href="IStore.html" class="tsd-signature-type tsd-kind-interface">IStore</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getconfigstore">getConfigStore</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:412</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:412</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getcoremodule"><span>get<wbr/>Core<wbr/>Module</span><a href="#getcoremodule" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -231,7 +231,7 @@
 <h4 class="tsd-returns-title">Returns <a href="../types/ICoreModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreModule</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getcoremodule">getCoreModule</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:406</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:406</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getcryptoclient"><span>get<wbr/>Crypto<wbr/>Client</span><a href="#getcryptoclient" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -241,7 +241,7 @@
 <h4 class="tsd-returns-title">Returns <a href="ICClient.html" class="tsd-signature-type tsd-kind-interface">ICClient</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getcryptoclient">getCryptoClient</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:398</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:398</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getdb"><span>get<wbr/>Db</span><a href="#getdb" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -251,7 +251,7 @@
 <h4 class="tsd-returns-title">Returns <a href="ICoreDb.html" class="tsd-signature-type tsd-kind-interface">ICoreDb</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getdb">getDb</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:402</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:402</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getdevmode"><span>get<wbr/>Dev<wbr/>Mode</span><a href="#getdevmode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -261,7 +261,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getdevmode">getDevMode</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:410</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:410</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getextension"><span>get<wbr/>Extension</span><a href="#getextension" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -279,7 +279,7 @@
 <h4 class="tsd-returns-title">Returns <a class="tsd-signature-type tsd-kind-type-parameter" href="#getextensiona">A</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getextension">getExtension</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:416</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:416</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getmetric"><span>get<wbr/>Metric</span><a href="#getmetric" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -288,7 +288,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <a href="../classes/BaseKernelMetric.html" class="tsd-signature-type tsd-kind-class">BaseKernelMetric</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/3e610ace789e7fc929477b0a0712e8eab8bb3ef6/src/lib/index.ts#L158">src/lib/index.ts:158</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/eaea94f4710138bc54fbdf738de8da28f2461844/src/lib/index.ts#L167">src/lib/index.ts:167</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getmodule"><span>get<wbr/>Module</span><a href="#getmodule" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -298,7 +298,7 @@
 <h4 class="tsd-returns-title">Returns <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getmodule">getModule</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:404</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:404</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getname"><span>get<wbr/>Name</span><a href="#getname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -308,7 +308,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getname">getName</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:485</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:485</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getoffline"><span>get<wbr/>Offline</span><a href="#getoffline" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -318,7 +318,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getoffline">getOffline</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:408</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:408</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getservicelist"><span>get<wbr/>Service<wbr/>List</span><a href="#getservicelist" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -332,7 +332,7 @@
 <h4 class="tsd-returns-title">Returns <a href="ICoreService.html" class="tsd-signature-type tsd-kind-interface">ICoreService</a><span class="tsd-signature-symbol">&lt;</span><a href="ICoreKernel.html" class="tsd-signature-type tsd-kind-interface">ICoreKernel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <a href="../types/ICoreAnyModule.html" class="tsd-signature-type tsd-kind-type-alias">ICoreAnyModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getservicelist">getServiceList</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:414</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:414</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="getstate"><span>get<wbr/>State</span><a href="#getstate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -342,7 +342,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#getstate">getState</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:394</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:394</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="hascryptoclient"><span>has<wbr/>Crypto<wbr/>Client</span><a href="#hascryptoclient" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -352,7 +352,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#hascryptoclient">hasCryptoClient</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:399</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:399</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="info"><span>info</span><a href="#info" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -366,7 +366,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#info">info</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:480</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:480</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="lerror"><span>l<wbr/>Error</span><a href="#lerror" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -380,7 +380,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Error</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#lerror">lError</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:484</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:484</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="log"><span>log</span><a href="#log" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -394,7 +394,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#log">log</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:478</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:478</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="on"><span>on</span><a href="#on" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -413,7 +413,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#on">on</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:401</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:401</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setappserverport"><span>set<wbr/>App<wbr/>Server<wbr/>Port</span><a href="#setappserverport" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -426,7 +426,7 @@
 <li><span><span class="tsd-kind-parameter">port</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/3e610ace789e7fc929477b0a0712e8eab8bb3ef6/src/lib/index.ts#L157">src/lib/index.ts:157</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/kernel/blob/eaea94f4710138bc54fbdf738de8da28f2461844/src/lib/index.ts#L166">src/lib/index.ts:166</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="setbasemodule"><span>set<wbr/>Base<wbr/>Module</span><a href="#setbasemodule" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -440,7 +440,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#setbasemodule">setBaseModule</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:405</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:405</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="setcryptoclient"><span>set<wbr/>Crypto<wbr/>Client</span><a href="#setcryptoclient" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -454,7 +454,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#setcryptoclient">setCryptoClient</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:397</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:397</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="setdevmode"><span>set<wbr/>Dev<wbr/>Mode</span><a href="#setdevmode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -468,7 +468,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#setdevmode">setDevMode</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:411</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:411</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="setoffline"><span>set<wbr/>Offline</span><a href="#setoffline" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -482,7 +482,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#setoffline">setOffline</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:409</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:409</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="setstate"><span>set<wbr/>State</span><a href="#setstate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -496,7 +496,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#setstate">setState</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:393</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:393</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="start"><span>start</span><a href="#start" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -506,7 +506,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#start">start</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:391</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:391</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="stop"><span>stop</span><a href="#stop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -516,7 +516,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#stop">stop</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:392</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:392</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="triggerevent"><span>trigger<wbr/>Event</span><a href="#triggerevent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -535,7 +535,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#triggerevent">triggerEvent</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:400</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:400</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="verbose"><span>verbose</span><a href="#verbose" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -549,7 +549,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#verbose">verbose</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:483</li></ul></aside></div></li></ul></section>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:483</li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="warn"><span>warn</span><a href="#warn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -563,7 +563,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="ICoreKernel.html">ICoreKernel</a>.<a href="ICoreKernel.html#warn">warn</a></p>
 <ul>
-<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-zEIxrSQ9.d.mts:482</li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in node_modules/@grandlinex/core/dist/CoreKernel-OqPboNJt.d.mts:482</li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
