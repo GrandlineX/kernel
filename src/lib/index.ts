@@ -149,6 +149,15 @@ export interface ICClient extends ICoreCClient {
    * @param token The JWT token for which a refresh token should be generated.
    * @return A promise that resolves to the new {@link TokenData} object or {@code null} if the token cannot be refreshed. */
   generateRefreshToken(token: JwtToken): Promise<TokenData | null>;
+
+  /**
+   * Extracts an authentication token from the provided request.
+   *
+   * @param {XRequest} req - The incoming request object from which to extract the token.
+   *
+   * @returns {string | undefined} The extracted token if present; otherwise, `undefined`.
+   */
+  tokenExtractor(req: XRequest): string | undefined;
 }
 
 export interface IKernel extends ICoreKernel<ICClient> {
