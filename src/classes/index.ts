@@ -12,7 +12,9 @@ import BaseKernelModule from './BaseKernelModule';
 import BaseApiAction from './BaseApiAction';
 import RouteApiAction from './RouteApiAction';
 import BaseCryptoClient from './BaseCryptoClient';
+import EntityTableUtil from './EntityTableUtil';
 
+export * from './BaseTableUtils';
 export * from './BaseKernelMetric';
 export * from './BaseUserAgent';
 export * from './timing';
@@ -30,5 +32,6 @@ export {
   BaseClient,
   BaseBridge,
   BaseCryptoClient,
+  EntityTableUtil,
   keepRawBody,
 };
