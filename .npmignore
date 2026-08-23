@@ -25,3 +25,7 @@ coverage
 .npmrc
 junit.xml
 .github
+tsdown.config.ts
+vitest.config.ts
+CHANGELOG.md
+*.iml
