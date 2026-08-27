@@ -81,7 +81,11 @@ export default abstract class BaseAction<
     if (!required && field === undefined) {
       return;
     }
-    if (schema.nullable && field === null) {
+    if (
+      (schema.type === 'null' ||
+        (Array.isArray(schema.type) && schema.type.includes('null'))) &&
+      field === null
+    ) {
       return;
     }
     switch (schema?.type) {

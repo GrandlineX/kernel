@@ -34,6 +34,7 @@ export default class EntityTableUtil extends BaseTableUtils {
   static async entityQuery<T extends CoreEntity>({
     event,
     wrapper,
+    mode = 'query',
     filter,
     allowedQuery,
     maxPageSize,
@@ -41,6 +42,7 @@ export default class EntityTableUtil extends BaseTableUtils {
   }: {
     event: XActionEvent;
     wrapper: CoreEntityWrapper<T>;
+    mode?: 'query' | 'body';
     filter?: (query: TableQueryType) => QInterfaceSearch<T>;
     allowedQuery?: string[];
     maxPageSize?: number;
@@ -52,7 +54,12 @@ export default class EntityTableUtil extends BaseTableUtils {
         sort.push(key as string);
       }
     });
-    const query = this.tableQuery(event, sort, allowedQuery, maxPageSize);
+    let query: TableQueryType | null;
+    if (mode === 'query') {
+      query = this.tableFieldQuery(event, sort, allowedQuery, maxPageSize);
+    } else {
+      query = this.tableFieldBody(event, sort, allowedQuery, maxPageSize);
+    }
     if (!query) {
       return;
     }

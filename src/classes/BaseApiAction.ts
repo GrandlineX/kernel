@@ -49,6 +49,9 @@ export default abstract class BaseApiAction<
         case 'POST':
           app.post(this.getName(), this.secureHandler);
           break;
+        case 'QUERY':
+          app.query?.(this.getName(), this.secureHandler);
+          break;
         case 'USE':
           app.use(this.getName(), this.secureHandler);
           break;

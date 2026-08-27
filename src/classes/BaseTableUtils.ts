@@ -4,43 +4,73 @@ import {
   type SSchemaEl,
   type SSchemaElObj,
   type SwaggerRPathParameter,
+  type SDataType,
 } from '@grandlinex/swagger-mate';
 import type { XActionEvent } from '../lib/express';
 
-const coreParam: SwaggerRPathParameter[] = [
+const coreFields: {
+  key: string;
+  type: SDataType;
+  description?: string;
+}[] = [
   {
-    name: 'page',
-    in: 'query',
-    required: false,
-    schema: { type: 'string' },
+    key: 'page',
+    type: 'number',
+    description: 'The current page number >=0',
   },
   {
-    name: 'pageSize',
-    in: 'query',
-    required: false,
-    schema: { type: 'string' },
+    key: 'pageSize',
+    type: 'number',
+    description:
+      'The number of items per page, must be >0 and <=100 (default), 0 = no limit',
   },
   {
-    name: 'sortBy',
-    in: 'query',
-    required: false,
-    schema: { type: 'string' },
+    key: 'sortBy',
+    type: 'string',
+    description:
+      'The field name to sort by, must be a valid field name for the entity',
   },
   {
-    name: 'sortDesc',
-    in: 'query',
-    required: false,
-    schema: { type: 'string' },
+    key: 'sortDesc',
+    type: 'boolean',
+    description: 'If true, sort in descending order, otherwise ascending order',
   },
 ];
 
+const coreQueryParam: SwaggerRPathParameter[] = coreFields.map(
+  ({ key, description }) => ({
+    name: key,
+    in: 'query',
+    required: false,
+    description,
+    schema: { type: 'string' },
+  }),
+);
+
+const coreBodyParam: SSchemaElObj = {
+  type: 'object',
+  properties: coreFields.reduce<SSchemaElObj['properties']>(
+    (prev, cur) => ({
+      ...prev,
+      [cur.key]: {
+        type: cur.type,
+        description: cur.description,
+      },
+    }),
+    {},
+  ),
+};
+
+export type TableQueryFields = Map<
+  string,
+  string | number | boolean | (string | number)[]
+>;
 export type TableQueryType = {
   page: number;
   pageSize: number;
   sortBy: string | undefined;
-  search: string | undefined;
   sortDesc: boolean;
-  query: Map<string, string>;
+  fields: TableQueryFields;
 };
 
 export type Paging = {
@@ -51,7 +81,7 @@ export type Paging = {
 
 export class BaseTableUtils {
   /**
-   * Builds a Swagger parameter list that includes standard pagination and sorting options + search.
+   * Builds a Swagger parameter list that includes standard pagination and sorting options
    *
    * @param {...SwaggerRPathParameter[]} param Existing query parameters to be appended.
    * @returns {SwaggerRPathParameter[]} An array of Swagger parameters containing the provided parameters plus
@@ -60,46 +90,42 @@ export class BaseTableUtils {
   static queryParams(
     ...param: SwaggerRPathParameter[]
   ): SwaggerRPathParameter[] {
-    return [
-      ...coreParam,
-      {
-        name: 'search',
-        in: 'query',
-        required: false,
-        schema: { type: 'string' },
-      },
-      ...param,
-    ];
+    return [...coreQueryParam, ...param];
   }
 
   /**
-   * Parses and validates table query parameters from an XActionEvent.
-   * @param query
-   * @param sendError
-   * @param allowedSort
-   * @param allowedQuery
-   * @param maxPageSize
+   * Creates a new schema element object that combines the default core body parameters
+   * with the provided properties.
+   *
+   * @param {SSchemaElObj['properties']} param The properties to merge into the core body parameters.
+   * @return {SSchemaElObj} The merged schema element object.
    */
-  static tableQuery(
+  static bodyParams(param: SSchemaElObj['properties']): SSchemaElObj {
+    return {
+      ...coreBodyParam,
+      properties: {
+        ...coreBodyParam.properties,
+        ...param,
+      },
+    };
+  }
+
+  static tableFieldQuery(
     { query, sendError }: XActionEvent,
     allowedSort?: string[],
-    allowedQuery: string[] = [],
+    allowedFields: string[] = [],
     maxPageSize = 100,
   ): TableQueryType | null {
-    const q = new Map<string, string>();
-    const { page, pageSize, sortBy, sortDesc, search } = query;
+    const fields: TableQueryFields = new Map();
+    const { page, pageSize, sortBy, sortDesc } = query;
 
     for (const key of Object.keys(query)) {
-      const defaultQuery = [
-        'page',
-        'pageSize',
-        'sortBy',
-        'sortDesc',
-        'search',
-      ].includes(key);
-      const allowedQ = allowedQuery.includes(key);
+      const defaultQuery = ['page', 'pageSize', 'sortBy', 'sortDesc'].includes(
+        key,
+      );
+      const allowedQ = allowedFields.includes(key);
       if (allowedQ) {
-        q.set(key, String(query[key]));
+        fields.set(key, String(query[key]));
       }
       if (!defaultQuery && !allowedQ) {
         sendError(400, {
@@ -140,7 +166,6 @@ export class BaseTableUtils {
 
     let xPage = 0;
     let xPageSize = 25;
-    let xSearch;
 
     if (page) {
       xPage = parseInt(page, 10);
@@ -172,30 +197,113 @@ export class BaseTableUtils {
       }
     }
 
-    if (search) {
-      xSearch = String(search);
+    return {
+      page: xPage,
+      pageSize: xPageSize,
+      sortBy: sortBy ?? undefined,
+      sortDesc: sortDesc === 'true' || false,
+      fields,
+    };
+  }
+
+  static tableFieldBody(
+    { body, sendError }: XActionEvent,
+    allowedSort?: string[],
+    allowedFields: string[] = [],
+    maxPageSize = 100,
+  ): TableQueryType | null {
+    const fields: TableQueryFields = new Map();
+    const { page, pageSize, sortBy, sortDesc } = body;
+
+    for (const key of Object.keys(body)) {
+      const defaultQuery = ['page', 'pageSize', 'sortBy', 'sortDesc'].includes(
+        key,
+      );
+      const allowedQ = allowedFields.includes(key);
+      if (allowedQ) {
+        fields.set(key, body[key]);
+      }
+      if (!defaultQuery && !allowedQ) {
+        sendError(400, {
+          field: [
+            {
+              key,
+              message: 'Unknown body parameter',
+            },
+          ],
+        });
+        return null;
+      }
+    }
+
+    if (sortBy && !allowedSort) {
+      sendError(400, {
+        field: [
+          {
+            key: 'sortBy',
+            message: 'Sorting is not allowed on this endpoint',
+          },
+        ],
+      });
+      return null;
+    }
+
+    if (sortBy && !allowedSort!.includes(sortBy)) {
+      sendError(400, {
+        field: [
+          {
+            key: 'sortBy',
+            message: 'Invalid sortBy value',
+          },
+        ],
+      });
+      return null;
+    }
+
+    let xPage = 0;
+    let xPageSize = 25;
+
+    if (page !== undefined) {
+      if (!Number.isInteger(page) || page < 0) {
+        sendError(400, {
+          field: [
+            {
+              key: 'page',
+              message: 'Invalid page number',
+            },
+          ],
+        });
+        return null;
+      }
+      xPage = page;
+    }
+
+    if (pageSize !== undefined) {
+      if (
+        !Number.isInteger(pageSize) ||
+        pageSize < 0 ||
+        pageSize > maxPageSize
+      ) {
+        sendError(400, {
+          field: [
+            {
+              key: 'pageSize',
+              message: 'Invalid page size number',
+            },
+          ],
+        });
+        return null;
+      }
+      xPageSize = pageSize;
     }
 
     return {
       page: xPage,
       pageSize: xPageSize,
       sortBy: sortBy ?? undefined,
-      sortDesc: sortDesc === 'true' || false,
-      search: xSearch,
-      query: q,
+      sortDesc: sortDesc === true,
+      fields,
     };
-  }
-
-  /**
-   * Returns an array of {@link SwaggerRPathParameter} that includes the default core parameters
-   * followed by any additional parameters supplied.
-   *
-   * @param {SwaggerRPathParameter[]} param The additional SwaggerRPathParameter objects to append.
-   * @returns {SwaggerRPathParameter[]} A combined array of core and supplied parameters. */
-  static simpleQueryParams(
-    ...param: SwaggerRPathParameter[]
-  ): SwaggerRPathParameter[] {
-    return [...coreParam, ...param];
   }
 
   static calcPages(query: TableQueryType, total: number): Paging {

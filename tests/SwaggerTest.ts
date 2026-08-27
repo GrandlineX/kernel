@@ -6,7 +6,6 @@ import Kernel from '../src/Kernel.js';
     title: 'SwaggerKernel',
     version: '0.0.0',
   },
-  openapi: '3.0.3',
   paths: {},
   security: [
     {
