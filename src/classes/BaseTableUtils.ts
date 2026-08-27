@@ -7,6 +7,7 @@ import {
   type SDataType,
 } from '@grandlinex/swagger-mate';
 import type { XActionEvent } from '../lib/express';
+import TableQueryFields from './TableQueryFields';
 
 const coreFields: {
   key: string;
@@ -61,10 +62,6 @@ const coreBodyParam: SSchemaElObj = {
   ),
 };
 
-export type TableQueryFields = Map<
-  string,
-  string | number | boolean | (string | number)[]
->;
 export type TableQueryType = {
   page: number;
   pageSize: number;
@@ -116,7 +113,7 @@ export class BaseTableUtils {
     allowedFields: string[] = [],
     maxPageSize = 100,
   ): TableQueryType | null {
-    const fields: TableQueryFields = new Map();
+    const fields = new TableQueryFields();
     const { page, pageSize, sortBy, sortDesc } = query;
 
     for (const key of Object.keys(query)) {
@@ -212,7 +209,7 @@ export class BaseTableUtils {
     allowedFields: string[] = [],
     maxPageSize = 100,
   ): TableQueryType | null {
-    const fields: TableQueryFields = new Map();
+    const fields = new TableQueryFields();
     const { page, pageSize, sortBy, sortDesc } = body;
 
     for (const key of Object.keys(body)) {

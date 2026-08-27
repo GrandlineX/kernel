@@ -13,6 +13,7 @@ import BaseApiAction from './BaseApiAction';
 import RouteApiAction from './RouteApiAction';
 import BaseCryptoClient from './BaseCryptoClient';
 import EntityTableUtil from './EntityTableUtil';
+import TableQueryFields from './TableQueryFields';
 
 export * from './BaseTableUtils';
 export * from './BaseKernelMetric';
@@ -33,5 +34,6 @@ export {
   BaseBridge,
   BaseCryptoClient,
   EntityTableUtil,
+  TableQueryFields,
   keepRawBody,
 };
