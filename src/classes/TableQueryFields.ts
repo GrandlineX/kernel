@@ -10,6 +10,15 @@ export default class TableQueryFields extends Map<
     return typeof val === 'string' ? val : null;
   }
 
+  getStringOption(key: string, ...options: string[]) {
+    const cur = this.getString(key);
+    if (!cur) return cur;
+    if (!options.includes(cur)) {
+      return null;
+    }
+    return cur;
+  }
+
   getNumber(key: string) {
     const val = this.get(key);
     if (val === undefined) return undefined;

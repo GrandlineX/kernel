@@ -80,21 +80,19 @@ export default class EntityTableUtil extends BaseTableUtils {
   private static queryEntity<T extends CoreEntity>(
     query: TableQueryType,
   ): Omit<QInterface<T>, 'search'> {
-    if (query.sortBy) {
-      return {
-        offset: query.page * query.pageSize,
-        limit: query.pageSize === 0 ? undefined : query.pageSize,
-        order: [
-          {
-            key: query.sortBy as keyof T,
-            order: query.sortDesc ? 'DESC' : 'ASC',
-          },
-        ],
-      };
+    const qif: Omit<QInterface<T>, 'search'> = {};
+    if (query.pageSize > 0) {
+      qif.offset = query.page * query.pageSize;
+      qif.limit = query.pageSize;
     }
-    return {
-      offset: query.page * query.pageSize,
-      limit: query.pageSize === 0 ? undefined : query.pageSize,
-    };
+    if (query.sortBy) {
+      qif.order = [
+        {
+          key: query.sortBy as keyof T,
+          order: query.sortDesc ? 'DESC' : 'ASC',
+        },
+      ];
+    }
+    return qif;
   }
 }
