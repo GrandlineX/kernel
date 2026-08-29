@@ -7,7 +7,7 @@ import type { XActionEvent } from '../lib/express';
   mode: ActionMode.DMZ,
   operationId: 'getVersion',
   summary: 'Get API version',
-  tags: ['kernel'],
+  tags: ['Kernel'],
   responseSchema: {
     type: 'object',
     properties: {

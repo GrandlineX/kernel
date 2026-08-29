@@ -7,7 +7,7 @@ import type { JwtToken } from '../lib';
   mode: ActionMode.DMZ,
   operationId: 'refreshToken',
   summary: 'Refresh API token',
-  tags: ['kernel'],
+  tags: ['Kernel'],
   responseSchema: SPathUtil.schemaPath('TokenData'),
   responseCodes: ['200', '403'],
 })

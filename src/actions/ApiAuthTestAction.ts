@@ -6,7 +6,7 @@ import type { JwtToken } from '../lib';
 @Route('GET', '/api/auth/test', {
   operationId: 'testAuth',
   summary: 'Test user auth',
-  tags: ['kernel'],
+  tags: ['Kernel'],
   responseCodes: ['200', '403'],
 })
 export default class ApiAuthTestAction extends RouteApiAction {

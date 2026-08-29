@@ -81,13 +81,25 @@ export default abstract class BaseAction<
     if (!required && field === undefined) {
       return;
     }
-    if (
-      (schema.type === 'null' ||
-        (Array.isArray(schema.type) && schema.type.includes('null'))) &&
-      field === null
-    ) {
+    if (schema.type === 'null' && field === null) {
       return;
     }
+
+    if (Array.isArray(schema.type)) {
+      const matched = schema.type.some((t) => {
+        const sub: ErrorType = { type: 'error', global: [], field: [] };
+        BaseAction.validateSchema(sub, { ...schema, type: t }, key, field);
+        return sub.field!.length === 0 && sub.global!.length === 0;
+      });
+      if (!matched) {
+        error.field?.push({
+          key,
+          message: `must be one of [${schema.type.join(', ')}]`,
+        });
+      }
+      return;
+    }
+
     switch (schema?.type) {
       case 'boolean':
         if (typeof field !== 'boolean') {
@@ -264,7 +276,7 @@ export default abstract class BaseAction<
     const auth = extension.timing.start('auth');
     const cc = this.getKernel().getCryptoClient();
     if (!cc) {
-      res.status(504).send('internal server error');
+      res.status(500).send('internal server error');
       return;
     }
 

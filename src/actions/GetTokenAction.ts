@@ -36,7 +36,7 @@ type SchemaType = {
   mode: ActionMode.DMZ,
   operationId: 'getToken',
   summary: 'Get API token',
-  tags: ['kernel'],
+  tags: ['Kernel'],
   requestSchema: {
     type: 'object',
     properties: {
